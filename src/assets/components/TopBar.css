@@ -1,0 +1,97 @@
+:root {
+  --bg-dark: #0f0f0f;
+  --text-light: #eeeeee;
+  --border: rgba(255, 255, 255, 0.3);
+  --btn-dark: #1c1c1c;
+  --btn-light: #ffffff;
+}
+
+.sd-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 11vh;
+  background-color: rgba(15, 15, 15,0.3);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 2rem;
+  z-index: 100;
+}
+
+.sd-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: 5em;
+}
+
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+.sd-sitename {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-light);
+}
+
+.sd-sitemotto {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.sd-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-right: 7em;
+}
+
+.sd-theme {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 0.4rem;
+  border-radius: 8px;
+}
+
+.sd-btn {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sign-in {
+  background-color: var(--btn-dark);
+  color: var(--text-light);
+  border: 1px solid var(--border);
+}
+
+.sign-in:hover {
+  background-color: #2a2a2a;
+}
+
+.get-started {
+  background-color: var(--btn-light);
+  color: #000;
+  border: none;
+}
+
+.get-started:hover {
+  background-color: #f3f3f3;
+}
+.logo-icon {
+  color: var(--text-light);
+}
+
