@@ -1,4 +1,4 @@
-import TopBar from '../../assets/components/TopBar.jsx'
+import TopBar from '../../components/TopBar.jsx'
 import "./HomePage.css";
 import {
     ArrowRight,
