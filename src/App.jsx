@@ -1,5 +1,5 @@
 import { Home } from 'lucide-react'
-import HomePage from './assets/Pages/HomePage/HomePage'
+import HomePage from './Pages/HomePage/HomePage'
 import './index.css'
 
 function App() {
