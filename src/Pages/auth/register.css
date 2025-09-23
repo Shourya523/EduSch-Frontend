@@ -9,6 +9,37 @@
   background-color: rgb(10, 10, 10);
 }
 
+.sdpf-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem; /* Added padding to keep content off edges */
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sdpf-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.sdpf-sitemotto {
+  color: var(--text-light);
+}
+
+.sdpf-theme {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
 /* --- Main Registration Container --- */
 .register-container {
   background-color: transparent;

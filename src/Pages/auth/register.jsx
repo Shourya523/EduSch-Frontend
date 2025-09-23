@@ -19,13 +19,13 @@ function Register() {
 
   return (
     <div className="register-page-wrapper">
-      <header className="sd-wrapper">
-        <div className="sd-left" onClick={handleGoHome}>
+      <header className="sdpf-wrapper">
+        <div className="sdpf-left" onClick={handleGoHome}>
           <ArrowLeft size={18} strokeWidth={2} color="white" />
-          <span className="sd-sitemotto">Back To Home</span>
+          <span className="sdpf-sitemotto">Back To Home</span>
         </div>
-        <div className="sd-right">
-          <button className="sd-theme">
+        <div className="sdpf-right">
+          <button className="sdpf-theme">
             <Sun size={18} />
           </button>
         </div>
