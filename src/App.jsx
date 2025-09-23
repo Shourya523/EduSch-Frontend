@@ -5,6 +5,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SignIn from './Pages/auth/signIn.jsx';
 import DashBoard from './Pages/DashBoard.jsx';
 import GenerateTT from './Pages/GenerateTT.jsx';
+import Rooms from './Pages/Rooms.jsx';
 function App() {
   
 
@@ -15,6 +16,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/dashboard' element ={<DashBoard />} />
         <Route path='/gentt' element ={<GenerateTT />} />
+        <Route path='/rooms' element ={<Rooms/>} />
       </Routes>
     </BrowserRouter>
   )

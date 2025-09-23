@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --status-red: #E5484D;
+    --status-green: #22c55e;
+    --status-orange: #f97316;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+
+.room-card {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.room-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Header --- */
+.room-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.room-title h4 {
+    margin: 0 0 4px 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.room-title p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.6;
+}
+
+.room-tags {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.type-tag {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    /* A light blue */
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.status-tag {
+    color: var(--text-light);
+}
+
+/* Status Tag Colors */
+.status-occupied {
+    background-color: rgba(229, 72, 77, 0.15);
+    color: var(--status-red);
+    border: 1px solid rgba(229, 72, 77, 0.2);
+}
+
+.status-available {
+    background-color: rgba(34, 197, 94, 0.15);
+    color: var(--status-green);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-maintenance {
+    background-color: rgba(249, 115, 22, 0.15);
+    color: var(--status-orange);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+}
+
+
+/* --- Body --- */
+.room-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.progress-item .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text-light);
+    opacity: 0.9;
+}
+
+.progress-labels span:last-child {
+    font-weight: 500;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--text-light);
+    border-radius: 4px;
+    transition: width 0.5s ease-in-out;
+}
+
+/* --- Footer --- */
+.room-card-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.7;
+    margin-top: auto;
+    /* Pushes to bottom */
+}

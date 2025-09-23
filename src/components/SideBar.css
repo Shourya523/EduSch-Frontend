@@ -20,13 +20,16 @@ body {
 .sidebar {
     background-color: var(--bg-dark);
     color: var(--text-light);
-    height: 100vh;
+    height: inherit;
     width: 18vw;
     display: flex;
     flex-direction: column;
     padding: 24px;
     box-sizing: border-box; /* Ensures padding is included in the width */
     border-right: 1px solid rgba(255,255,255,0.1) ;
+    overflow: hidden;
+    position: relative;
+    /* z-index: 10; */
 }
 
 /* --- Header --- */
@@ -106,6 +109,7 @@ body {
 .sidebar-footer {
     padding-top: 16px;
     border-top: 1px solid var(--border);
+    bottom: 1em;
 }
 
 .sidebar-footer button {

@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 :root {
-    --bg-dark: #0f0f0f;
+    --bg-dark: #080808;
     --text-light: #eeeeee;
     --border: rgba(255, 255, 255, 0.1);
     --btn-dark: #1c1c1c;
@@ -20,7 +20,7 @@ body {
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background-color: var(--btn-dark);
+    background-color: var(--bg-dark);
     border: 1px solid var(--border);
     border-radius: 12px;
     flex: 1; /* Allows cards to grow and fill space */

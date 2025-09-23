@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --status-red: #E5484D;
+    --status-green: #22c55e;
+    --status-orange: #f97316;
+    --heat-blue: #0ea5e9;
+    /* 0-25% */
+    --heat-green: #22c55e;
+    /* 25-50% */
+    --heat-yellow: #eab308;
+    /* 50-75% */
+    --heat-orange: #f97316;
+    /* 75-90% */
+    --heat-red: #ef4444;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+
+.heatmap-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+}
+
+.heatmap-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-light);
+}
+
+.heatmap-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.heatmap-description {
+    margin: 4px 0 24px 0;
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.6;
+}
+
+/* --- Legend --- */
+.heatmap-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    font-size: 12px;
+    margin-bottom: 24px;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-color-box {
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+}
+
+/* --- Table --- */
+.table-wrapper {
+    overflow-x: auto;
+    /* Allow horizontal scrolling on small screens */
+}
+
+.heatmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    /* Vertical spacing between rows */
+    font-size: 14px;
+}
+
+.heatmap-table th,
+.heatmap-table td {
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.heatmap-table th {
+    color: var(--text-light);
+    opacity: 0.7;
+    font-weight: 500;
+    text-align: center;
+}
+
+.heatmap-table .time-cell {
+    color: var(--text-light);
+    opacity: 0.9;
+    font-weight: 500;
+    text-align: left;
+    min-width: 100px;
+}
+
+.cell-content {
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-weight: 500;
+    color: var(--text-dark);
+    /* Dark text for contrast on colored backgrounds */
+}
+
+/* --- Cell Colors --- */
+.heat-0-25 {
+    background-color: var(--heat-blue);
+}
+
+.heat-25-50 {
+    background-color: var(--heat-green);
+}
+
+.heat-50-75 {
+    background-color: var(--heat-yellow);
+}
+
+.heat-75-90 {
+    background-color: var(--heat-orange);
+}
+
+.heat-90-plus {
+    background-color: var(--heat-red);
+}
+
+.heat-empty .cell-content {
+    background-color: transparent;
+}

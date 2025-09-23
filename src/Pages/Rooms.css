@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #000;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --status-red: #E5484D;
+    --status-green: #22c55e;
+    --status-orange: #f97316;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Layout --- */
+.page-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+/* We add a scrollbar to the content area if it overflows */
+.content-area {
+    padding: 32px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* --- Stats Grid --- */
+.stats-grid {
+    display: grid;
+    /* Create 4 columns, each taking up an equal fraction of the space */
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+/* --- Room Grid --- */
+.room-grid {
+    display: grid;
+    /* Create columns that are at least 320px wide, but grow to fill space */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1024px) {
+    .stats-grid {
+        /* On medium screens, switch to 2 columns */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .content-area {
+        padding: 24px;
+    }
+
+    .stats-grid {
+        /* On small screens, stack the stats in a single column */
+        grid-template-columns: 1fr;
+    }
+
+    .room-grid {
+        /* Also stack room cards on small screens */
+        grid-template-columns: 1fr;
+    }
+}
