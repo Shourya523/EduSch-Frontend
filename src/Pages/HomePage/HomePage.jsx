@@ -1,4 +1,5 @@
 import TopBar from '../../components/TopBar.jsx'
+import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
 import {
     ArrowRight,
@@ -14,6 +15,7 @@ import {
 } from "lucide-react";
 
 export default function HomePage() {
+    const navigate =useNavigate();
     return (
         <>
             {/* Hero Section */}
@@ -33,7 +35,7 @@ export default function HomePage() {
                     <button className="btn btn-primary">
                         Start Free Trial <ArrowRight size={16} />
                     </button>
-                    <button className="btn btn-secondary">View Demo Dashboard</button>
+                    <button className="btn btn-secondary" onClick={()=>navigate("/dashboard")}>View Demo Dashboard</button>
                 </div>
             </section>
 
