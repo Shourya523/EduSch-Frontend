@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --danger-red: #E5484D;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Layout --- */
+.page-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Content Area --- */
+.content-area {
+    padding: 32px;
+}
+
+.content-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 24px;
+}
+
+.language-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-family: 'Geist', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.language-toggle-btn:hover {
+    background-color: var(--btn-dark);
+}

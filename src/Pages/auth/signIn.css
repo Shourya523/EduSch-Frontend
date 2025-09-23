@@ -11,7 +11,7 @@
 
 /* --- Top Bar --- */
 /* CHANGED: Made the wrapper absolute to span the full page width */
-.sd-wrapper {
+.sdf-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@
   align-items: center;
   padding: 1.5rem 2rem; /* Added padding to keep content off edges */
   box-sizing: border-box;
-  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .sd-left {
@@ -68,6 +68,7 @@
   width: 100%;            /* Ensures it takes up full width of the container */
   justify-content: center; /* Re-centers the new horizontal group */
   margin-top: 2rem;
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.1); */
 }
 
 /* New class for the text container */

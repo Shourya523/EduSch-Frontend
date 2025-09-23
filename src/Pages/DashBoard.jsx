@@ -1,16 +1,19 @@
-import AddFile from '../../components/AddFile';
-import Header from '../../components/Header';
-import SideBar from '../../components/SideBar';
-import StatCard from '../../components/StatCard';
+import AddFile from '../components/AddFile';
+import Header from '../components/Header';
+import SideBar from '../components/SideBar';
+import StatCard from '../components/StatCard';
 import './DashBoard.css';
 import { RectangleHorizontal, Users, Clock, UserSquare2 } from "lucide-react";
 
 export default function DashBoard() {
     return (
         <div className="dashboard-layout">
-            <SideBar />
+            <SideBar activePage={'dashboard'} />
             <main className="main-content">
-                <Header />
+                <Header 
+                    title="Dashboard"
+                    subtitle="Welcome back, Admin User"
+                />
                 <div className="content-area">
                     <div className="stats-grid">
                         <StatCard
@@ -42,8 +45,10 @@ export default function DashBoard() {
                         />
                     </div>
                     
-                    {/* The AddFile component is now included below */}
-                    <AddFile />
+                    <AddFile 
+                        title="Upload Faculty Timetable"
+                        description="Upload an Excel file containing faculty schedules"
+                    />
 
                 </div>
             </main>

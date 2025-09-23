@@ -1,12 +1,14 @@
 import './Header.css';
 import { Moon, Languages, LogOut } from "lucide-react";
 
-export default function Header() {
+// Add { title, subtitle } as props
+export default function Header({ title, subtitle }) {
     return (
         <header className="dashboard-header">
             <div className="header-title">
-                <h1>Dashboard</h1>
-                <p>Welcome back, Admin User</p>
+                {/* Use the props, with fallback text */}
+                <h1>{title || 'Dashboard'}</h1>
+                <p>{subtitle || 'Welcome back, Admin User'}</p>
             </div>
             <div className="header-controls">
                 <button className="theme-toggle">
