@@ -65,14 +65,15 @@
     padding-bottom: 0;
 }
 
+/* UPDATED: Day heading styles */
 .day-section h3 {
     font-weight: 500;
     font-size: 1rem;
-    margin: 0 0 1rem 0;
-    background-color: var(--btn-dark); /* Grey background for day name */
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    display: inline-block; /* Fit content width */
+    margin: 0 0 1.5rem 0; /* Adjusted margin */
+    background-color: var(--btn-dark); /* Grey background */
+    padding: 0.75rem 1rem;
+    border-radius: 6px; /* Keeps the heading contained */
+    /* REMOVED: display: inline-block; to allow it to be a full-width block */
 }
 
 .entries-container {
