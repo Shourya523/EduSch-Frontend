@@ -2,7 +2,7 @@ import { Home } from 'lucide-react'
 import HomePage from './Pages/HomePage/HomePage'
 import './index.css'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import SignIn from './Pages/HomePage/signIn.jsx';
+import SignIn from './Pages/auth/signIn.jsx';
 function App() {
   
 

@@ -1,0 +1,217 @@
+/* Wrapper for the whole page */
+.signin-page-wrapper {
+  display: flex;
+  justify-content: center; /* Center the signin-container horizontally */
+  align-items: center;    /* Center the signin-container vertically */
+  min-height: 100vh;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  background-color: rgb(10, 10, 10);
+}
+
+/* --- Top Bar --- */
+/* CHANGED: Made the wrapper absolute to span the full page width */
+.sd-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem; /* Added padding to keep content off edges */
+  box-sizing: border-box;
+  border: none;
+}
+
+.sd-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+}
+
+.sd-sitemotto {
+  color: var(--text-light);
+}
+
+.sd-theme {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+/* --- Main Sign-In Container --- */
+.signin-container {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  /* CHANGED: Reduced max-width and padding to make it much smaller */
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* --- Header section (Logo and App Name) --- */
+.signin-header {
+  display: flex;          /* Aligns icon and text-wrapper horizontally */
+  align-items: center;    /* Vertically centers the icon with the text */
+  gap: 0.75rem;           /* Creates space between the icon and text */
+  margin-bottom: 1rem;
+  color: var(--text-light);
+  width: 100%;            /* Ensures it takes up full width of the container */
+  justify-content: center; /* Re-centers the new horizontal group */
+  margin-top: 2rem;
+}
+
+/* New class for the text container */
+.header-text-wrapper {
+    text-align: left;
+}
+
+/* Remove margins to stack text tightly */
+.signin-header h1, .signin-header p {
+  margin: 0;
+}
+
+.signin-header h1 {
+ font-size: 1.4rem;
+}
+
+.signin-header p {
+ font-size: 0.8rem;
+ color: #a0a0a0;
+}
+
+/* --- Title section (Welcome Back) --- */
+.signin-title {
+  /* CHANGED: Reduced margin and font size */
+  margin-bottom: 1.5rem;
+}
+
+.signin-title h2 {
+  font-size: 1.5rem;
+  color: var(--text-light);
+  margin: 0 0 0.2rem;
+}
+
+.signin-title p {
+  font-size: 1rem;
+  color: #a0a0a0;
+  margin: 0;
+}
+
+/* --- Form --- */
+.signin-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* CHANGED: Reduced gap between inputs */
+  gap: 0.5rem;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-light);
+}
+
+.form-group input {
+  width: 100%;
+  background-color: rgba(42, 42, 42, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.50rem;
+  color: var(--text-light);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+  color: #777;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--btn-light);
+}
+
+.email-wrapper {
+  position: relative;
+}
+
+.email-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+.email-wrapper input {
+  padding-left: 2.5rem;
+  font-size: 0.9rem;
+}
+
+.password-wrapper input {
+  padding-left: 2.5rem;
+  font-size: 0.9rem;
+}
+
+/* --- Sign In Button --- */
+.signin-button {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: rgb(99, 99, 99);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.signin-button:hover {
+  background-color: #444444;
+}
+
+/* --- Sign Up Link --- */
+.signup-link {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #a0a0a0;
+}
+
+.signup-link span {
+  color: var(--text-light);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
