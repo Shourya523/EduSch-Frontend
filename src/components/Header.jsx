@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 import { Moon, Languages, LogOut } from "lucide-react";
 
 // Add { title, subtitle } as props
 export default function Header({ title, subtitle }) {
+    const navigate=useNavigate();
     return (
         <header className="dashboard-header">
             <div className="header-title">
@@ -18,7 +20,7 @@ export default function Header({ title, subtitle }) {
                     <Languages size={18} />
                     <span>हिन्दी</span>
                 </button>
-                <button className="control-btn logout-btn">
+                <button className="control-btn logout-btn" onClick={()=>navigate("/")}>
                     <LogOut size={18} />
                     <span>Logout</span>
                 </button>
