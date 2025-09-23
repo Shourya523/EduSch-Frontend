@@ -113,7 +113,7 @@
 }
 
 .entry-tag.lab {
-    background-color: var(--danger-red); /* Red background */
+    background-color: #57090c; /* Red background */
     color: var(--btn-light); /* White text */
 }
 
