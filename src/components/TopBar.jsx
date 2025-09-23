@@ -1,7 +1,11 @@
 import "./TopBar.css";
 import { Sun,Brain } from "lucide-react";
-
+import { useNavigate } from "react-router-dom";
 export default function TopBar() {
+    const navigate = useNavigate();
+    function handleSignIn() {
+        navigate('/signin');
+    }
     return (
         <header className="sd-wrapper">
             {/* Left Side: Logo + Title */}
@@ -21,7 +25,7 @@ export default function TopBar() {
                 <button className="sd-theme">
                     <Sun size={18} />
                 </button>
-                <button className="sd-btn sign-in">Sign In</button>
+                <button className="sd-btn sign-in" onClick={handleSignIn}>Sign In</button>
                 <button className="sd-btn get-started">Get Started</button>
             </div>
         </header>
