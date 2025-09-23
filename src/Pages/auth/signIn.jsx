@@ -15,7 +15,7 @@ function SignIn() {
   };
 
   const handleSignUp = () => {
-    navigate("/signup"); // Navigate to the sign-up page
+    navigate("/register"); // Navigate to the sign-up page
   };
 
   return (
@@ -72,7 +72,7 @@ function SignIn() {
 
         <div className="signup-link">
           <p>
-            Don't have an account? <span onClick={handleSignUp}>Sign up</span>
+            Don't have an account? <span onClick={handleSignUp}>Register</span>
           </p>
         </div>
       </main>

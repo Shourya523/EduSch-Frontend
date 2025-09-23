@@ -26,7 +26,7 @@ export default function TopBar() {
                     <Sun size={18} />
                 </button>
                 <button className="sd-btn sign-in" onClick={handleSignIn}>Sign In</button>
-                <button className="sd-btn get-started">Get Started</button>
+                <button className="sd-btn get-started" onClick={()=>navigate("/register")}>Get Started</button>
             </div>
         </header>
     );
