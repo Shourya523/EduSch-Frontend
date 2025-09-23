@@ -3,6 +3,7 @@ import HomePage from './Pages/HomePage/HomePage'
 import './index.css'
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import SignIn from './Pages/HomePage/signIn.jsx';
+import DashBoard from './Pages/HomePage/DashBoard.jsx';
 function App() {
   
 
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/dashboard' element ={<DashBoard />} />
       </Routes>
     </BrowserRouter>
   )

@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #000;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --danger-red: #E5484D;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.stat-card {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    flex: .5; /* Allows cards to grow and fill space */
+    min-width: 10em; /* Prevents cards from getting too small */
+}
+
+/* --- Card Header --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.card-title {
+    font-size: .85em;
+    font-weight: 500;
+}
+
+.card-icon {
+    font-size: 20px;
+}
+
+/* --- Card Value --- */
+.card-value {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+/* --- Card Footer --- */
+.card-footer {
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background-color: var(--btn-light);
+    border-radius: 3px;
+    transition: width 0.5s ease-in-out;
+}
+
+.card-description {
+    font-size: 14px;
+    color: var(--text-light);
+    opacity: 0.6;
+    margin: 0;
+}

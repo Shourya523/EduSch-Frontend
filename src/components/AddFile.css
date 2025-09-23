@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #0f0f0f;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --danger-red: #E5484D;
+    --primary-accent: #3b82f6;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+
+.add-file-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 32px;
+    color: var(--text-light);
+}
+
+.add-file-container h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.add-file-container .description {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.dropzone {
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 40px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Style for when a file is being dragged over */
+.dropzone.is-dragging,
+.dropzone:hover {
+    border-color: var(--primary-accent);
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.upload-icon {
+    margin-bottom: 16px;
+    opacity: 0.7;
+    pointer-events: none;
+    /* Prevents icon from interfering with drop event */
+}
+
+.dropzone p {
+    margin: 0 0 16px 0;
+    font-size: 16px;
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+.browse-link {
+    color: var(--primary-accent);
+    font-weight: 500;
+}
+
+.file-input {
+    display: none;
+}
+
+.choose-file-btn {
+    background-color: var(--btn-light);
+    color: var(--text-dark);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-family: 'Geist', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.choose-file-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.choose-file-btn:active {
+    transform: scale(0.98);
+}
