@@ -1,0 +1,165 @@
+/* --- Page Wrapper --- */
+.register-page-wrapper {
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  padding-top: 6rem; /* Make space for the fixed header */
+  box-sizing: border-box;
+  background-color: rgb(10, 10, 10);
+}
+
+/* --- Main Registration Container --- */
+.register-container {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  height: fit-content; /* Allow container to grow with content */
+}
+
+/* --- Reused Header and Title Styles --- */
+.register-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  justify-content: center;
+}
+
+.register-header h1, .register-header p { margin: 0; }
+.register-header h1 { font-size: 1.4rem; color: white; }
+.register-header p { font-size: 0.8rem; color: #a0a0a0; }
+.header-text-wrapper { text-align: left; }
+
+.register-title { margin-bottom: 1.5rem; }
+.register-title h2 { font-size: 1.5rem; color: white; margin: 0 0 0.2rem; }
+.register-title p { font-size: 1rem; color: #a0a0a0; margin: 0; }
+
+/* --- Role Selection Section --- */
+.role-selection-section {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.role-prompt {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.role-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.role-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background-color: #1c1c1c;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.role-card:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.role-card.selected {
+  border-color: white; /* White border when selected */
+}
+
+.role-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* THIS IS THE ICON DIV YOU REQUESTED */
+.role-icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px; /* Rounded corners */
+  background-color: #333333; /* Greyish color when unselected */
+  transition: background-color 0.2s ease;
+}
+
+/* STYLE FOR THE SELECTED ICON DIV */
+.role-icon-wrapper.selected {
+  background-color: white; /* White background when selected */
+}
+
+.role-details { text-align: left; }
+.role-name { font-weight: 500; color: white; }
+.role-description { font-size: 0.8rem; color: #a0a0a0; margin: 0; }
+.selected-check { color: white; }
+
+/* --- Registration Form Styles --- */
+.register-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group { text-align: left; }
+.form-group label { display: block; font-size: 0.875rem; margin-bottom: 0.5rem; color: white; }
+
+.input-wrapper { position: relative; }
+.input-wrapper input {
+  width: 100%;
+  background-color: #1c1c1c;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.75rem 0.75rem 0.75rem 2.5rem; /* Padding for icon */
+  color: white;
+  font-size: 0.9rem;
+}
+.input-wrapper input:focus { outline: none; border-color: white; }
+.input-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #777; }
+
+/* --- Button and Link Styles --- */
+.register-button {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: rgb(220, 220, 220);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+}
+.register-button:hover { background-color: white; }
+
+.signin-link-register {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: #a0a0a0;
+}
+.signin-link-register span { color: white; font-weight: 500; cursor: pointer; text-decoration: underline; }
+
+.selected-option {
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
+  margin-right: 4px;
+}

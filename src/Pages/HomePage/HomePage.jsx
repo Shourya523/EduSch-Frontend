@@ -32,7 +32,7 @@ export default function HomePage() {
                     eliminate scheduling conflicts automatically.
                 </p>
                 <div className="hero-actions">
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary" onClick={()=>navigate("/register")}>
                         Start Free Trial <ArrowRight size={16} />
                     </button>
                     <button className="btn btn-secondary" onClick={()=>navigate("/dashboard")}>View Demo Dashboard</button>
