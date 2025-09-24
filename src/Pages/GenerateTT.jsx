@@ -1,82 +1,3 @@
-// --- Enhanced Timetable Generator ---
-// This function distributes subjects across weekdays and timeslots, respecting constraints and global rules
-function generateTimetable(subjectAllocations, constraints, globalRules) {
-    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-    const times = [
-        "9:00-10:00",
-        "10:00-11:00",
-        "11:00-12:00",
-        "12:00-13:00",
-        "14:00-15:00",
-        "15:00-16:00"
-    ];
-    // Diverse set of rooms
-    const allRooms = [
-        "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
-        "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
-        "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
-        "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
-    ];
-    let timetable = days.map(day => ({ day, classes: [] }));
-    // Track used slots: {day, time, room}
-    const usedSlots = new Set();
-    const facultyList = ["Prof. Kumar", "Prof. Sharma", "Prof. Verma", "Prof. Iyer", "Prof. Singh"];
-    function isSlotAvailable(day, time, room, faculty) {
-        if (usedSlots.has(`${day}|${time}|${room}`)) return false;
-        if (constraints.classrooms.some(c => c.day === day && c.time === time && c.room === room)) return false;
-        if (constraints.teachers.some(c => c.day === day && c.teacher === faculty)) return false;
-        return true;
-    }
-    // Optionally shuffle days/times for 'minimize gaps' rule
-    let dayOrder = [...days];
-    let timeOrder = [...times];
-    if (!globalRules.minimizeGaps) {
-        dayOrder = dayOrder.reverse();
-        timeOrder = timeOrder.reverse();
-    }
-    let subjectIndex = 0;
-    for (let subject of subjectAllocations) {
-        const faculty = facultyList[subjectIndex % facultyList.length];
-        let assigned = 0;
-        // Determine room type: lab or lecture
-        let possibleRooms = allRooms;
-        const subjName = subject.name.toLowerCase();
-        if (subjName.includes('lab')) {
-            if (subjName.includes('mech')) possibleRooms = allRooms.filter(r => r.startsWith('MECH-LAB'));
-            else if (subjName.includes('cs')) possibleRooms = allRooms.filter(r => r.startsWith('CS-LAB'));
-            else if (subjName.includes('phy')) possibleRooms = allRooms.filter(r => r.startsWith('PHY-LAB'));
-            else if (subjName.includes('chem')) possibleRooms = allRooms.filter(r => r.startsWith('CHEM-LAB'));
-            else if (subjName.includes('eee')) possibleRooms = allRooms.filter(r => r.startsWith('EEE-LAB'));
-            else possibleRooms = allRooms.filter(r => r.includes('LAB'));
-        } else {
-            possibleRooms = allRooms.filter(r => r.startsWith('LT-'));
-        }
-        // Try to distribute classes evenly across all days and times
-        outer: for (let slot = 0; slot < dayOrder.length * timeOrder.length * possibleRooms.length; slot++) {
-            const d = slot % dayOrder.length;
-            const t = Math.floor(slot / dayOrder.length) % timeOrder.length;
-            // Randomize room selection for each slot
-            const roomIdx = Math.floor(Math.random() * possibleRooms.length);
-            const day = dayOrder[d];
-            const time = timeOrder[t];
-            const room = possibleRooms[roomIdx];
-            if (isSlotAvailable(day, time, room, faculty)) {
-                timetable[days.indexOf(day)].classes.push({
-                    type: subjName.includes('lab') ? "Lab" : "Lecture",
-                    subject: subject.name,
-                    time,
-                    location: room,
-                    instructor: faculty
-                });
-                usedSlots.add(`${day}|${time}|${room}`);
-                assigned++;
-                if (assigned >= subject.classesPerWeek) break outer;
-            }
-        }
-        subjectIndex++;
-    }
-    return timetable;
-}
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
@@ -374,9 +295,6 @@ const SubjectAllocationRow = ({ subject, onAllocationChange }) => (
     </div>
 );
 
-
-
-
 function getInitialDept() {
     return localStorage.getItem('lastSelectedDept') || 'Computer Science';
 }
@@ -390,6 +308,8 @@ function GenerateTT() {
     const [selectedSemester, setSelectedSemester] = useState(getInitialSem());
     const [currentScopeData, setCurrentScopeData] = useState(mockData[getInitialDept()][getInitialSem()]);
     const [subjectAllocations, setSubjectAllocations] = useState(mockData[getInitialDept()][getInitialSem()].subjects);
+    // Batch scope
+    const [selectedBatch, setSelectedBatch] = useState('A');
     // Constraints state
     const [classroomConstraints, setClassroomConstraints] = useState([]); // {room, day, time}
     const [teacherConstraints, setTeacherConstraints] = useState([]); // {teacher, day}
@@ -405,6 +325,78 @@ function GenerateTT() {
     ];
     const [newClassroom, setNewClassroom] = useState({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' });
     const [newTeacher, setNewTeacher] = useState({ teacher: '', day: 'Monday' });
+    // Generate batch options based on currentScopeData.resources.batches
+    const batchOptions = Array.from({ length: currentScopeData?.resources?.batches || 1 }, (_, i) => String.fromCharCode(65 + i));
+    // --- Enhanced Timetable Generator ---
+    // This function distributes subjects across weekdays and timeslots, respecting constraints and global rules
+    function generateTimetable(subjectAllocations, constraints, globalRules) {
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        const times = [
+            "9:00-10:00",
+            "10:00-11:00",
+            "11:00-12:00",
+            "12:00-13:00",
+            "14:00-15:00",
+            "15:00-16:00"
+        ];
+        // Diverse set of rooms
+        const allRooms = [
+            "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
+            "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
+            "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
+            "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
+        ];
+        let timetable = days.map(day => ({ day, classes: [] }));
+        // Track used slots: {day, time, room}
+        const usedSlots = new Set();
+        const facultyList = ["Prof. Kumar", "Prof. Sharma", "Prof. Verma", "Prof. Iyer", "Prof. Singh"];
+        function isSlotAvailable(day, time, room, faculty) {
+            if (usedSlots.has(`${day}|${time}|${room}`)) return false;
+            if (constraints.classrooms.some(c => c.day === day && c.time === time && c.room === room)) return false;
+            if (constraints.teachers.some(c => c.day === day && c.teacher === faculty)) return false;
+            return true;
+        }
+        // Optionally shuffle days/times for 'minimize gaps' rule
+        let dayOrder = [...days];
+        let timeOrder = [...times];
+        if (!globalRules.minimizeGaps) {
+            dayOrder = dayOrder.reverse();
+            timeOrder = timeOrder.reverse();
+        }
+        let subjectIndex = 0;
+        for (let subject of subjectAllocations) {
+            const faculty = facultyList[subjectIndex % facultyList.length];
+            let assigned = 0;
+            // Determine room type: lab or lecture
+            let possibleRooms = allRooms;
+            const subjName = subject.name.toLowerCase();
+            if (subjName.includes('lab')) {
+                possibleRooms = allRooms.filter(r => r.toLowerCase().includes('lab'));
+            } else {
+                possibleRooms = allRooms.filter(r => r.toLowerCase().includes('lt') || r.toLowerCase().includes('class'));
+            }
+            // Try to distribute classes evenly across all days and times
+            outer: for (let slot = 0; slot < dayOrder.length * timeOrder.length * possibleRooms.length; slot++) {
+                const day = dayOrder[slot % dayOrder.length];
+                const time = timeOrder[Math.floor(slot / dayOrder.length) % timeOrder.length];
+                const room = possibleRooms[Math.floor(slot / (dayOrder.length * timeOrder.length)) % possibleRooms.length];
+                if (isSlotAvailable(day, time, room, faculty)) {
+                    timetable[days.indexOf(day)].classes.push({
+                        type: subjName.includes('lab') ? 'Lab' : 'Lecture',
+                        subject: subject.name,
+                        time,
+                        location: room,
+                        instructor: faculty
+                    });
+                    usedSlots.add(`${day}|${time}|${room}`);
+                    assigned++;
+                    if (assigned >= subject.classesPerWeek) break outer;
+                }
+            }
+            subjectIndex++;
+        }
+        return timetable;
+    }
 
     // Effect to update data when scope changes
     useEffect(() => {
@@ -451,11 +443,20 @@ function GenerateTT() {
             { classrooms: classroomConstraints, teachers: teacherConstraints },
             { minimizeGaps, balanceWorkload }
         );
-        localStorage.setItem('generatedTimetable', JSON.stringify({
+        // Use a unique key for each batch
+        const batchKey = `${selectedDept.replace(/\s+/g, '')}_${selectedSemester.replace(/\s+/g, '')}_${selectedBatch}`;
+        localStorage.setItem(`timetable_${batchKey}`, JSON.stringify({
             dept: selectedDept,
             semester: selectedSemester,
+            batch: selectedBatch,
             timetable
         }));
+        // Optionally, update a list of batch keys
+        let batchKeys = JSON.parse(localStorage.getItem('timetable_batchKeys') || '[]');
+        if (!batchKeys.includes(batchKey)) {
+            batchKeys.push(batchKey);
+            localStorage.setItem('timetable_batchKeys', JSON.stringify(batchKeys));
+        }
         window.location.href = '/timetable';
     };
 
@@ -496,7 +497,7 @@ function GenerateTT() {
                                 <h3>Define Scope</h3>
                             </div>
                             <p className="section-description">
-                                Select the department and semester. The resources and subjects below will update accordingly.
+                                Select the department, semester, and batch. The resources and subjects below will update accordingly.
                             </p>
                             <div className="scope-selection">
                                 <div className="form-group">
@@ -510,6 +511,14 @@ function GenerateTT() {
                                     <select id="semester" name="semester" value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)}>
                                         {semesters.map(sem => (
                                             <option key={sem} value={sem}>{sem}</option>
+                                        ))}
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="batch">Batch</label>
+                                    <select id="batch" name="batch" value={selectedBatch} onChange={e => setSelectedBatch(e.target.value)}>
+                                        {batchOptions.map(batch => (
+                                            <option key={batch} value={batch}>{batch}</option>
                                         ))}
                                     </select>
                                 </div>
