@@ -457,7 +457,7 @@ function GenerateTT() {
             batchKeys.push(batchKey);
             localStorage.setItem('timetable_batchKeys', JSON.stringify(batchKeys));
         }
-        window.location.href = '/timetable';
+        window.location.href = '/admin-timetable';
     };
 
     // Constraint handlers
