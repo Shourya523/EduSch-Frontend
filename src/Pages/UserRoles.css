@@ -77,20 +77,20 @@
 
 /* Only border and text color for each role */
 .role-student {
-  border-color: #2248c5;
-  color: #2269c5;
+  border-color: white;
+  color: white;
   border-left-width: 1px;
   border-right-width: 1px;
 }
 .role-admin {
-  border-color: #E5484D;
-  color: #E5484D;
+  border-color: white;
+  color: white;
   border-left-width: 1px;
   border-right-width: 1px;
 }
 .role-teacher {
-  border-color: #22c55e;
-  color: #22c55e;
+  border-color: white;
+  color: white;
   border-left-width: 1px;
   border-right-width: 1px;
 }
