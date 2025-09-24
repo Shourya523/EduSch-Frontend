@@ -8,6 +8,7 @@ import GenerateTT from './Pages/GenerateTT.jsx';
 import Rooms from './Pages/Rooms.jsx';
 import DashBoard from './Pages/DashBoard.jsx';
 import Timetable from './Pages/timetable.jsx';
+import StudentDashboard from './Pages/StudentsDashboard/Dashboard-students.jsx';
 function App() {
 
 
@@ -21,6 +22,7 @@ function App() {
         <Route path='/gentt' element={<GenerateTT />} />
         <Route path='/rooms' element={<Rooms />} />
         <Route path='/timetable' element={<Timetable />} />
+        <Route path='/studentdashboard' element={<StudentDashboard />} />
       </Routes>
     </BrowserRouter>
   )
