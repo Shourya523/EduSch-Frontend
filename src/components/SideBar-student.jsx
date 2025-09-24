@@ -39,7 +39,7 @@ export default function SideBarStudent({ activePage }) {
             <nav className="sidebar-student-nav">
                 <ul>
                     {/* --- Student Specific Navigation Links --- */}
-                    <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => handleNavigate("/dashboard")}>
+                    <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => handleNavigate("-dashboard")}>
                         <a href="#">
                             <LayoutDashboard size={20} />
                             <span>Dashboard</span>
