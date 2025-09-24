@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    /* --btn-dark: #1c1c1c; */
+    --focus-blue: #3b82f6;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+.approval-queue-container {
+    background-color: var(--bg-dark);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.approval-queue-container h3 {
+    margin: 0 0 1rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.request-item {
+    background-color: var(--btn-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.request-info .department-info {
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-light);
+}
+
+.request-info .department-info span {
+    font-weight: 400;
+    color: var(--text-muted, #a1a1aa);
+}
+
+.request-info .submitted-by {
+    font-size: 0.875rem;
+    color: var(--text-muted, #a1a1aa);
+    margin: 0.25rem 0 0 0;
+}
+
+.request-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.approve-btn {
+    background-color: #10b981;
+    /* Success Green */
+    color: white;
+}
+
+.approve-btn:hover {
+    background-color: #059669;
+}
+
+.reject-btn {
+    background-color: var(--danger-red);
+    color: white;
+}
+
+.reject-btn:hover {
+    background-color: #c5393d;
+}
+
+.no-requests {
+    color: var(--text-muted, #a1a1aa);
+    text-align: center;
+    padding: 1rem 0;
+}

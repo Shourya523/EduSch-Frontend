@@ -9,6 +9,7 @@ import Rooms from './Pages/Rooms.jsx';
 import DashBoard from './Pages/DashBoard.jsx';
 import Timetable from './Pages/timetable.jsx';
 import StudentDashboard from './Pages/StudentsDashboard/Dashboard-students.jsx';
+import Faculty from './Pages/Faculty.jsx';
 function App() {
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path='/rooms' element={<Rooms />} />
         <Route path='/timetable' element={<Timetable />} />
         <Route path='/studentdashboard' element={<StudentDashboard />} />
+        <Route path='/faculty' element={<Faculty />} />
       </Routes>
     </BrowserRouter>
   )

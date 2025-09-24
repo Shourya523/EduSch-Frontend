@@ -8,6 +8,8 @@
     --btn-light: #ffffff;
     --text-dark: #0f0f0f;
     --danger-red: #E5484D;
+    --accent-primary: #eeeeee;
+    --text-muted: rgba(238, 238, 238, 0.7);
 }
 
 body {
@@ -21,7 +23,7 @@ body {
 .page-layout {
     display: flex;
     background-color: var(--bg-dark);
-    color: var(--text-light);
+    color: var(--text-dark);
     min-height: 100vh;
 }
 
@@ -36,28 +38,414 @@ body {
     padding: 32px;
 }
 
-.content-header {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 24px;
+/* --- Generate Timetable Page Specific Styles --- */
+.generation-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
 }
 
-.language-toggle-btn {
+.generation-section {
+    padding: 1.5rem 2rem;
+}
+
+.generation-section:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+}
+
+.section-header {
     display: flex;
     align-items: center;
-    gap: 8px;
-    background-color: transparent;
-    border: 1px solid var(--border);
-    color: var(--text-light);
-    padding: 10px 14px;
-    border-radius: 8px;
-    font-family: 'Geist', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
 }
 
-.language-toggle-btn:hover {
+.section-number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background-color: var(--accent-primary);
+    color: var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+.section-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-light);
+}
+
+.section-description {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0;
+    max-width: 600px;
+}
+
+.scope-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.form-group select,
+.form-group input {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    font-family: 'Geist', sans-serif;
+    font-size: 1rem;
+}
+
+/* --- Resource Overview Styles --- */
+.resource-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.stat-box {
+    background-color: var(--btn-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-box svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.stat-box-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-box-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-light);
+}
+
+.stat-box-label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+/* --- Subject Allocation Styles --- */
+.subject-allocation-container {
+    margin-top: 1.5rem;
+}
+
+.subject-allocation-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+}
+
+.subject-allocation-header h4 {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.subject-allocation-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+    color: var(--text-light);
+}
+
+.subject-allocation-row:hover {
     background-color: var(--btn-dark);
 }
+
+.subject-name {
+    margin: 0;
+    font-weight: 500;
+}
+
+
+/* Enhanced subject allocation controls */
+.subject-allocation-row .form-group.subject-allocation-controls {
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+
+.allocation-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--btn-dark);
+    color: var(--text-light);
+    font-size: 1.25rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.1s;
+    outline: none;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+}
+.allocation-btn:active {
+    transform: scale(0.95);
+}
+.allocation-btn.plus {
+    background: linear-gradient(90deg, #eeeeee 0%, #bdbdbd 100%);
+    color: var(--text-dark);
+    border: 1px solid #eeeeee;
+}
+.allocation-btn.plus:hover {
+    background: #fff;
+    color: #111;
+}
+.allocation-btn.minus {
+    background: var(--btn-dark);
+    color: var(--danger-red);
+    border: 1px solid var(--danger-red);
+}
+.allocation-btn.minus:hover {
+    background: #2a1617;
+    color: #fff;
+}
+.allocation-value {
+    min-width: 28px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-light);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+
+.constraints-content {
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.fixed-slots h4,
+.global-rules h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.fixed-slot-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 1rem 0;
+    font-family: monospace;
+    color: var(--text-muted);
+}
+
+.fixed-slot-list li {
+    background-color: var(--btn-dark);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+.fixed-slot-list li button {
+    background: var(--danger-red);
+    color: #fff;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: background 0.2s;
+}
+.fixed-slot-list li button:hover {
+    background: #b91c1c;
+}
+.constraint-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.constraint-form input,
+.constraint-form select {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 1rem;
+    min-width: 120px;
+}
+.constraint-form input::placeholder {
+    color: var(--text-muted);
+    opacity: 1;
+}
+.constraint-form .btn-secondary {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.4rem;
+    margin-left: 0.2rem;
+}
+.btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.btn-secondary {
+    background-color: var(--btn-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-primary {
+    background-color: var(--accent-primary);
+    color: var(--text-dark);
+}
+
+.btn-primary:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+.rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    color: var(--text-light);
+}
+
+.rule-item:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+}
+
+.rule-label {
+    font-weight: 500;
+    margin: 0;
+}
+
+.rule-description {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0.25rem 0 0;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #4b5563;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.action-panel {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+}
+
