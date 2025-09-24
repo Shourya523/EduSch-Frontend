@@ -1,0 +1,233 @@
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --text-dark: #0f0f0f;
+    --accent-primary: #eeeeee;
+    --text-muted: rgba(238, 238, 238, 0.7);
+}
+
+.page-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Sidebar Component Styles --- */
+.sidebar-container {
+    width: 260px;
+    background-color: var(--bg-dark);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 0.5rem 1.5rem 0.5rem;
+}
+
+.logo-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background-color: var(--accent-primary);
+    border-radius: 0.5rem;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-light);
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 0.25rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-item a:hover {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.nav-item a.active {
+    background-color: var(--accent-primary);
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.sidebar-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+}
+
+/* --- Faculty Page Specific Styles --- */
+.faculty-page {
+    padding: 32px;
+    color: var(--text-light);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.faculty-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.faculty-page h1 {
+    font-size: 1.75rem;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.add-faculty-btn {
+    background-color: var(--accent-primary);
+    color: var(--text-dark);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.add-faculty-btn:hover {
+    background-color: white;
+    transform: translateY(-2px);
+}
+
+.faculty-content-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.faculty-section,
+.info-section {
+    padding: 1.5rem 2rem;
+}
+
+.faculty-section:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+}
+
+.faculty-section h2,
+.info-section h2 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.faculty-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.faculty-table th,
+.faculty-table td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+}
+
+.faculty-table thead {
+    border-bottom: 2px solid var(--border);
+}
+
+.faculty-table th {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.faculty-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.faculty-table tbody tr:hover {
+    background-color: var(--btn-dark);
+}
+
+.faculty-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.faculty-table td ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    background-color: var(--bg-dark);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+}
+
+.info-item .info-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem 0;
+}
+
+.info-item .info-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1.4;
+}

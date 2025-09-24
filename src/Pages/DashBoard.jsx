@@ -1,7 +1,8 @@
-import AddFile from '../components/AddFile';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import StatCard from '../components/StatCard';
+import QuickActions from '../components/QuickActions'; // New Import
+import ApprovalQueue from '../components/ApprovalQueue'; // New Import
 import './DashBoard.css';
 import { RectangleHorizontal, Users, Clock, UserSquare2 } from "lucide-react";
 
@@ -45,11 +46,14 @@ export default function DashBoard() {
                         />
                     </div>
                     
-                    <AddFile 
-                        title="Upload Faculty Timetable"
-                        description="Upload an Excel file containing faculty schedules"
-                    />
-
+                    <div className="dashboard-main-section">
+                        <div className="left-column">
+                            <QuickActions />
+                        </div>
+                        <div className="right-column">
+                            <ApprovalQueue />
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

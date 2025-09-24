@@ -1,53 +1,71 @@
+
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import './timetable.css';
 import { Clock, MapPin, User } from 'lucide-react';
 
-// UPDATED: Mock data now includes the full week (Monday - Friday).
-const timetableData = [
+const fallbackTimetable = [
     {
         day: "Monday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Smith" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
+            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" },
+            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Sharma" },
+            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Verma" }
         ]
     },
     {
         day: "Tuesday",
         classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Williams" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Brown" },
-            { type: "Lab", subject: "Data Structures Lab", time: "11:00-13:00", location: "Lab-C2", instructor: "Dr. Williams" }
+            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Iyer" },
+            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Singh" },
+            { type: "Lab", subject: "Data Structures Lab", time: "11:00-13:00", location: "Lab-C2", instructor: "Dr. Iyer" }
         ]
     },
     {
         day: "Wednesday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
+            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" }
         ]
     },
     {
         day: "Thursday",
         classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Williams" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Brown" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Smith" },
+            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Iyer" },
+            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Singh" },
+            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Sharma" },
         ]
     },
     {
         day: "Friday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
+            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" },
+            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Verma" }
         ]
     }
 ];
 
+
 export default function Timetable() {
+    const [timetableData, setTimetableData] = useState(fallbackTimetable);
+
+    useEffect(() => {
+        try {
+            const stored = localStorage.getItem('generatedTimetable');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (parsed && parsed.timetable) {
+                    setTimetableData(parsed.timetable);
+                }
+            }
+        } catch (e) {
+            setTimetableData(fallbackTimetable);
+        }
+    }, []);
+
     return (
         <div className="timetable-layout">
             <SideBar activePage={'timetable'} />

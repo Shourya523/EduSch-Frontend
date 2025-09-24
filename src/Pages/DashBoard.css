@@ -33,7 +33,7 @@ body {
 
 /* --- Content Area within Main --- */
 .content-area {
-    padding: 1em;
+    padding: 1.5rem;
 }
 
 /* --- Stats Grid --- */
@@ -43,7 +43,22 @@ body {
     gap: 24px;
 }
 
+/* --- NEW: Main Dashboard Section --- */
+.dashboard-main-section {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Left column is twice the size of the right */
+    gap: 24px;
+    align-items: start;
+}
+
 /* Responsive adjustments */
+@media (max-width: 992px) { /* Adjusted breakpoint for better layout flow */
+    .dashboard-main-section {
+        grid-template-columns: 1fr; /* Stack columns on tablet and smaller */
+    }
+}
+
 @media (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column;
@@ -57,3 +72,4 @@ body {
         grid-template-columns: 1fr; /* Stack cards on smaller screens */
     }
 }
+
