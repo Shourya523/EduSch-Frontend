@@ -10,16 +10,20 @@ function generateTimetable(subjectAllocations, constraints, globalRules) {
         "14:00-15:00",
         "15:00-16:00"
     ];
+    // Diverse set of rooms
+    const allRooms = [
+        "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
+        "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
+        "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
+        "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
+    ];
     let timetable = days.map(day => ({ day, classes: [] }));
-    let subjectIndex = 0;
-    let timeIndex = 0;
-    // Demo: assign a faculty per subject
+    // Track used slots: {day, time, room}
+    const usedSlots = new Set();
     const facultyList = ["Prof. Kumar", "Prof. Sharma", "Prof. Verma", "Prof. Iyer", "Prof. Singh"];
-    // Helper to check constraints
     function isSlotAvailable(day, time, room, faculty) {
-        // Check classroom constraints
+        if (usedSlots.has(`${day}|${time}|${room}`)) return false;
         if (constraints.classrooms.some(c => c.day === day && c.time === time && c.room === room)) return false;
-        // Check teacher constraints
         if (constraints.teachers.some(c => c.day === day && c.teacher === faculty)) return false;
         return true;
     }
@@ -27,32 +31,49 @@ function generateTimetable(subjectAllocations, constraints, globalRules) {
     let dayOrder = [...days];
     let timeOrder = [...times];
     if (!globalRules.minimizeGaps) {
-        // Shuffle for demo (not real gap minimization)
         dayOrder = dayOrder.reverse();
         timeOrder = timeOrder.reverse();
     }
+    let subjectIndex = 0;
     for (let subject of subjectAllocations) {
         const faculty = facultyList[subjectIndex % facultyList.length];
         let assigned = 0;
-        outer: for (let d = 0; d < dayOrder.length; d++) {
-            for (let t = 0; t < timeOrder.length; t++) {
-                const day = dayOrder[d];
-                const time = timeOrder[t];
-                const room = `Room-${100 + d}`;
-                if (isSlotAvailable(day, time, room, faculty)) {
-                    timetable[days.indexOf(day)].classes.push({
-                        type: "Lecture",
-                        subject: subject.name,
-                        time,
-                        location: room,
-                        instructor: faculty
-                    });
-                    assigned++;
-                    // Mark this slot as used for this subject
-                    if (assigned >= subject.classesPerWeek) break outer;
-                }
+        // Determine room type: lab or lecture
+        let possibleRooms = allRooms;
+        const subjName = subject.name.toLowerCase();
+        if (subjName.includes('lab')) {
+            if (subjName.includes('mech')) possibleRooms = allRooms.filter(r => r.startsWith('MECH-LAB'));
+            else if (subjName.includes('cs')) possibleRooms = allRooms.filter(r => r.startsWith('CS-LAB'));
+            else if (subjName.includes('phy')) possibleRooms = allRooms.filter(r => r.startsWith('PHY-LAB'));
+            else if (subjName.includes('chem')) possibleRooms = allRooms.filter(r => r.startsWith('CHEM-LAB'));
+            else if (subjName.includes('eee')) possibleRooms = allRooms.filter(r => r.startsWith('EEE-LAB'));
+            else possibleRooms = allRooms.filter(r => r.includes('LAB'));
+        } else {
+            possibleRooms = allRooms.filter(r => r.startsWith('LT-'));
+        }
+        // Try to distribute classes evenly across all days and times
+        outer: for (let slot = 0; slot < dayOrder.length * timeOrder.length * possibleRooms.length; slot++) {
+            const d = slot % dayOrder.length;
+            const t = Math.floor(slot / dayOrder.length) % timeOrder.length;
+            // Randomize room selection for each slot
+            const roomIdx = Math.floor(Math.random() * possibleRooms.length);
+            const day = dayOrder[d];
+            const time = timeOrder[t];
+            const room = possibleRooms[roomIdx];
+            if (isSlotAvailable(day, time, room, faculty)) {
+                timetable[days.indexOf(day)].classes.push({
+                    type: subjName.includes('lab') ? "Lab" : "Lecture",
+                    subject: subject.name,
+                    time,
+                    location: room,
+                    instructor: faculty
+                });
+                usedSlots.add(`${day}|${time}|${room}`);
+                assigned++;
+                if (assigned >= subject.classesPerWeek) break outer;
             }
         }
+        subjectIndex++;
     }
     return timetable;
 }
@@ -376,7 +397,13 @@ function GenerateTT() {
     const [minimizeGaps, setMinimizeGaps] = useState(true);
     const [balanceWorkload, setBalanceWorkload] = useState(true);
     // UI state for constraint forms
-    const [newClassroom, setNewClassroom] = useState({ room: '', day: 'Monday', time: '9:00-10:00' });
+    const allRooms = [
+        "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
+        "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
+        "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
+        "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
+    ];
+    const [newClassroom, setNewClassroom] = useState({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' });
     const [newTeacher, setNewTeacher] = useState({ teacher: '', day: 'Monday' });
 
     // Effect to update data when scope changes
@@ -552,7 +579,9 @@ function GenerateTT() {
                                         ))}
                                     </ul>
                                     <div className="constraint-form">
-                                        <input type="text" placeholder="Room (e.g. Room-101)" value={newClassroom.room} onChange={e => setNewClassroom({...newClassroom, room: e.target.value})} />
+                                        <select value={newClassroom.room} onChange={e => setNewClassroom({...newClassroom, room: e.target.value})}>
+                                            {allRooms.map(room => <option key={room} value={room}>{room}</option>)}
+                                        </select>
                                         <select value={newClassroom.day} onChange={e => setNewClassroom({...newClassroom, day: e.target.value})}>
                                             {['Monday','Tuesday','Wednesday','Thursday','Friday'].map(day => <option key={day} value={day}>{day}</option>)}
                                         </select>

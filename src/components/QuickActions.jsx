@@ -17,7 +17,7 @@ export default function QuickActions() {
                     <CalendarDays size={24} />
                     <span>View All Timetables</span>
                 </button>
-                <button className="action-button">
+                <button className="action-button" onClick={()=>navigate("/faculty")}>
                     <Users size={24} />
                     <span>Add New Faculty</span>
                 </button>
