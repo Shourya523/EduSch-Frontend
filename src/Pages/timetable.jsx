@@ -8,41 +8,41 @@ const timetableData = [
     {
         day: "Monday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Smith" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-204", instructor: "Mrs. Ruchika Bala" },
+            { type: "Lecture", subject: "Database Management Systems", time: "10:00-11:00", location: "B-301", instructor: "Mr. Vicky Gupta" },
+            { type: "Lab", subject: "IT Infrastructure and Communication Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Himika Verma" },
+            { type: "Lab", subject: "Digital Systems and Computer Organisation", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Divya Kaushik" }
         ]
     },
     {
         day: "Tuesday",
         classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Williams" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Brown" },
-            { type: "Lab", subject: "Data Structures Lab", time: "11:00-13:00", location: "Lab-C2", instructor: "Dr. Williams" }
+            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Mrs. Ruchika Bala" },
+            { type: "Lecture", subject: "Database Management Systems", time: "10:00-11:00", location: "B-302", instructor: "Mr. Vicky Gupta" },
+            { type: "Lab", subject: "Data Structures Lab", time: "11:00-13:00", location: "Lab-C2", instructor: "Dr. Anshul Singh" }
         ]
     },
     {
         day: "Wednesday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "Economics", time: "9:00-10:00", location: "A-204", instructor: "Mr. Alok Kumar Singh" },
+            { type: "Lecture", subject: "IT Infrastructure and Communication Lab", time: "10:00-11:00", location: "B-301", instructor: "Prof. Rishabh Negi" }
         ]
     },
     {
         day: "Thursday",
         classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Williams" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Brown" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Smith" },
+            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Mrs. Ruchika Bala" },
+            { type: "Lecture", subject: "Database Management Systems", time: "10:00-11:00", location: "B-302", instructor: "Mr. Vicky Gupta" },
+            { type: "Lecture", subject: "Digital Systems and Computer Organization", time: "11:00-12:00", location: "Lab-C1", instructor: "Dr. Nilufar Yasmin" },
         ]
     },
     {
         day: "Friday",
         classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Smith" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Johnson" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Johnson" }
+            { type: "Lecture", subject: "Mathematical Foundations for Artificial Intelligence and Data Science", time: "9:00-10:00", location: "A-204", instructor: "Mrs. Shivani Pant" },
+            { type: "Lecture", subject: "IT Infrastructure and Communication Lab", time: "10:00-11:00", location: "B-301", instructor: "Prof.Rishabh  Negi" },
+            { type: "Lab", subject: "Database Management Systems Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Noor Mohammad" }
         ]
     }
 ];
