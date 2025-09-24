@@ -28,7 +28,7 @@ export default function UserRoles() {
     const navigate = useNavigate();
     const getRoute = (roleName) => {
         if (roleName.toLowerCase() === 'admin') return '/admin-dashboard';
-        if (roleName.toLowerCase() === 'student') return '/student';
+        if (roleName.toLowerCase() === 'student') return '/student-dashboard';
         if (roleName.toLowerCase() === 'teacher') return '/teacher';
         return '/';
     };
