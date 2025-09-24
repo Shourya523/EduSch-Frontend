@@ -11,6 +11,8 @@ import Timetable from './Pages/timetable.jsx';
 import StudentDashboard from './Pages/StudentsDashboard/Dashboard-students.jsx';
 import Faculty from './Pages/Faculty.jsx';
 import UserRoles from './Pages/UserRoles.jsx';
+import StudentTimetable from './Pages/StudentsDashboard/StudentTimetable.jsx';
+import Courses from './Pages/StudentsDashboard/StudentCourses.jsx';
 function App() {
 
 
@@ -27,6 +29,8 @@ function App() {
         <Route path='/admin-faculty' element={<Faculty />} />
         <Route path='/student-dashboard' element={<StudentDashboard />} />
         <Route path='/roles' element={<UserRoles />} />
+        <Route path='student/timetable' element={<StudentTimetable />} />
+        <Route path='student/courses' element={<Courses />} />
       </Routes>
     </BrowserRouter>
   )

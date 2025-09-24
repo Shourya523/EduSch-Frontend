@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+/* --- Root Variables (Consistent with other pages) --- */
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Layout --- */
+.student-timetable-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area {
+    padding: 24px 32px;
+    overflow-y: auto;
+}
+
+/* --- Timetable Container (Adapted from timetable.css) --- */
+.timetable-container {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* --- Day Section Styling --- */
+.day-section {
+    margin-bottom: 24px;
+}
+
+.day-section:last-child {
+    margin-bottom: 0;
+}
+
+.day-section h3 {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0 0 24px 0;
+    background-color: var(--btn-dark);
+    padding: 12px 16px;
+    border-radius: 8px;
+}
+
+.entries-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+}
+
+/* --- Timetable Entry Card Styling --- */
+.timetable-entry {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.entry-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.entry-tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.entry-tag.lecture {
+    background-color: var(--btn-light);
+    color: var(--text-dark);
+}
+
+.entry-tag.lab {
+    background-color: #57090c;
+    color: var(--btn-light);
+}
+
+.entry-top h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.entry-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    color: #a0a0a0;
+    font-size: 0.85rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.no-class-message {
+    color: #a0a0a0;
+    font-style: italic;
+    padding: 16px;
+    text-align: center;
+}
