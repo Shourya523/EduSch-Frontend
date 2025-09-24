@@ -12,7 +12,7 @@ export default function TopBar() {
             <div className="sd-left">
                 <div className="sd-logo">
                     <div className="sd-logo">
-                        <Brain size={28} strokeWidth={2.5} className="logo-icon" />
+                        <Brain size={28} strokeWidth={2} className="logo-icon" color="black"/>
                     </div>
                 </div>
                 <div>
