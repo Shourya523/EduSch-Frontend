@@ -113,7 +113,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* CHANGED: Reduced gap between inputs */
   gap: 0.5rem;
 }
 
@@ -148,7 +147,7 @@
   border-color: var(--btn-light);
 }
 
-.email-wrapper {
+.email-wrapper-signin {
   position: relative;
 }
 
@@ -161,7 +160,7 @@
 }
 
 
-.password-wrapper {
+.password-wrapper-signin {
   position: relative;
 }
 
@@ -173,13 +172,13 @@
   color: #777;
 }
 
-.email-wrapper input {
-  padding-left: 2.5rem;
+.email-wrapper-signin input {
+  padding-left: 2.8rem !important;
   font-size: 0.9rem;
 }
 
-.password-wrapper input {
-  padding-left: 2.5rem;
+.password-wrapper-signin input {
+  padding-left: 2.8rem !important;
   font-size: 0.9rem;
 }
 

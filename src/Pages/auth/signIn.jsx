@@ -51,7 +51,7 @@ function SignIn() {
         <form className="signin-form" onSubmit={(e) => e.preventDefault()}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
-            <div className="email-wrapper">
+            <div className="email-wrapper-signin">
               <Mail size={16} className="email-icon" />
               <input type="email" id="email" placeholder="Enter your email" />
             </div>
@@ -59,7 +59,7 @@ function SignIn() {
 
           <div className="form-group">
             <label htmlFor="password">Password</label>
-            <div className="password-wrapper">
+            <div className="password-wrapper-signin">
               <Lock size={16} className="password-icon" />
               <input type="password" id="password" placeholder="Enter your password" />
             </div>
