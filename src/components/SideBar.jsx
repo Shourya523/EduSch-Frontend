@@ -29,31 +29,31 @@ export default function SideBar({ activePage }) {
 
             <nav className="sidebar-nav">
                 <ul>
-                    <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => navigate("/dashboard")}>
+                    <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => navigate("/admin-dashboard")}>
                         <a href="#">
                             <LayoutDashboard size={20} />
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => navigate("/timetable")}>
+                    <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => navigate("/admin-timetable")}>
                         <a href="#">
                             <CalendarDays size={20} />
                             <span>Timetable</span>
                         </a>
                     </li>
-                    <li className={activePage === 'gentt' ? 'active' : ''} onClick={() => navigate("/gentt")}>
+                    <li className={activePage === 'gentt' ? 'active' : ''} onClick={() => navigate("/admin-gentt")}>
                         <a href="#">
                             <FilePlus2 size={20} />
                             <span>Generate Timetable</span>
                         </a>
                     </li>
-                    <li className={activePage === 'faculty' ? 'active' : ''} onClick={() => navigate("/faculty")}>
+                    <li className={activePage === 'faculty' ? 'active' : ''} onClick={() => navigate("/admin-faculty")}>
                         <a href="#">
                             <Users size={20} />
                             <span>Faculty</span>
                         </a>
                     </li>
-                    <li className={activePage === 'rooms' ? 'active' : ''} onClick={() => navigate("/rooms")}>
+                    <li className={activePage === 'rooms' ? 'active' : ''} onClick={() => navigate("/admin-rooms")}>
                         <a href="#">
                             <DoorOpen size={20} />
                             <span>Rooms</span>
@@ -69,12 +69,6 @@ export default function SideBar({ activePage }) {
                         <a href="#">
                             <TrendingUp size={20} />
                             <span>Analytics</span>
-                        </a>
-                    </li>
-                    <li className={activePage === 'settings' ? 'active' : ''} onClick={() => navigate("/settings")}>
-                        <a href="#">
-                            <Settings size={20} />
-                            <span>Settings</span>
                         </a>
                     </li>
                 </ul>

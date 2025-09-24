@@ -1,12 +1,15 @@
+import React, { useState } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import StatCard from '../components/StatCard';
-import QuickActions from '../components/QuickActions'; // New Import
-import ApprovalQueue from '../components/ApprovalQueue'; // New Import
-import './DashBoard.css';
+import QuickActions from '../components/QuickActions';
+import ApprovalQueue from '../components/ApprovalQueue';
+import './AdminDashBoard.css';
 import { RectangleHorizontal, Users, Clock, UserSquare2 } from "lucide-react";
+import UserRoles from './UserRoles';
 
 export default function DashBoard() {
+
     return (
         <div className="dashboard-layout">
             <SideBar activePage={'dashboard'} />
@@ -45,7 +48,6 @@ export default function DashBoard() {
                             progressPercent={95}
                         />
                     </div>
-                    
                     <div className="dashboard-main-section">
                         <div className="left-column">
                             <QuickActions />

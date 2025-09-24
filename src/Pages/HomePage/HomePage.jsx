@@ -35,7 +35,7 @@ export default function HomePage() {
                     <button className="btn btn-primary" onClick={()=>navigate("/register")}>
                         Start Free Trial <ArrowRight size={16} />
                     </button>
-                    <button className="btn btn-secondary" onClick={()=>navigate("/dashboard")}>View Demo Dashboard</button>
+                    <button className="btn btn-secondary" onClick={()=>navigate("/roles")}>View Demo Dashboard</button>
                 </div>
             </section>
 
