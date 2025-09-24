@@ -8,6 +8,7 @@ import GenerateTT from './Pages/GenerateTT.jsx';
 import Rooms from './Pages/Rooms.jsx';
 import DashBoard from './Pages/AdminDashBoard.jsx';
 import Timetable from './Pages/timetable.jsx';
+import StudentDashboard from './Pages/StudentsDashboard/Dashboard-students.jsx';
 import Faculty from './Pages/Faculty.jsx';
 import UserRoles from './Pages/UserRoles.jsx';
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path='/admin-rooms' element={<Rooms />} />
         <Route path='/admin-timetable' element={<Timetable />} />
         <Route path='/admin-faculty' element={<Faculty />} />
+        <Route path='/student-dashboard' element={<StudentDashboard />} />
         <Route path='/roles' element={<UserRoles />} />
       </Routes>
     </BrowserRouter>
