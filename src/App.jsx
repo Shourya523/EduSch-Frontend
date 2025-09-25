@@ -15,6 +15,7 @@ import StudentTimetable from './Pages/StudentsDashboard/StudentTimetable.jsx';
 import Courses from './Pages/StudentsDashboard/StudentCourses.jsx';
 import Notifications from './Pages/Notifications.jsx';
 import StudentAttendance from './Pages/StudentsDashboard/StudentAttendance.jsx';
+import StudentGrades from './Pages/StudentsDashboard/StudentGrades.jsx';
 function App() {
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path='student/timetable' element={<StudentTimetable />} />
         <Route path='student/courses' element={<Courses />} />
         <Route path='student/attendance' element={<StudentAttendance />} />
+        <Route path='student/grades' element={<StudentGrades />} />
       </Routes>
     </BrowserRouter>
   )
