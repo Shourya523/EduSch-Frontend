@@ -59,16 +59,10 @@ export default function SideBar({ activePage }) {
                             <span>Rooms</span>
                         </a>
                     </li>
-                    <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => navigate("/notifications")}>
+                    <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => navigate("/admin-notifications")}>
                         <a href="#">
                             <Bell size={20} />
                             <span>Notifications</span>
-                        </a>
-                    </li>
-                    <li className={activePage === 'analytics' ? 'active' : ''} onClick={() => navigate("/analytics")}>
-                        <a href="#">
-                            <TrendingUp size={20} />
-                            <span>Analytics</span>
                         </a>
                     </li>
                 </ul>

@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
-import SideBar from '../components/SideBar';
+import SideBar from '../components/SideBar'; // Make sure this path is correct
 import './GenerateTT.css';
 import { Plus, Settings2, RotateCw, Book, School, Users, UserCheck, Target } from 'lucide-react';
+import TimetablePopup from '../components/TimeTablePopUp';
 
-// --- Mock Data ---
-// In a real application, this data would come from an API based on scope selection.
-// --- Robust Mock Data for All Semesters ---
+// --- Helper function to shuffle an array (Fisher-Yates shuffle) ---
+const shuffleArray = (array) => {
+    let newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+};
+
+
+// --- Mock Data (Keep as is) ---
 const getOrdinal = (n) => {
     if (n === 1) return '1st Semester';
     if (n === 2) return '2nd Semester';
@@ -15,7 +25,6 @@ const getOrdinal = (n) => {
 };
 const semesters = Array.from({ length: 8 }, (_, i) => getOrdinal(i + 1));
 
-// Realistic Indian BTech subject structure
 const btechSubjects = {
     common: {
         1: [
@@ -161,13 +170,11 @@ const generateSemesterData = (dept, sem) => {
         semNum = sem;
     }
     let subjects = [];
-    // Common subjects for 1st and 2nd semester
     if (semNum === 1 || semNum === 2) {
         subjects = btechSubjects.common[semNum] || [];
     } else if (btechSubjects[dept] && btechSubjects[dept][semNum]) {
         subjects = btechSubjects[dept][semNum];
     } else {
-        // Fallback generic subjects
         subjects = [
             { name: `${dept} ${sem} - Subject 1`, classesPerWeek: 3 },
             { name: `${dept} ${sem} - Subject 2`, classesPerWeek: 4 },
@@ -186,26 +193,17 @@ const generateSemesterData = (dept, sem) => {
 };
 
 const departments = [
-    'Computer Science',
-    'Information Technology',
-    'Mechanical Engineering',
-    'Biotechnology',
-    'Electronics and Communication'
+    'Computer Science', 'Information Technology', 'Mechanical Engineering',
+    'Biotechnology', 'Electronics and Communication'
 ];
 
 const mockData = {};
 for (const dept of departments) {
     mockData[dept] = {};
     for (const sem of semesters) {
-        // Add some custom data for known cases, else fallback to generated
         if (dept === 'Computer Science' && sem === '5th Semester') {
             mockData[dept][sem] = {
-                resources: {
-                    faculties: 28,
-                    classrooms: 12,
-                    subjects: 21,
-                    batches: 3,
-                },
+                resources: { faculties: 28, classrooms: 12, subjects: 21, batches: 3 },
                 subjects: [
                     { name: 'CS-501 Artificial Intelligence', classesPerWeek: 4 },
                     { name: 'CS-502 Database Systems', classesPerWeek: 4 },
@@ -215,12 +213,7 @@ for (const dept of departments) {
             };
         } else if (dept === 'Computer Science' && sem === '7th Semester') {
             mockData[dept][sem] = {
-                resources: {
-                    faculties: 25,
-                    classrooms: 10,
-                    subjects: 18,
-                    batches: 2,
-                },
+                resources: { faculties: 25, classrooms: 10, subjects: 18, batches: 2 },
                 subjects: [
                     { name: 'CS-701 Machine Learning', classesPerWeek: 5 },
                     { name: 'CS-702 Cloud Computing', classesPerWeek: 4 },
@@ -229,12 +222,7 @@ for (const dept of departments) {
             };
         } else if (dept === 'Mechanical Engineering' && sem === '3rd Semester') {
             mockData[dept][sem] = {
-                resources: {
-                    faculties: 35,
-                    classrooms: 15,
-                    subjects: 25,
-                    batches: 4,
-                },
+                resources: { faculties: 35, classrooms: 15, subjects: 25, batches: 4 },
                 subjects: [
                     { name: 'ME-301 Thermodynamics', classesPerWeek: 5 },
                     { name: 'ME-302 Fluid Mechanics', classesPerWeek: 5 },
@@ -248,159 +236,92 @@ for (const dept of departments) {
 }
 
 // --- Reusable Sub-Components ---
+const StatBox = ({ icon, value, label }) => ( <div className="stat-box"> {icon} <div className="stat-box-info"> <p className="stat-box-value">{value}</p> <p className="stat-box-label">{label}</p> </div> </div> );
+const SubjectAllocationRow = ({ subject, onAllocationChange }) => ( <div className="subject-allocation-row"> <p className="subject-name">{subject.name}</p> <div className="form-group subject-allocation-controls"> <button type="button" className="allocation-btn minus" onClick={() => onAllocationChange(subject.name, Math.max(0, subject.classesPerWeek - 1))} > - </button> <span className="allocation-value">{subject.classesPerWeek}</span> <button type="button" className="allocation-btn plus" onClick={() => onAllocationChange(subject.name, subject.classesPerWeek + 1)} > + </button> </div> </div> );
 
-const StatBox = ({ icon, value, label }) => (
-    <div className="stat-box">
-        {icon}
-        <div className="stat-box-info">
-            <p className="stat-box-value">{value}</p>
-            <p className="stat-box-label">{label}</p>
-        </div>
-    </div>
-);
-
-const GenerationRule = ({ label, description }) => (
-    <div className="rule-item">
-        <div className="rule-info">
-            <p className="rule-label">{label}</p>
-            <p className="rule-description">{description}</p>
-        </div>
-        <label className="switch">
-            <input type="checkbox" defaultChecked />
-            <span className="slider round"></span>
-        </label>
-    </div>
-);
-
-const SubjectAllocationRow = ({ subject, onAllocationChange }) => (
-    <div className="subject-allocation-row">
-        <p className="subject-name">{subject.name}</p>
-        <div className="form-group subject-allocation-controls">
-            <button
-                type="button"
-                className="allocation-btn minus"
-                onClick={() => onAllocationChange(subject.name, Math.max(0, subject.classesPerWeek - 1))}
-            >
-                -
-            </button>
-            <span className="allocation-value">{subject.classesPerWeek}</span>
-            <button
-                type="button"
-                className="allocation-btn plus"
-                onClick={() => onAllocationChange(subject.name, subject.classesPerWeek + 1)}
-            >
-                +
-            </button>
-        </div>
-    </div>
-);
-
-function getInitialDept() {
-    return localStorage.getItem('lastSelectedDept') || 'Computer Science';
-}
-function getInitialSem() {
-    return localStorage.getItem('lastSelectedSemester') || '5th Semester';
-}
-
+function getInitialDept() { return localStorage.getItem('lastSelectedDept') || 'Computer Science'; }
+function getInitialSem() { return localStorage.getItem('lastSelectedSemester') || '5th Semester'; }
 
 function GenerateTT() {
     const [selectedDept, setSelectedDept] = useState(getInitialDept());
     const [selectedSemester, setSelectedSemester] = useState(getInitialSem());
     const [currentScopeData, setCurrentScopeData] = useState(mockData[getInitialDept()][getInitialSem()]);
     const [subjectAllocations, setSubjectAllocations] = useState(mockData[getInitialDept()][getInitialSem()].subjects);
-    // Batch scope
     const [selectedBatch, setSelectedBatch] = useState('A');
-    // Constraints state
-    const [classroomConstraints, setClassroomConstraints] = useState([]); // {room, day, time}
-    const [teacherConstraints, setTeacherConstraints] = useState([]); // {teacher, day}
-    // Global rules state
+    const [classroomConstraints, setClassroomConstraints] = useState([]);
+    const [teacherConstraints, setTeacherConstraints] = useState([]);
     const [minimizeGaps, setMinimizeGaps] = useState(true);
     const [balanceWorkload, setBalanceWorkload] = useState(true);
-    // UI state for constraint forms
-    const allRooms = [
-        "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
-        "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
-        "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
-        "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
-    ];
+    const [showPopup, setShowPopup] = useState(false);
+    const [generatedTimetables, setGeneratedTimetables] = useState([]);
+
+    const allRooms = [ "LT-101", "LT-102", "LT-103", "LT-104", "LT-105", "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3", "CS-LAB-1", "CS-LAB-2", "CS-LAB-3", "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1" ];
     const [newClassroom, setNewClassroom] = useState({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' });
     const [newTeacher, setNewTeacher] = useState({ teacher: '', day: 'Monday' });
-    // Generate batch options based on currentScopeData.resources.batches
     const batchOptions = Array.from({ length: currentScopeData?.resources?.batches || 1 }, (_, i) => String.fromCharCode(65 + i));
-    // --- Enhanced Timetable Generator ---
-    // This function distributes subjects across weekdays and timeslots, respecting constraints and global rules
+    
+    // --- MODIFIED Timetable Generator for Better Distribution ---
     function generateTimetable(subjectAllocations, constraints, globalRules) {
         const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-        const times = [
-            "9:00-10:00",
-            "10:00-11:00",
-            "11:00-12:00",
-            "12:00-13:00",
-            "14:00-15:00",
-            "15:00-16:00"
-        ];
-        // Diverse set of rooms
-        const allRooms = [
-            "LT-101", "LT-102", "LT-103", "LT-104", "LT-105",
-            "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3",
-            "CS-LAB-1", "CS-LAB-2", "CS-LAB-3",
-            "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"
-        ];
+        const times = ["9:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "14:00-15:00", "15:00-16:00"];
         let timetable = days.map(day => ({ day, classes: [] }));
-        // Track used slots: {day, time, room}
         const usedSlots = new Set();
-        const facultyList = ["Prof. Kumar", "Prof. Sharma", "Prof. Verma", "Prof. Iyer", "Prof. Singh"];
+        const facultyList = ["Prof. Kumar", "Prof. Sharma", "Prof. Verma", "Prof. Iyer", "Prof. Singh", "Dr. Gupta", "Dr. Reddy"];
+
         function isSlotAvailable(day, time, room, faculty) {
             if (usedSlots.has(`${day}|${time}|${room}`)) return false;
+            if (usedSlots.has(`${day}|${time}|faculty|${faculty}`)) return false;
             if (constraints.classrooms.some(c => c.day === day && c.time === time && c.room === room)) return false;
             if (constraints.teachers.some(c => c.day === day && c.teacher === faculty)) return false;
             return true;
         }
-        // Optionally shuffle days/times for 'minimize gaps' rule
-        let dayOrder = [...days];
-        let timeOrder = [...times];
-        if (!globalRules.minimizeGaps) {
-            dayOrder = dayOrder.reverse();
-            timeOrder = timeOrder.reverse();
-        }
-        let subjectIndex = 0;
-        for (let subject of subjectAllocations) {
-            const faculty = facultyList[subjectIndex % facultyList.length];
-            let assigned = 0;
-            // Determine room type: lab or lecture
-            let possibleRooms = allRooms;
-            const subjName = subject.name.toLowerCase();
-            if (subjName.includes('lab')) {
-                possibleRooms = allRooms.filter(r => r.toLowerCase().includes('lab'));
-            } else {
-                possibleRooms = allRooms.filter(r => r.toLowerCase().includes('lt') || r.toLowerCase().includes('class'));
+
+        // Build a flat list of all class sessions needed
+        let classSessions = [];
+        subjectAllocations.forEach((subject, subjIdx) => {
+            for (let i = 0; i < subject.classesPerWeek; i++) {
+                classSessions.push({
+                    subject: subject.name,
+                    subjIdx,
+                    type: 'Lecture',
+                });
             }
-            // Try to distribute classes evenly across all days and times
-            outer: for (let slot = 0; slot < dayOrder.length * timeOrder.length * possibleRooms.length; slot++) {
-                const day = dayOrder[slot % dayOrder.length];
-                const time = timeOrder[Math.floor(slot / dayOrder.length) % timeOrder.length];
-                const room = possibleRooms[Math.floor(slot / (dayOrder.length * timeOrder.length)) % possibleRooms.length];
-                if (isSlotAvailable(day, time, room, faculty)) {
-                    timetable[days.indexOf(day)].classes.push({
-                        type: subjName.includes('lab') ? 'Lab' : 'Lecture',
-                        subject: subject.name,
-                        time,
-                        location: room,
-                        instructor: faculty
-                    });
-                    usedSlots.add(`${day}|${time}|${room}`);
-                    assigned++;
-                    if (assigned >= subject.classesPerWeek) break outer;
-                }
+        });
+        // Shuffle for variety
+        classSessions = shuffleArray(classSessions);
+
+        // Distribute classes round-robin across all days and times
+        let sessionIdx = 0;
+        for (let slot = 0; slot < days.length * times.length; slot++) {
+            if (sessionIdx >= classSessions.length) break;
+            const day = days[slot % days.length];
+            const time = times[Math.floor(slot / days.length) % times.length];
+            const session = classSessions[sessionIdx];
+            // Assign a random room and faculty
+            const room = allRooms[(sessionIdx + slot) % allRooms.length];
+            const faculty = facultyList[(session.subjIdx + slot) % facultyList.length];
+            if (isSlotAvailable(day, time, room, faculty)) {
+                timetable.find(d => d.day === day).classes.push({
+                    type: session.type,
+                    subject: session.subject,
+                    time,
+                    location: room,
+                    instructor: faculty
+                });
+                usedSlots.add(`${day}|${time}|${room}`);
+                usedSlots.add(`${day}|${time}|faculty|${faculty}`);
+                sessionIdx++;
             }
-            subjectIndex++;
         }
+        // Sort classes in each day by time
+        timetable.forEach(day => {
+            day.classes.sort((a, b) => times.indexOf(a.time) - times.indexOf(b.time));
+        });
         return timetable;
     }
 
     // Effect to update data when scope changes
     useEffect(() => {
-        // Persist selection
         localStorage.setItem('lastSelectedDept', selectedDept);
         localStorage.setItem('lastSelectedSemester', selectedSemester);
         const data = mockData[selectedDept]?.[selectedSemester];
@@ -408,7 +329,6 @@ function GenerateTT() {
             setCurrentScopeData(data);
             setSubjectAllocations(data.subjects);
         } else {
-            // Handle cases where data for a combination doesn't exist
             const fallbackDept = Object.keys(mockData)[0];
             const fallbackSem = Object.keys(mockData[fallbackDept])[0];
             setCurrentScopeData(mockData[fallbackDept][fallbackSem]);
@@ -417,68 +337,56 @@ function GenerateTT() {
     }, [selectedDept, selectedSemester]);
 
     const handleAllocationChange = (subjectName, newValue) => {
-        const updatedAllocations = subjectAllocations.map(subject => 
+        const updatedAllocations = subjectAllocations.map(subject =>
             subject.name === subjectName ? { ...subject, classesPerWeek: newValue } : subject
         );
         setSubjectAllocations(updatedAllocations);
     };
 
-
     const handleReset = () => {
-        setSelectedDept(getInitialDept());
-        setSelectedSemester(getInitialSem());
-        setCurrentScopeData(mockData[getInitialDept()][getInitialSem()]);
-        setSubjectAllocations(mockData[getInitialDept()][getInitialSem()].subjects);
+        const initialDept = getInitialDept();
+        const initialSem = getInitialSem();
+        setSelectedDept(initialDept);
+        setSelectedSemester(initialSem);
+        setCurrentScopeData(mockData[initialDept][initialSem]);
+        setSubjectAllocations(mockData[initialDept][initialSem].subjects);
         setClassroomConstraints([]);
         setTeacherConstraints([]);
         setMinimizeGaps(true);
         setBalanceWorkload(true);
     };
 
-
     const handleGenerate = () => {
-        // Generate timetable and save to localStorage, respecting constraints and rules
-        const timetable = generateTimetable(
-            subjectAllocations,
-            { classrooms: classroomConstraints, teachers: teacherConstraints },
-            { minimizeGaps, balanceWorkload }
-        );
-        // Use a unique key for each batch
+        const options = [];
+        const constraints = { classrooms: classroomConstraints, teachers: teacherConstraints };
+        const globalRules = { minimizeGaps, balanceWorkload };
+        for (let i = 0; i < 4; i++) {
+            const timetable = generateTimetable(subjectAllocations, constraints, globalRules);
+            options.push(timetable);
+        }
+        setGeneratedTimetables(options);
+        setShowPopup(true);
+    };
+
+    const handleTimetableSelect = (selectedTimetable) => {
         const batchKey = `${selectedDept.replace(/\s+/g, '')}_${selectedSemester.replace(/\s+/g, '')}_${selectedBatch}`;
         localStorage.setItem(`timetable_${batchKey}`, JSON.stringify({
-            dept: selectedDept,
-            semester: selectedSemester,
-            batch: selectedBatch,
-            timetable
+            dept: selectedDept, semester: selectedSemester, batch: selectedBatch, timetable: selectedTimetable
         }));
-        // Optionally, update a list of batch keys
         let batchKeys = JSON.parse(localStorage.getItem('timetable_batchKeys') || '[]');
         if (!batchKeys.includes(batchKey)) {
             batchKeys.push(batchKey);
             localStorage.setItem('timetable_batchKeys', JSON.stringify(batchKeys));
         }
+        setShowPopup(false);
         window.location.href = '/admin-timetable';
     };
 
     // Constraint handlers
-    const handleAddClassroomConstraint = () => {
-        if (newClassroom.room && newClassroom.day && newClassroom.time) {
-            setClassroomConstraints([...classroomConstraints, { ...newClassroom }]);
-            setNewClassroom({ room: '', day: 'Monday', time: '9:00-10:00' });
-        }
-    };
-    const handleRemoveClassroomConstraint = idx => {
-        setClassroomConstraints(classroomConstraints.filter((_, i) => i !== idx));
-    };
-    const handleAddTeacherConstraint = () => {
-        if (newTeacher.teacher && newTeacher.day) {
-            setTeacherConstraints([...teacherConstraints, { ...newTeacher }]);
-            setNewTeacher({ teacher: '', day: 'Monday' });
-        }
-    };
-    const handleRemoveTeacherConstraint = idx => {
-        setTeacherConstraints(teacherConstraints.filter((_, i) => i !== idx));
-    };
+    const handleAddClassroomConstraint = () => { if (newClassroom.room && newClassroom.day && newClassroom.time) { setClassroomConstraints([...classroomConstraints, { ...newClassroom }]); setNewClassroom({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' }); } };
+    const handleRemoveClassroomConstraint = idx => { setClassroomConstraints(classroomConstraints.filter((_, i) => i !== idx)); };
+    const handleAddTeacherConstraint = () => { if (newTeacher.teacher && newTeacher.day) { setTeacherConstraints([...teacherConstraints, { ...newTeacher }]); setNewTeacher({ teacher: '', day: 'Monday' }); } };
+    const handleRemoveTeacherConstraint = idx => { setTeacherConstraints(teacherConstraints.filter((_, i) => i !== idx)); };
 
     return (
         <div className="page-layout">
@@ -509,17 +417,13 @@ function GenerateTT() {
                                 <div className="form-group">
                                     <label htmlFor="semester">Semester</label>
                                     <select id="semester" name="semester" value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)}>
-                                        {semesters.map(sem => (
-                                            <option key={sem} value={sem}>{sem}</option>
-                                        ))}
+                                        {semesters.map(sem => ( <option key={sem} value={sem}>{sem}</option> ))}
                                     </select>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="batch">Batch</label>
                                     <select id="batch" name="batch" value={selectedBatch} onChange={e => setSelectedBatch(e.target.value)}>
-                                        {batchOptions.map(batch => (
-                                            <option key={batch} value={batch}>{batch}</option>
-                                        ))}
+                                        {batchOptions.map(batch => ( <option key={batch} value={batch}>{batch}</option> ))}
                                     </select>
                                 </div>
                             </div>
@@ -528,12 +432,10 @@ function GenerateTT() {
                         {/* --- Section 2: Resource Overview --- */}
                         <div className="generation-section">
                              <div className="section-header">
-                                <div className="section-number">2</div>
-                                <h3>Resource Overview</h3>
+                                 <div className="section-number">2</div>
+                                 <h3>Resource Overview</h3>
                             </div>
-                            <p className="section-description">
-                                A summary of the available resources for the selected scope.
-                            </p>
+                            <p className="section-description"> A summary of the available resources for the selected scope. </p>
                             <div className="resource-overview">
                                 <StatBox icon={<Users size={24} />} value={currentScopeData.resources.faculties} label="Faculties Available" />
                                 <StatBox icon={<School size={24} />} value={currentScopeData.resources.classrooms} label="Classrooms & Labs" />
@@ -542,27 +444,19 @@ function GenerateTT() {
                             </div>
                         </div>
 
-                        {/* --- NEW Section 3: Subject-wise Class Allocation --- */}
+                        {/* --- Section 3: Subject Class Allocation --- */}
                         <div className="generation-section">
                             <div className="section-header">
                                 <div className="section-number">3</div>
                                 <h3>Subject Class Allocation</h3>
                             </div>
-                            <p className="section-description">
-                                Define the number of classes to be conducted for each subject per week.
-                            </p>
+                            <p className="section-description"> Define the number of classes to be conducted for each subject per week. </p>
                             <div className="subject-allocation-container">
                                 <div className="subject-allocation-header">
                                     <h4><Book size={18} /> Subject Name</h4>
                                     <h4><Target size={18} /> Classes Per Week</h4>
                                 </div>
-                                {subjectAllocations.map(subject => (
-                                    <SubjectAllocationRow 
-                                        key={subject.name} 
-                                        subject={subject} 
-                                        onAllocationChange={handleAllocationChange} 
-                                    />
-                                ))}
+                                {subjectAllocations.map(subject => ( <SubjectAllocationRow key={subject.name} subject={subject} onAllocationChange={handleAllocationChange} /> ))}
                             </div>
                         </div>
 
@@ -572,20 +466,12 @@ function GenerateTT() {
                                 <div className="section-number">4</div>
                                 <h3>Constraints & Rules</h3>
                             </div>
-                            <p className="section-description">
-                                Add classroom/teacher constraints and set global rules for the timetable engine.
-                            </p>
+                            <p className="section-description"> Add classroom/teacher constraints and set global rules for the timetable engine. </p>
                             <div className="constraints-content">
-                                {/* Classroom Constraints */}
                                 <div className="fixed-slots">
                                     <h4>Classroom Unavailable</h4>
                                     <ul className="fixed-slot-list">
-                                        {classroomConstraints.map((c, idx) => (
-                                            <li key={idx}>
-                                                {c.room} unavailable on {c.day} at {c.time}
-                                                <button onClick={() => handleRemoveClassroomConstraint(idx)} style={{marginLeft:8}}>Remove</button>
-                                            </li>
-                                        ))}
+                                        {classroomConstraints.map((c, idx) => ( <li key={idx}> {c.room} unavailable on {c.day} at {c.time} <button onClick={() => handleRemoveClassroomConstraint(idx)} className="btn-remove-constraint">Remove</button> </li> ))}
                                     </ul>
                                     <div className="constraint-form">
                                         <select value={newClassroom.room} onChange={e => setNewClassroom({...newClassroom, room: e.target.value})}>
@@ -597,33 +483,22 @@ function GenerateTT() {
                                         <select value={newClassroom.time} onChange={e => setNewClassroom({...newClassroom, time: e.target.value})}>
                                             {["9:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","14:00-15:00","15:00-16:00"].map(time => <option key={time} value={time}>{time}</option>)}
                                         </select>
-                                        <button className="btn btn-secondary" onClick={handleAddClassroomConstraint}>
-                                            <Plus size={16} /> Add
-                                        </button>
+                                        <button className="btn btn-secondary" onClick={handleAddClassroomConstraint}> <Plus size={16} /> Add </button>
                                     </div>
                                 </div>
-                                {/* Teacher Constraints */}
                                 <div className="fixed-slots">
                                     <h4>Teacher Absent</h4>
                                     <ul className="fixed-slot-list">
-                                        {teacherConstraints.map((c, idx) => (
-                                            <li key={idx}>
-                                                {c.teacher} unavailable on {c.day}
-                                                <button onClick={() => handleRemoveTeacherConstraint(idx)} style={{marginLeft:8}}>Remove</button>
-                                            </li>
-                                        ))}
+                                        {teacherConstraints.map((c, idx) => ( <li key={idx}> {c.teacher} unavailable on {c.day} <button onClick={() => handleRemoveTeacherConstraint(idx)} className="btn-remove-constraint">Remove</button> </li> ))}
                                     </ul>
                                     <div className="constraint-form">
                                         <input type="text" placeholder="Teacher (e.g. Prof. Kumar)" value={newTeacher.teacher} onChange={e => setNewTeacher({...newTeacher, teacher: e.target.value})} />
                                         <select value={newTeacher.day} onChange={e => setNewTeacher({...newTeacher, day: e.target.value})}>
                                             {['Monday','Tuesday','Wednesday','Thursday','Friday'].map(day => <option key={day} value={day}>{day}</option>)}
                                         </select>
-                                        <button className="btn btn-secondary" onClick={handleAddTeacherConstraint}>
-                                            <Plus size={16} /> Add
-                                        </button>
+                                        <button className="btn btn-secondary" onClick={handleAddTeacherConstraint}> <Plus size={16} /> Add </button>
                                     </div>
                                 </div>
-                                {/* Global Rules */}
                                 <div className="global-rules">
                                     <h4><Settings2 size={18} /> Global Rules</h4>
                                     <div className="rule-item">
@@ -652,21 +527,24 @@ function GenerateTT() {
 
                         {/* --- Section 5: Action Panel --- */}
                         <div className="action-panel">
-                            <button className="btn btn-secondary" onClick={handleReset}>
-                                <RotateCw size={16} /> Reset
-                            </button>
-                            <button className="btn btn-primary" onClick={handleGenerate}>
-                                Generate Timetable
-                            </button>
+                            <button className="btn-secondary-reset" onClick={handleReset}> <RotateCw size={16} /> Reset </button>
+                            <button className="btn btn-primary" onClick={handleGenerate}> Generate Timetable </button>
                         </div>
                     </div>
                 </div>
             </main>
+
+            {/* --- Conditionally render the popup --- */}
+            {showPopup && (
+                <TimetablePopup 
+                    timetables={generatedTimetables}
+                    onSelect={handleTimetableSelect}
+                    onClose={() => setShowPopup(false)}
+                    scope={{ dept: selectedDept, semester: selectedSemester, batch: selectedBatch }}
+                />
+            )}
         </div>
     );
 }
 
 export default GenerateTT;
-
-
-

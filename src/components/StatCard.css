@@ -18,7 +18,7 @@ body {
 }
 
 .stat-card {
-    background-color: var(--bg-dark);
+    background-color: oklch(0.205 0 0);
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1em;

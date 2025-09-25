@@ -40,7 +40,7 @@ body {
 
 /* --- Generate Timetable Page Specific Styles --- */
 .generation-container {
-    background-color: var(--bg-dark);
+    background-color: #0f0f0f;
     border: 1px solid var(--border);
     border-radius: 0.75rem;
 }
@@ -224,29 +224,35 @@ body {
     cursor: pointer;
     transition: background 0.2s, color 0.2s, transform 0.1s;
     outline: none;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.08);
 }
+
 .allocation-btn:active {
     transform: scale(0.95);
 }
+
 .allocation-btn.plus {
     background: linear-gradient(90deg, #eeeeee 0%, #bdbdbd 100%);
     color: var(--text-dark);
     border: 1px solid #eeeeee;
 }
+
 .allocation-btn.plus:hover {
     background: #fff;
     color: #111;
 }
+
 .allocation-btn.minus {
     background: var(--btn-dark);
     color: var(--danger-red);
     border: 1px solid var(--danger-red);
 }
+
 .allocation-btn.minus:hover {
     background: #2a1617;
     color: #fff;
 }
+
 .allocation-value {
     min-width: 28px;
     text-align: center;
@@ -294,6 +300,7 @@ body {
     justify-content: space-between;
     gap: 0.5rem;
 }
+
 .fixed-slot-list li button {
     background: var(--danger-red);
     color: #fff;
@@ -306,9 +313,11 @@ body {
     margin-left: 0.5rem;
     transition: background 0.2s;
 }
+
 .fixed-slot-list li button:hover {
     background: #b91c1c;
 }
+
 .constraint-form {
     display: flex;
     gap: 0.5rem;
@@ -316,6 +325,7 @@ body {
     flex-wrap: wrap;
     align-items: center;
 }
+
 .constraint-form input,
 .constraint-form select {
     background-color: var(--bg-dark);
@@ -326,16 +336,19 @@ body {
     font-size: 1rem;
     min-width: 120px;
 }
+
 .constraint-form input::placeholder {
     color: var(--text-muted);
     opacity: 1;
 }
+
 .constraint-form .btn-secondary {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     border-radius: 0.4rem;
     margin-left: 0.2rem;
 }
+
 .btn {
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
@@ -349,12 +362,31 @@ body {
 }
 
 .btn-secondary {
-    background-color: var(--btn-dark);
-    color: var(--text-light);
-    border: 1px solid var(--border);
+    background-color: var(--bg-dark);
+    color: #22c55e;
+    border: 1px solid #22c55e;
 }
 
 .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary-reset {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    transition: background-color 0.2s, transform 0.2s;
+    background-color: var(--bg-dark);
+    color: #E5484D;
+    border: 1px solid #E5484D;
+}
+
+.btn-secondary-reset:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -448,4 +480,3 @@ input:checked+.slider:before {
     gap: 1rem;
     padding: 1.5rem 2rem;
 }
-

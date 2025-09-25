@@ -26,7 +26,7 @@ body {
     flex-direction: column;
     padding: 24px;
     box-sizing: border-box; /* Ensures padding is included in the width */
-    border-right: 1px solid rgba(255,255,255,0.1) ;
+    border-right: 1px solid rgba(255,255,255,0.2) ;
     overflow: hidden;
     position: relative;
     /* z-index: 10; */

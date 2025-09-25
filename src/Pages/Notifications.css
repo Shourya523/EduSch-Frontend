@@ -1,0 +1,219 @@
+/* --- Notifications Page Specific Styles --- */
+.ntf-page {
+    padding: 32px;
+    color: var(--text-light);
+    background: #101014;
+    min-height: 100vh;
+}
+
+.ntf-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #16161a;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 16px 0 #000a;
+}
+
+.ntf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: #18181c;
+}
+
+.ntf-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.ntf-filter-tabs {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.ntf-filter-btn {
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.ntf-filter-btn:focus {
+    box-shadow: 0 0 0 2px #4fd1c5;
+    z-index: 1;
+}
+
+.ntf-filter-tabs .ntf-filter-btn:first-child {
+    border-left: none;
+}
+
+.ntf-filter-btn:hover {
+    color: var(--text-light);
+    background-color: var(--btn-dark);
+}
+
+.ntf-filter-btn.active {
+    background-color: #23232b;
+    color: var(--text-light);
+    font-weight: 600;
+    box-shadow: 0 2px 8px 0 #0004;
+}
+
+.ntf-list {
+    padding: 1.5rem 2rem 2.5rem 2rem;
+}
+
+/* --- Notification Card Styles --- */
+.ntf-card {
+    display: flex;
+    gap: 1.5rem;
+    background-color: #18181c;
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+    border-radius: 0.5rem;
+    padding: 1.15rem 1.25rem;
+    margin-bottom: 1.25rem;
+    transition: opacity 0.3s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 8px 0 #0006;
+}
+.ntf-card:hover {
+    background-color: #23232b;
+    box-shadow: 0 2px 16px 0 #000a;
+}
+
+/* Card type color-coding */
+.ntf-card.request { border-left-color: #3b82f6; }
+.ntf-card.absence { border-left-color: #f97316; }
+.ntf-card.maintenance { border-left-color: #eab308; }
+.ntf-card.info { border-left-color: #a855f7; }
+.ntf-card.success { border-left-color: #22c55e; }
+
+.ntf-card.read {
+    opacity: 0.5;
+    filter: grayscale(0.2);
+}
+.ntf-card.read:hover {
+    opacity: 0.8;
+}
+
+.ntf-card-icon {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+.ntf-icon-request { color: #3b82f6; }
+.ntf-icon-absence { color: #f97316; }
+.ntf-icon-maintenance { color: #eab308; }
+.ntf-icon-info { color: #a855f7; }
+.ntf-icon-success { color: #22c55e; }
+
+.ntf-card-content {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.ntf-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
+.ntf-content-header h3 {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.01em;
+}
+
+.ntf-timestamp {
+    font-size: 0.8rem;
+    color: #8e9ab3;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.ntf-message {
+    font-size: 0.97rem;
+    color: #bdbdbd;
+    margin: 0 0 1.1rem 0;
+    line-height: 1.65;
+}
+
+.ntf-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.ntf-action-btn {
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 0.87rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    outline: none;
+}
+.ntf-action-btn:focus {
+    box-shadow: 0 0 0 2px #4fd1c5;
+    z-index: 1;
+}
+.ntf-action-btn:active {
+    transform: scale(0.97);
+}
+
+/* Specific button styles */
+.ntf-action-btn.approve, .ntf-action-btn.reschedule, .ntf-action-btn.find-room {
+    background-color: var(--accent-primary);
+    color: var(--text-dark);
+    box-shadow: 0 1px 4px 0 #0003;
+}
+.ntf-action-btn.approve:hover, .ntf-action-btn.reschedule:hover, .ntf-action-btn.find-room:hover {
+    background-color: #fff;
+    color: #18181c;
+}
+
+.ntf-action-btn.decline, .ntf-action-btn.acknowledge, .ntf-action-btn.mark-read, .ntf-action-btn.view-timetable, .ntf-action-btn.notify-students {
+    background-color: #18181c;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px 0 #0002;
+}
+.ntf-action-btn.decline:hover, .ntf-action-btn.acknowledge:hover, .ntf-action-btn.mark-read:hover, .ntf-action-btn.view-timetable:hover, .ntf-action-btn.notify-students:hover {
+    background-color: #23232b;
+    color: var(--text-light);
+}
+
+/* Empty State Styles */
+.ntf-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #8e9ab3;
+}
+.ntf-empty-state svg {
+    color: #22c55e;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+.ntf-empty-state p {
+    font-size: 1.13rem;
+    margin: 0;
+    color: #bdbdbd;
+}
+

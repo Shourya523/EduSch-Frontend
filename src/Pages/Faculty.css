@@ -21,85 +21,11 @@
     flex-direction: column;
 }
 
-/* --- Sidebar Component Styles --- */
-.sidebar-container {
-    width: 260px;
-    background-color: var(--bg-dark);
-    padding: 1.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid var(--border);
-    flex-shrink: 0;
-}
-
-.sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0 0.5rem 1.5rem 0.5rem;
-}
-
-.logo-icon {
-    flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    background-color: var(--accent-primary);
-    border-radius: 0.5rem;
-}
-
-.sidebar-header h2 {
-    margin: 0;
-    font-size: 1.25rem;
-    color: var(--text-light);
-}
-
-.sidebar-nav {
-    flex-grow: 1;
-}
-
-.nav-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.nav-item a {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    margin-bottom: 0.25rem;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.nav-item a:hover {
-    background-color: var(--bg-dark);
-    color: var(--text-light);
-}
-
-.nav-item a.active {
-    background-color: var(--accent-primary);
-    color: var(--text-dark);
-    font-weight: 600;
-}
-
-.sidebar-footer a {
-    color: var(--text-muted);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-}
-
 /* --- Faculty Page Specific Styles --- */
 .faculty-page {
     padding: 32px;
     color: var(--text-light);
-    max-width: 1200px;
+    max-width: 1400px; /* Increased max-width for the new layout */
     margin: 0 auto;
 }
 
@@ -135,10 +61,21 @@
     transform: translateY(-2px);
 }
 
-.faculty-content-container {
-    background-color: var(--bg-dark);
+/* --- NEW: Layout for Info Grid on top --- */
+.info-section.top {
+    background-color: #0f0f0f;
     border: 1px solid var(--border);
     border-radius: 0.75rem;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+}
+
+/* --- NEW: Two-column layout for table and details panel --- */
+.faculty-content-container {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(350px, 1fr); /* Flexible table, fixed-min details */
+    gap: 2rem;
+    align-items: flex-start;
 }
 
 .faculty-section,
@@ -146,8 +83,12 @@
     padding: 1.5rem 2rem;
 }
 
-.faculty-section:not(:last-child) {
-    border-bottom: 1px solid var(--border);
+/* Common container style */
+.faculty-section,
+.faculty-details-panel {
+    background-color: #0f0f0f;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
 }
 
 .faculty-section h2,
@@ -160,6 +101,7 @@
     gap: 0.75rem;
 }
 
+/* --- Faculty Table Styles --- */
 .faculty-table {
     width: 100%;
     border-collapse: collapse;
@@ -169,7 +111,7 @@
 .faculty-table td {
     padding: 1rem;
     text-align: left;
-    vertical-align: top;
+    vertical-align: middle; /* Changed for better alignment */
     border-bottom: 1px solid var(--border);
 }
 
@@ -186,29 +128,36 @@
 
 .faculty-table tbody tr {
     transition: background-color 0.2s;
+    cursor: pointer;
 }
 
 .faculty-table tbody tr:hover {
     background-color: var(--btn-dark);
 }
 
+/* --- NEW: Selected row highlight --- */
+.faculty-table tbody tr.selected {
+    background-color: rgba(238, 238, 238, 0.05);
+    box-shadow: inset 3px 0 0 var(--accent-primary); /* Left border highlight */
+}
+
 .faculty-table tbody tr:last-child td {
     border-bottom: none;
 }
 
-.faculty-table td ul {
+.faculty-table .special-classes-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-family: monospace;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
 
+/* --- Resource Info Grid Styles --- */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .info-item {
@@ -230,4 +179,105 @@
     color: var(--text-light);
     margin: 0;
     line-height: 1.4;
+}
+
+/* --- NEW: Faculty Details Panel --- */
+.faculty-details-panel {
+    padding: 1.5rem 2rem;
+    position: sticky; /* Makes panel stick while scrolling table */
+    top: 2rem;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.panel-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-light);
+}
+
+.close-panel-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    line-height: 1;
+    border-radius: 50%;
+}
+.close-panel-btn:hover {
+    color: var(--text-light);
+    background-color: var(--btn-dark);
+}
+
+.panel-content h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 1.5rem 0 0.75rem 0;
+    font-weight: 500;
+}
+
+.details-subject-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.details-subject-list li {
+    background-color: var(--btn-dark);
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.details-constraints {
+    font-size: 0.95rem;
+}
+
+.details-constraints p {
+    margin: 0.5rem 0;
+}
+.details-constraints strong {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.details-special-classes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.details-special-classes li {
+    background-color: var(--bg-dark);
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.sc-subject {
+    display: block;
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+.sc-details {
+    color: var(--text-muted);
+}
+.no-special-classes {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.9rem;
 }

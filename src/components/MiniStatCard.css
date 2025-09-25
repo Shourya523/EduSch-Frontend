@@ -20,7 +20,7 @@ body {
     align-items: center;
     gap: 16px;
     padding: 16px;
-    background-color: var(--bg-dark);
+    background-color: #0f0f0f;
     border: 1px solid var(--border);
     border-radius: 12px;
     flex: 1; /* Allows cards to grow and fill space */

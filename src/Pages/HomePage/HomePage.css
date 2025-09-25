@@ -78,13 +78,13 @@ body {
   background-color: #f3f3f3;
 }
 
-.btn-secondary {
+.btn-secondary-demo-dashboard {
   background-color: var(--btn-dark);
   color: var(--text-light);
   border: 1px solid var(--border);
 }
 
-.btn-secondary:hover {
+.btn-secondary-demo-dashboard:hover {
   background-color: #2a2a2a;
 }
 /* --- NEW STYLES FOR FEATURES SECTION --- */

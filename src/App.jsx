@@ -13,6 +13,7 @@ import Faculty from './Pages/Faculty.jsx';
 import UserRoles from './Pages/UserRoles.jsx';
 import StudentTimetable from './Pages/StudentsDashboard/StudentTimetable.jsx';
 import Courses from './Pages/StudentsDashboard/StudentCourses.jsx';
+import Notifications from './Pages/Notifications.jsx';
 function App() {
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path='/admin-rooms' element={<Rooms />} />
         <Route path='/admin-timetable' element={<Timetable />} />
         <Route path='/admin-faculty' element={<Faculty />} />
+        <Route path='/admin-notifications' element={<Notifications />} />
         <Route path='/student-dashboard' element={<StudentDashboard />} />
         <Route path='/roles' element={<UserRoles />} />
         <Route path='student/timetable' element={<StudentTimetable />} />
