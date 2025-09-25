@@ -26,9 +26,22 @@ body {
 }
 
 .main-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        /* Offset for sidebar width */
+        /* margin-left: 260px; */
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+    .content-area {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
 }
 
 /* --- Content Area within Main --- */
@@ -59,17 +72,15 @@ body {
     }
 }
 
-@media (max-width: 768px) {
-    .dashboard-layout {
-        flex-direction: column;
-    }
-    
-    .content-area {
-        padding: 24px;
-    }
+@media (max-width: 900px) { .main-content { margin-left: 220px; } }
+@media (max-width: 768px) { .main-content { margin-left: 76px; } }
 
-    .stats-grid {
-        grid-template-columns: 1fr; /* Stack cards on smaller screens */
-    }
+/* Responsive Admin Dashboard */
+@media (max-width: 1024px) {
+  .dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .dashboard-grid { grid-template-columns: 1fr; gap: 12px; }
+  .panel, .card { width: 100%; }
 }
 

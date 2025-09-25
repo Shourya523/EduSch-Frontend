@@ -1,3 +1,9 @@
+/* Hide subtitle under main heading for phones */
+@media (max-width: 900px) {
+    .header-subtitle-mobile-hide {
+        display: none !important;
+    }
+}
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 :root {
@@ -108,4 +114,11 @@ body {
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* Responsive header */
+@media (max-width: 768px) {
+  .header, .top-header { padding: 8px 12px; }
+  .header .title, .top-header .title { font-size: 1.1rem; }
+  .header .actions, .top-header .actions { gap: 8px; flex-wrap: wrap; }
 }

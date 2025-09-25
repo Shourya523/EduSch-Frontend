@@ -22,3 +22,14 @@
     padding: 32px;
     overflow-y: auto; /* Adds a scrollbar ONLY to this container when needed */
 }
+
+/* Left sidebar layout helper */
+.page.with-sidebar {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+}
+.page.with-sidebar .main { min-width: 0; }
+
+/* Responsive Page Layout */
+@media (max-width: 1024px) { .page.with-sidebar { grid-template-columns: 220px 1fr; } }
+@media (max-width: 768px) { .page.with-sidebar { grid-template-columns: 76px 1fr; } }

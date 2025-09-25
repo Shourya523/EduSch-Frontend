@@ -45,8 +45,10 @@ export default function UserRoles() {
                             style={{ cursor: 'pointer' }}
                         >
                             <div className="user-role-icon">{role.icon}</div>
-                            <div className="user-role-title">{role.name}</div>
-                            <div className="user-role-desc">{role.description}</div>
+                            <div className="user-role-texts">
+                                <div className="user-role-title">{role.name}</div>
+                                <div className="user-role-desc">{role.description}</div>
+                            </div>
                         </div>
                     ))}
                 </div>

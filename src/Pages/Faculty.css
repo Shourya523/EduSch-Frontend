@@ -1,3 +1,52 @@
+/* Faculty Details Modal for Mobile */
+.faculty-details-modal {
+    display: none;
+}
+.faculty-details-modal-content {
+    background: #18181c;
+    color: var(--text-light);
+    border-radius: 1.1rem;
+    max-width: 98vw;
+    margin: 0 auto;
+    padding: 1.5rem 1.2rem 2.2rem 1.2rem;
+    box-shadow: 0 8px 32px #000a;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 900px) {
+    .faculty-details-desktop {
+        display: none !important;
+    }
+    .faculty-details-modal {
+        display: flex !important;
+        position: fixed;
+        left: 0; top: 0; right: 0; bottom: 0;
+        z-index: 2000;
+        background: rgba(0,0,0,0.75);
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        animation: fadeInModal 0.2s;
+    }
+    .faculty-details-modal-content {
+        width: 100%;
+        min-width: 0;
+        max-width: 440px;
+        min-height: 0;
+        max-height: 92vh;
+        padding: 1.2rem 2.2rem 2rem 2.2rem;
+        margin-left: 1.2rem;
+        margin-right: 1.2rem;
+        box-sizing: border-box;
+    }
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 :root {
     --bg-dark: #080808;
     --text-light: #eeeeee;
@@ -72,10 +121,29 @@
 
 /* --- NEW: Two-column layout for table and details panel --- */
 .faculty-content-container {
-    display: grid;
-    grid-template-columns: minmax(0, 2fr) minmax(350px, 1fr); /* Flexible table, fixed-min details */
-    gap: 2rem;
-    align-items: flex-start;
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(350px, 1fr); /* Flexible table, fixed-min details */
+        gap: 2rem;
+        align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+    .faculty-content-container {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+    .faculty-details-panel {
+        position: static;
+        top: auto;
+        width: 100%;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 1.2rem 1rem;
+    }
+    .faculty-section, .info-section, .faculty-details-panel {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
 }
 
 .faculty-section,
@@ -280,4 +348,12 @@
     color: var(--text-muted);
     font-style: italic;
     font-size: 0.9rem;
+}
+
+/* Responsive Faculty */
+@media (max-width: 1024px) {
+  .faculty-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .faculty-grid { grid-template-columns: 1fr; gap: 12px; }
 }

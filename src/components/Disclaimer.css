@@ -81,3 +81,9 @@
     background-color: #ffffff; /* Lighter on hover */
 }
 
+/* Responsive: mobile layout adjustments */
+@media (max-width: 768px) {
+  .disclaimer, .container { padding: 12px; }
+  .disclaimer p { font-size: 0.95rem; line-height: 1.6; }
+}
+

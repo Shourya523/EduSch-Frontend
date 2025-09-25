@@ -82,3 +82,9 @@ body {
     opacity: 0.6;
     margin: 0;
 }
+
+/* Responsive Stat Cards */
+@media (max-width: 768px) {
+  .stat-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .stat-card { width: 100%; }
+}

@@ -217,3 +217,10 @@
     color: #bdbdbd;
 }
 
+/* Responsive Notifications */
+@media (max-width: 768px) {
+  .notifications { padding: 12px; }
+  .notification-list { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .notification-item { width: 100%; }
+}
+

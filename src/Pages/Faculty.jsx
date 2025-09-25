@@ -192,41 +192,78 @@ export default function Faculty() {
                         </div>
 
                         {/* --- Conditionally Rendered Faculty Details Panel --- */}
+                        {/* Faculty Details: Side panel for desktop, modal for mobile */}
                         {selectedFaculty && (
-                            <div className="faculty-details-panel">
-                                <div className="panel-header">
-                                    <h3>{selectedFaculty.name}</h3>
-                                    <button className="close-panel-btn" onClick={() => setSelectedFaculty(null)}>
-                                        <X size={18} />
-                                    </button>
-                                </div>
-                                <div className="panel-content">
-                                    <h4><BookOpen size={16} /> Subjects Taught</h4>
-                                    <ul className="details-subject-list">
-                                        {selectedFaculty.subjects.map(sub => <li key={sub}>{sub}</li>)}
-                                    </ul>
-
-                                    <h4><Ban size={16} /> Scheduling Constraints</h4>
-                                    <div className="details-constraints">
-                                        <p>Max Classes per Day: <strong>{selectedFaculty.maxClassesPerDay}</strong></p>
-                                        <p>Allowed Leaves per Month: <strong>{selectedFaculty.leavesPerMonth}</strong></p>
+                            <>
+                                {/* Desktop/Tablet: Side panel */}
+                                <div className="faculty-details-panel faculty-details-desktop">
+                                    <div className="panel-header">
+                                        <h3>{selectedFaculty.name}</h3>
+                                        <button className="close-panel-btn" onClick={() => setSelectedFaculty(null)}>
+                                            <X size={18} />
+                                        </button>
                                     </div>
-
-                                    <h4><Clock size={16} /> Fixed Schedule / Special Classes</h4>
-                                    {selectedFaculty.specialClasses.length > 0 ? (
-                                        <ul className="details-special-classes">
-                                            {selectedFaculty.specialClasses.map((sc, i) => (
-                                                <li key={i}>
-                                                    <span className="sc-subject">{sc.subject}</span>
-                                                    <span className="sc-details">{sc.day} at {sc.time} in {sc.room}</span>
-                                                </li>
-                                            ))}
+                                    <div className="panel-content">
+                                        <h4><BookOpen size={16} /> Subjects Taught</h4>
+                                        <ul className="details-subject-list">
+                                            {selectedFaculty.subjects.map(sub => <li key={sub}>{sub}</li>)}
                                         </ul>
-                                    ) : (
-                                        <p className="no-special-classes">No special classes scheduled.</p>
-                                    )}
+                                        <h4><Ban size={16} /> Scheduling Constraints</h4>
+                                        <div className="details-constraints">
+                                            <p>Max Classes per Day: <strong>{selectedFaculty.maxClassesPerDay}</strong></p>
+                                            <p>Allowed Leaves per Month: <strong>{selectedFaculty.leavesPerMonth}</strong></p>
+                                        </div>
+                                        <h4><Clock size={16} /> Fixed Schedule / Special Classes</h4>
+                                        {selectedFaculty.specialClasses.length > 0 ? (
+                                            <ul className="details-special-classes">
+                                                {selectedFaculty.specialClasses.map((sc, i) => (
+                                                    <li key={i}>
+                                                        <span className="sc-subject">{sc.subject}</span>
+                                                        <span className="sc-details">{sc.day} at {sc.time} in {sc.room}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        ) : (
+                                            <p className="no-special-classes">No special classes scheduled.</p>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
+                                {/* Mobile: Modal popup */}
+                                <div className="faculty-details-modal faculty-details-mobile" onClick={() => setSelectedFaculty(null)}>
+                                    <div className="faculty-details-modal-content" onClick={e => e.stopPropagation()}>
+                                        <div className="panel-header">
+                                            <h3>{selectedFaculty.name}</h3>
+                                            <button className="close-panel-btn" onClick={() => setSelectedFaculty(null)}>
+                                                <X size={18} />
+                                            </button>
+                                        </div>
+                                        <div className="panel-content">
+                                            <h4><BookOpen size={16} /> Subjects Taught</h4>
+                                            <ul className="details-subject-list">
+                                                {selectedFaculty.subjects.map(sub => <li key={sub}>{sub}</li>)}
+                                            </ul>
+                                            <h4><Ban size={16} /> Scheduling Constraints</h4>
+                                            <div className="details-constraints">
+                                                <p>Max Classes per Day: <strong>{selectedFaculty.maxClassesPerDay}</strong></p>
+                                                <p>Allowed Leaves per Month: <strong>{selectedFaculty.leavesPerMonth}</strong></p>
+                                            </div>
+                                            <h4><Clock size={16} /> Fixed Schedule / Special Classes</h4>
+                                            {selectedFaculty.specialClasses.length > 0 ? (
+                                                <ul className="details-special-classes">
+                                                    {selectedFaculty.specialClasses.map((sc, i) => (
+                                                        <li key={i}>
+                                                            <span className="sc-subject">{sc.subject}</span>
+                                                            <span className="sc-details">{sc.day} at {sc.time} in {sc.room}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            ) : (
+                                                <p className="no-special-classes">No special classes scheduled.</p>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>

@@ -480,3 +480,13 @@ input:checked+.slider:before {
     gap: 1rem;
     padding: 1.5rem 2rem;
 }
+
+/* Responsive Generate Timetable */
+@media (max-width: 1024px) {
+  .generate-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .generate-grid { grid-template-columns: 1fr; gap: 12px; }
+  .panel, .card { width: 100%; }
+  table { display: block; width: 100%; overflow-x: auto; }
+}

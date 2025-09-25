@@ -99,3 +99,12 @@ body {
 .choose-file-btn:active {
     transform: scale(0.98);
 }
+
+/* Responsive: mobile layout adjustments */
+@media (max-width: 768px) {
+  .container, .addfile-container, .wrapper { padding: 12px; }
+  .grid, .grid-2, .grid-3 { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .card, .panel { width: 100%; }
+  .actions, .controls { gap: 8px; flex-wrap: wrap; }
+  table { display: block; width: 100%; overflow-x: auto; }
+}

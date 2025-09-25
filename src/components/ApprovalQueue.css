@@ -106,3 +106,12 @@ body {
     text-align: center;
     padding: 1rem 0;
 }
+
+/* Responsive: mobile layout adjustments */
+@media (max-width: 768px) {
+  .container, .approval-queue, .wrapper { padding: 12px; }
+  .list, .grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .card, .item { width: 100%; }
+  .actions { gap: 8px; flex-wrap: wrap; }
+  table { display: block; width: 100%; overflow-x: auto; }
+}

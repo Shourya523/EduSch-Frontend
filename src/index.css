@@ -6,8 +6,48 @@
   --border: rgba(255, 255, 255, 0.3);
   --btn-dark: #1c1c1c;
   --btn-light: #ffffff;
+  --container-max: 1200px;
 }
 body {
   font-family: 'Geist', sans-serif;
   background-color: var(--bg-dark);
+  margin: 0;
+}
+
+/* Global container utility */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Fluid typography */
+html { font-size: 100%; }
+@media (max-width: 1200px) { html { font-size: 97.5%; } }
+@media (max-width: 992px) { html { font-size: 95%; } }
+@media (max-width: 768px) { html { font-size: 93.75%; } }
+@media (max-width: 576px) { html { font-size: 90%; } }
+
+/* Responsive media */
+img, video { max-width: 100%; height: auto; }
+
+/* Utility classes */
+.hide-on-mobile { display: block; }
+.show-on-mobile { display: none; }
+@media (max-width: 768px) {
+  .hide-on-mobile { display: none !important; }
+  .show-on-mobile { display: block !important; }
+}
+
+/* Responsive grid helpers */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+@media (max-width: 992px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }

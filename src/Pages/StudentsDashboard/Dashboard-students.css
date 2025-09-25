@@ -178,3 +178,11 @@ body {
         grid-template-columns: 1fr; /* Stack cards on smaller screens */
     }
 }
+
+/* Responsive Student Dashboard */
+@media (max-width: 1024px) {
+  .student-dashboard-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .student-dashboard-grid { grid-template-columns: 1fr; gap: 12px; }
+}

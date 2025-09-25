@@ -70,3 +70,10 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* Responsive Quick Actions */
+@media (max-width: 768px) {
+  .quick-actions { padding: 12px; }
+  .quick-actions .actions { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  .quick-actions .action { width: 100%; }
+}

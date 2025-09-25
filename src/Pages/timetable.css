@@ -137,3 +137,12 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Responsive Timetable */
+@media (max-width: 1024px) {
+  .timetable-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .timetable-grid { grid-template-columns: 1fr; gap: 12px; }
+  table { display: block; width: 100%; overflow-x: auto; }
+}

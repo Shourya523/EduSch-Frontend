@@ -23,6 +23,106 @@
   align-items: stretch;
 }
 
+@media (max-width: 900px) {
+  .user-roles-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+    padding: 0 1vw;
+  }
+
+  .user-role-card {
+    width: 44vw;
+    max-width: 180px;
+    min-width: 120px;
+    height: 210px;
+    padding: 0.7rem 0.4rem 0.7rem 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .user-role-title {
+    font-size: 1rem;
+  }
+
+  .user-role-desc {
+    font-size: 0.89rem;
+  }
+
+  .user-role-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.7rem;
+    margin-top: 0.1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .user-roles-container {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0 2vw;
+  }
+
+  .user-role-card {
+    width: 98% !important;
+    max-width: 98vw !important;
+    min-width: 0 !important;
+    height: 56px !important;
+    min-height: 0 !important;
+    border-radius: 1.1rem !important;
+    padding: 0 0.7rem !important;
+    margin-bottom: 1.1rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+    gap: 0.7rem !important;
+    overflow: hidden !important;
+  }
+
+  .user-role-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0 !important;
+    margin-right: 0.7rem;
+    margin-top: 0 !important;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .user-role-texts {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .user-role-title {
+    font-size: 0.98rem;
+    margin-bottom: 0;
+    text-align: left;
+    display: block;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .user-role-desc {
+    font-size: 0.78rem;
+    margin-bottom: 0;
+    text-align: left;
+    margin-left: 0;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
+
 .user-role-card {
   min-width: 120px;
   max-width: 300px;
@@ -34,7 +134,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(22, 23, 26,0.5);
+  background: rgba(22, 23, 26, 0.5);
   border: 1px solid rgb(35, 35, 35);
   border-left-width: 4px;
   border-right-width: 4px;
@@ -45,10 +145,11 @@
   overflow: hidden;
   margin-bottom: 0.5rem;
 }
+
 .user-role-card:hover {
   transform: translateY(-4px) scale(1.035);
   box-shadow: 0 8px 32px #000a;
-  border: 3px solid ;
+  border: 3px solid;
 }
 
 .user-role-icon {
@@ -60,6 +161,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .user-role-title {
   font-size: 1.18rem;
   font-weight: 700;
@@ -68,6 +170,7 @@
   color: inherit;
   text-align: center;
 }
+
 .user-role-desc {
   font-size: 1.01rem;
   color: #bdbdbd;
@@ -82,12 +185,14 @@
   border-left-width: 1px;
   border-right-width: 1px;
 }
+
 .role-admin {
   border-color: white;
   color: white;
   border-left-width: 1px;
   border-right-width: 1px;
 }
+
 .role-teacher {
   border-color: white;
   color: white;

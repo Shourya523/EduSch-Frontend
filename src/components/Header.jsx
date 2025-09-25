@@ -10,7 +10,7 @@ export default function Header({ title, subtitle }) {
             <div className="header-title">
                 {/* Use the props, with fallback text */}
                 <h1>{title || 'Dashboard'}</h1>
-                <p>{subtitle || 'Welcome back, Admin User'}</p>
+                <p className="header-subtitle-mobile-hide">{subtitle || 'Welcome back, Admin User'}</p>
             </div>
             <div className="header-controls">
                 <button className="theme-toggle">

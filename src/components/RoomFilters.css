@@ -94,3 +94,24 @@ body {
     border-color: var(--focus-blue);
     box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
+
+/* Responsive Room Filters */
+@media (max-width: 768px) {
+    .room-filters-container {
+        width: 99%;
+        max-width: 99%;
+        margin-left: 1vw;
+        margin-right: 1vw;
+        box-sizing: border-box;
+    }
+
+    .room-filters {
+        padding: 12px;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .room-filters .filter {
+        width: calc(50% - 8px);
+    }
+}

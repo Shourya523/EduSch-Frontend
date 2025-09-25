@@ -131,3 +131,12 @@ body {
     padding: 16px;
     text-align: center;
 }
+
+/* Responsive Student Timetable */
+@media (max-width: 1024px) {
+  .student-timetable-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+@media (max-width: 768px) {
+  .student-timetable-grid { grid-template-columns: 1fr; gap: 12px; }
+  table { display: block; width: 100%; overflow-x: auto; }
+}

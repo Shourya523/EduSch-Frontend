@@ -184,3 +184,9 @@
     color: var(--text-muted);
     margin-top: 0.5rem;
 }
+
+/* Responsive Student Courses */
+@media (max-width: 768px) {
+  .courses-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+  .course-card { width: 100%; }
+}

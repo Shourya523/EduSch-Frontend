@@ -149,3 +149,9 @@ body {
 .heat-empty .cell-content {
     background-color: transparent;
 }
+
+/* Responsive Heatmap */
+@media (max-width: 768px) {
+  .heatmap { padding: 12px; }
+  .heatmap svg { width: 100% !important; height: auto !important; }
+}
