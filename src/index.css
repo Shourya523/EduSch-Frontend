@@ -37,9 +37,17 @@ img, video { max-width: 100%; height: auto; }
 /* Utility classes */
 .hide-on-mobile { display: block; }
 .show-on-mobile { display: none; }
+
 @media (max-width: 768px) {
   .hide-on-mobile { display: none !important; }
   .show-on-mobile { display: block !important; }
+  body::after {
+    content: '';
+    display: block;
+    height: 25vh;
+    width: 100vw;
+    pointer-events: none;
+  }
 }
 
 /* Responsive grid helpers */

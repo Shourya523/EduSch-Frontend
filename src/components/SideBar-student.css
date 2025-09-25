@@ -122,7 +122,7 @@ body {
     .sidebar-student {
        width: 100%;
     position: fixed;
-    bottom:18vh;
+    bottom:12vh;
     left: 2%;
     right: 0;
     transform: none; /* Removed centering */
