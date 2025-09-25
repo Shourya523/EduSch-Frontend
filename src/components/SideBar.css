@@ -218,7 +218,7 @@ body {
     /* --- Full Width & Position --- */
     width: 100%;
     position: fixed;
-    bottom:8vh;
+    bottom:5vh;
     left: 2%;
     right: 0;
     transform: none; /* Removed centering */
