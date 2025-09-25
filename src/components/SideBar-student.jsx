@@ -71,16 +71,10 @@ export default function SideBarStudent({ activePage }) {
                             <span className="label">Grades</span>
                         </a>
                     </li>
-                    <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => handleNavigate("/notifications")}>
+                    <li className={activePage === 'notifications' ? 'active' : ''}>
                         <a href="#">
                             <Bell size={20} />
                             <span className="label">Notifications</span>
-                        </a>
-                    </li>
-                    <li className={activePage === 'settings' ? 'active' : ''} onClick={() => handleNavigate("/settings")}>
-                        <a href="#">
-                            <Settings size={20} />
-                            <span className="label">Settings</span>
                         </a>
                     </li>
                 </ul>
