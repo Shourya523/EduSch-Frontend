@@ -1,0 +1,390 @@
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --text-muted: rgba(238, 238, 238, 0.7);
+    --accent-primary: #ffffff;
+    --status-ok-fg: #16a34a;
+    --status-low-fg: #E5484D;
+    --ring-bg: #2a2a2a;
+    --font-family: 'Geist', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+.page-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.attendance-page {
+    padding: 32px;
+    color: var(--text-light);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.attendance-content-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
+}
+
+.tab-switcher {
+    display: flex;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background-color: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+    border-radius: 0.5rem;
+}
+
+.tab-button.active {
+    background-color: var(--btn-dark);
+    color: var(--text-light);
+}
+
+.tab-content {
+    padding: 2rem;
+}
+
+.overview-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.attendance-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.attendance-list-item:last-child {
+    border-bottom: none;
+}
+.attendance-list-item:hover {
+    background-color: var(--btn-dark);
+}
+
+.course-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.course-code {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.attendance-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.stats-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.status-low {
+    color: var(--status-low-fg);
+}
+
+.status-ok {
+    color: var(--status-ok-fg);
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring-bg {
+    fill: none;
+    stroke: var(--ring-bg);
+}
+
+.progress-ring-fg {
+    fill: none;
+    stroke: var(--accent-primary);
+    transition: stroke-dashoffset 0.35s;
+    stroke-linecap: round;
+}
+
+.progress-ring-text {
+    font-size: 12px;
+    font-weight: 600;
+    fill: var(--text-light);
+    transform: rotate(90deg) translate(0px, -1.5px);
+}
+
+.day-to-day-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.calendar-container {
+    width: 100%;
+    max-width: 350px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 99px;
+    transition: background-color 0.2s;
+}
+.calendar-header button:hover:not(:disabled) {
+    background-color: var(--btn-dark);
+}
+.calendar-header button:disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.calendar-days, .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+}
+
+.calendar-days {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.calendar-cell {
+    padding: 0.25rem 0;
+    font-weight: 500;
+}
+.calendar-cell:not(.disabled) {
+    cursor: pointer;
+    border-radius: 99px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.calendar-cell:not(.disabled):hover {
+    background-color: var(--btn-dark);
+}
+.calendar-cell.disabled {
+    color: var(--text-muted);
+    opacity: 0.4;
+    cursor: default;
+}
+.calendar-cell.selected {
+    background-color: var(--accent-primary);
+    color: var(--bg-dark);
+}
+
+.daily-classes-list {
+    width: 100%;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+}
+
+.daily-class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+}
+.daily-class-item:last-child {
+    border-bottom: none;
+}
+.class-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.class-name {
+    font-weight: 500;
+}
+.class-status {
+    font-size: 0.85rem;
+}
+.status-present {
+    color: var(--status-ok-fg);
+}
+.status-absent {
+    color: var(--status-low-fg);
+}
+.class-time {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+.no-classes-message {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+}
+
+
+.course-detail-view {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.detail-view-header {
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+.detail-view-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+.back-button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+.back-button:hover {
+    background-color: var(--btn-dark);
+    color: var(--text-light);
+}
+.no-data-message {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+}
+.calendar-cell span {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+.status-dot {
+    color: var(--bg-dark);
+}
+.status-dot.present {
+    background-color: var(--status-ok-fg);
+}
+.status-dot.absent {
+    background-color: var(--status-low-fg);
+}
+.calendar-cell.disabled span {
+    background-color: transparent !important;
+    color: inherit;
+}
+.chart-container {
+    width: 100%;
+    height: 300px;
+}
+
+/* --- In StudentAttendance.css --- */
+/* --- In StudentAttendance.css --- */
+/* REPLACE the old header and button styles with these */
+
+.detail-view-header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* 3 columns: left, center, right */
+    align-items: center;
+    width: 100%;
+    
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-view-header h3 {
+    grid-column: 2; /* Place the title in the center column */
+    text-align: center; /* Ensure it's centered within its column */
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.back-button {
+    grid-column: 1;
+    justify-self: start; 
+    margin-top: -0.75rem;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+.back-button:hover {
+    background-color: var(--btn-dark);
+    color: var(--text-light);
+}

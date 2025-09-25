@@ -1,0 +1,160 @@
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --text-dark: #0f0f0f;
+    --accent-primary: #eeeeee;
+    --text-muted: rgba(238, 238, 238, 0.7);
+    --grade-o: #2563eb;
+    --grade-a-plus: #16a34a;
+    --grade-a: #15803d;
+    --grade-b-plus: #ca8a04;
+    --grade-b: #a16207;
+    --grade-c: #c2410c;
+    --grade-f: #dc2626;
+}
+
+.page-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.grades-page {
+    padding: 32px;
+    color: var(--text-light);
+    flex-grow: 1;
+}
+
+.grades-content-container {
+    background-color: var(--bg-dark);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.info-section,
+.grades-section {
+    padding: 1.5rem 2rem;
+}
+
+.grades-section:not(:last-child),
+.info-section:not(:last-child) {
+    border-bottom: 1px solid var(--border);
+}
+
+.info-section h2,
+.grades-section h2 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* --- Info Grid Styles (Copied from StudentCourses.css) --- */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.info-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-item-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.info-item-icon {
+    color: var(--text-muted);
+}
+
+.info-item-value {
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--text-light);
+    margin: 0;
+    line-height: 1;
+}
+
+/* --- Table Styles (Adapted from StudentCourses.css) --- */
+.grades-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grades-table th,
+.grades-table td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.grades-table thead {
+    border-bottom: 2px solid var(--border);
+}
+
+.grades-table th {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.grades-table tbody tr:hover {
+    background-color: var(--btn-dark);
+}
+
+.grades-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* --- NEW: Grade Badge Styling --- */
+.grade-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+}
+
+.grade-o { background-color: var(--grade-o); }
+.grade-aplus { background-color: var(--grade-a-plus); }
+.grade-a { background-color: var(--grade-a); }
+.grade-bplus { background-color: var(--grade-b-plus); }
+.grade-b { background-color: var(--grade-b); }
+.grade-c { background-color: var(--grade-c); }
+.grade-f { background-color: var(--grade-f); }
