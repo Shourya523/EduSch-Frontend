@@ -144,7 +144,7 @@ body {
         /* --- Positioning & Sizing --- */
         width: 100%;
         position: fixed;
-        bottom: 12vh;
+        bottom: 8vh;
         left: 2%;
         right: 0;
         transform: none; /* Removed centering */
