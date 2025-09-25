@@ -1,26 +1,27 @@
+import React from 'react';
 import './StatCard.css';
 
 export default function StatCard({ icon, title, value, description, progressPercent }) {
     return (
-        <div className="stat-card">
-            <div className="card-header">
-                <span className="card-title">{title}</span>
-                <div className="card-icon">{icon}</div>
+        <div className="dashboard-metric-card">
+            <div className="dashboard-metric-header">
+                <span className="dashboard-metric-title">{title}</span>
+                <div className="dashboard-metric-icon">{icon}</div>
             </div>
-            <div className="card-value">
+            <div className="dashboard-metric-value">
                 {value}
             </div>
-            <div className="card-footer">
+            <div className="dashboard-metric-footer">
                 {/* Conditionally render the progress bar only if progressPercent is provided */}
                 {progressPercent !== undefined && (
-                    <div className="progress-bar-container">
+                    <div className="dashboard-metric-progress-container">
                         <div 
-                            className="progress-bar-fill" 
+                            className="dashboard-metric-progress-fill" 
                             style={{ width: `${progressPercent}%` }}
                         ></div>
                     </div>
                 )}
-                <p className="card-description">{description}</p>
+                <p className="dashboard-metric-description">{description}</p>
             </div>
         </div>
     );

@@ -2,14 +2,14 @@
 .ntf-page {
     padding: 32px;
     color: var(--text-light);
-    background: #101014;
+    background: #0f0f0f;
     min-height: 100vh;
 }
 
 .ntf-container {
     max-width: 1000px;
     margin: 0 auto;
-    background-color: #16161a;
+    background-color: #0f0f0f;
     border: 1px solid var(--border);
     border-radius: 0.75rem;
     box-shadow: 0 2px 16px 0 #000a;
@@ -21,7 +21,7 @@
     align-items: center;
     padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--border);
-    background: #18181c;
+    background: #0f0f0f;
 }
 
 .ntf-header h2 {
@@ -80,7 +80,7 @@
 .ntf-card {
     display: flex;
     gap: 1.5rem;
-    background-color: #18181c;
+    background-color: #0f0f0f;
     border: 1px solid var(--border);
     border-left-width: 4px;
     border-radius: 0.5rem;

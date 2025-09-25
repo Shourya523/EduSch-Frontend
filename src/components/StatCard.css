@@ -17,7 +17,7 @@ body {
     padding: 0;
 }
 
-.stat-card {
+.dashboard-metric-card {
     background-color: oklch(0.205 0 0);
     border: 1px solid var(--border);
     border-radius: 12px;
@@ -29,7 +29,7 @@ body {
 }
 
 /* --- Card Header --- */
-.card-header {
+.dashboard-metric-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -37,17 +37,17 @@ body {
     opacity: 0.8;
 }
 
-.card-title {
+.dashboard-metric-title {
     font-size: .85em;
     font-weight: 500;
 }
 
-.card-icon {
+.dashboard-metric-icon {
     font-size: 20px;
 }
 
 /* --- Card Value --- */
-.card-value {
+.dashboard-metric-value {
     font-size: 1.5em;
     font-weight: 600;
     color: var(--text-light);
@@ -56,11 +56,11 @@ body {
 }
 
 /* --- Card Footer --- */
-.card-footer {
+.dashboard-metric-footer {
     margin-top: auto; /* Pushes footer to the bottom */
 }
 
-.progress-bar-container {
+.dashboard-metric-progress-container {
     width: 100%;
     height: 6px;
     background-color: rgba(255, 255, 255, 0.15);
@@ -69,14 +69,14 @@ body {
     margin-bottom: 12px;
 }
 
-.progress-bar-fill {
+.dashboard-metric-progress-fill {
     height: 100%;
     background-color: var(--btn-light);
     border-radius: 3px;
     transition: width 0.5s ease-in-out;
 }
 
-.card-description {
+.dashboard-metric-description {
     font-size: 14px;
     color: var(--text-light);
     opacity: 0.6;
