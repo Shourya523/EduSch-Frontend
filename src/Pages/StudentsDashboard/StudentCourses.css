@@ -11,7 +11,6 @@
     --tag-lab: #ca8a04;
 }
 
-/* UPDATED: Reverted to 100% zoom for consistency */
 .page-layout {
     display: flex;
     background-color: var(--bg-dark);
@@ -26,17 +25,20 @@
 }
 
 /* --- Courses Page Specific Styles --- */
+/* UPDATED: Removed max-width and margin, added flex-grow to match attendance page */
 .courses-page {
     padding: 32px;
     color: var(--text-light);
-    max-width: 1200px;
-    margin: 0 auto;
+    flex-grow: 1; /* Allows the page container to expand */
 }
 
+/* UPDATED: Applied max-width and margin here to center the content */
 .courses-content-container {
     background-color: var(--bg-dark);
     border: 1px solid var(--border);
     border-radius: 0.75rem;
+    max-width: 1200px; /* Set max-width on the inner container */
+    margin: 0 auto;     /* Center the container */
 }
 
 .course-section,

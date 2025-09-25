@@ -14,6 +14,7 @@ import UserRoles from './Pages/UserRoles.jsx';
 import StudentTimetable from './Pages/StudentsDashboard/StudentTimetable.jsx';
 import Courses from './Pages/StudentsDashboard/StudentCourses.jsx';
 import Notifications from './Pages/Notifications.jsx';
+import StudentAttendance from './Pages/StudentsDashboard/StudentAttendance.jsx';
 function App() {
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/roles' element={<UserRoles />} />
         <Route path='student/timetable' element={<StudentTimetable />} />
         <Route path='student/courses' element={<Courses />} />
+        <Route path='student/attendance' element={<StudentAttendance />} />
       </Routes>
     </BrowserRouter>
   )
