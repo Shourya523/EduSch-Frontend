@@ -35,18 +35,19 @@ export default function SideBar({ activePage }) {
                             <span>Dashboard</span>
                         </a>
                     </li>
-                    <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => navigate("/admin-timetable")}>
-                        <a href="#">
-                            <CalendarDays size={20} />
-                            <span>Timetable</span>
-                        </a>
-                    </li>
                     <li className={activePage === 'gentt' ? 'active' : ''} onClick={() => navigate("/admin-gentt")}>
                         <a href="#">
                             <FilePlus2 size={20} />
                             <span>Generate Timetable</span>
                         </a>
                     </li>
+                    <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => navigate("/admin-timetable")}>
+                        <a href="#">
+                            <CalendarDays size={20} />
+                            <span>Timetable</span>
+                        </a>
+                    </li>
+                    
                     <li className={activePage === 'faculty' ? 'active' : ''} onClick={() => navigate("/admin-faculty")}>
                         <a href="#">
                             <Users size={20} />

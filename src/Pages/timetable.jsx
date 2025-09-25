@@ -40,48 +40,7 @@ function getAllBatchInfos() {
     }));
 }
 
-const fallbackTimetable = [
-    {
-        day: "Monday",
-        classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Sharma" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Verma" }
-        ]
-    },
-    {
-        day: "Tuesday",
-        classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Iyer" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Singh" },
-            { type: "Lab", subject: "Data Structures Lab", time: "11:00-13:00", location: "Lab-C2", instructor: "Dr. Iyer" }
-        ]
-    },
-    {
-        day: "Wednesday",
-        classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" }
-        ]
-    },
-    {
-        day: "Thursday",
-        classes: [
-            { type: "Lecture", subject: "Data Structures", time: "9:00-10:00", location: "A-205", instructor: "Dr. Iyer" },
-            { type: "Lecture", subject: "Database Systems", time: "10:00-11:00", location: "B-302", instructor: "Prof. Singh" },
-            { type: "Lab", subject: "EMFT Lab", time: "11:00-13:00", location: "Lab-C1", instructor: "Dr. Sharma" },
-        ]
-    },
-    {
-        day: "Friday",
-        classes: [
-            { type: "Lecture", subject: "EMFT", time: "9:00-10:00", location: "A-204", instructor: "Dr. Sharma" },
-            { type: "Lecture", subject: "Comprehensive AI", time: "10:00-11:00", location: "B-301", instructor: "Prof. Verma" },
-            { type: "Lab", subject: "Comprehensive AI Lab", time: "14:00-16:00", location: "Lab-D2", instructor: "Prof. Verma" }
-        ]
-    }
-];
+
 
 
 
@@ -99,11 +58,12 @@ function getTimetableForBatch(batchKey) {
 
 
 
+
 export default function Timetable() {
     const [batchGroups, setBatchGroups] = useState(getAllBatchInfos());
     const [selectedGroup, setSelectedGroup] = useState(null); // dept+sem
     const [selectedBatch, setSelectedBatch] = useState(null); // batchInfo
-    const [timetableData, setTimetableData] = useState(fallbackTimetable);
+    const [timetableData, setTimetableData] = useState(null);
 
     // On mount, load batch groups and select the first group/batch if available
     useEffect(() => {
@@ -123,7 +83,9 @@ export default function Timetable() {
         if (selectedBatch) {
             const data = getTimetableForBatch(selectedBatch.key);
             if (data) setTimetableData(data);
-            else setTimetableData(fallbackTimetable);
+            else setTimetableData(null);
+        } else {
+            setTimetableData(null);
         }
     }, [selectedBatch]);
 
@@ -158,7 +120,12 @@ export default function Timetable() {
                     {/* Dept/Sem Groups */}
                     <div style={{ display: 'flex', gap: '1.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                         {batchGroups.length === 0 && (
-                            <div style={{ color: '#e5484d', fontWeight: 600 }}>No batches found. Generate a timetable first.</div>
+                            <div style={{ color: '#e5484d', fontWeight: 600 }}>
+                                No batches found.<br />
+                                <span style={{ color: '#b3e5fc', fontWeight: 500 }}>
+                                    Generate timetables to view them.
+                                </span>
+                            </div>
                         )}
                         {batchGroups.map(group => (
                             <div
@@ -253,7 +220,10 @@ export default function Timetable() {
                             ))
                         ) : (
                             <div style={{ color: '#e5484d', fontWeight: 600, marginTop: 32 }}>
-                                No timetable found for this batch.
+                                No timetable found for this batch.<br />
+                                <span style={{ color: '#b3e5fc', fontWeight: 500 }}>
+                                    Generate timetables to view them.
+                                </span>
                             </div>
                         )}
                     </div>
