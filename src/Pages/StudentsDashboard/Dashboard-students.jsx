@@ -1,7 +1,7 @@
 import Header from '../../components/Header';
 import SideBar from '../../components/SideBar-student';
 import StatCard from '../../components/StatCard';
-import './dashboard-students.css';
+import './Dashboard-Students.css';
 // UPDATED: Replaced Zap with Clock icon for the new StatCard
 import { BookOpen, ClipboardCheck, Award, Clock, MapPin, Library, FileText, Wallet } from "lucide-react";
 
