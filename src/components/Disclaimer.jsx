@@ -37,7 +37,7 @@ export default function DisclaimerPopup() {
 
         <div className="video-container">
           <video
-            src="public/Sequence 04.mp4" // Placeholder video source
+            src="Sequence.mp4" // Placeholder video source
             autoPlay
             loop
             muted
