@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import SideBar from '../components/SideBar'; // Make sure this path is correct
 import './GenerateTT.css';
 import { Plus, Settings2, RotateCw, Book, School, Users, UserCheck, Target } from 'lucide-react';
-import TimetablePopup from '../components/TimeTablePopUp';
+import TimetablePopup from '../components/TimetablePopup.jsx';
 
 // --- Helper function to shuffle an array (Fisher-Yates shuffle) ---
 const shuffleArray = (array) => {
