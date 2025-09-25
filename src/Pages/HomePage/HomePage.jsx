@@ -13,11 +13,13 @@ import {
     Zap,
     XCircle
 } from "lucide-react";
+import DisclaimerPopup from '../../components/Disclaimer.jsx';
 
 export default function HomePage() {
     const navigate =useNavigate();
     return (
         <>
+        <DisclaimerPopup />
             {/* Hero Section */}
             <section className="hero">
                 {/* ... (previous hero section code remains unchanged) ... */}
