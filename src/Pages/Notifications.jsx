@@ -103,7 +103,7 @@ export default function Notifications() {
             <SideBar activePage={"notifications"} />
             <main className="main-content">
                 <Header 
-                    title="Notifications & Alerts"
+                    title="Notifications"
                     subtitle="Review requests, updates, and system alerts"
                 />
                 <div className="ntf-page">

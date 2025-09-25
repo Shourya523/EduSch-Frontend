@@ -48,6 +48,14 @@ img, video { max-width: 100%; height: auto; }
     width: 100vw;
     pointer-events: none;
   }
+
+  html, body, #root, .page-layout, .main-content, .content-area {
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
 }
 
 /* Responsive grid helpers */

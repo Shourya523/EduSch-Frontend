@@ -1,3 +1,106 @@
+/* Native checkbox for mobile toggle replacement */
+
+.mobile-checkbox {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .mobile-checkbox {
+        display: block !important;
+        margin: 0.75rem auto 0.75rem auto;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 2px solid #888;
+        background: #181818;
+        transition: box-shadow 0.2s, border-color 0.2s;
+        accent-color: #e5484d;
+        box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+        appearance: none;
+        position: relative;
+        cursor: pointer;
+    }
+    .mobile-checkbox:checked {
+        border-color: #e5484d;
+        background: #e5484d;
+        box-shadow: 0 2px 12px 0 rgba(229,72,77,0.15);
+    }
+    /* Remove white circle, add tick SVG when checked */
+    .mobile-checkbox:after {
+        content: '';
+        display: none;
+    }
+    .mobile-checkbox:checked::before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 7px;
+        top: 10px;
+        width: 12px;
+        height: 6px;
+        border-left: 3px solid #fff;
+        border-bottom: 3px solid #fff;
+        transform: rotate(-45deg);
+        border-radius: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .rule-item .switch {
+        display: none !important;
+    }
+    .mobile-checkbox {
+        display: block !important;
+        margin: 0.5rem auto 0.5rem auto;
+        width: 24px;
+        height: 24px;
+        accent-color: #eeeeee;
+    }
+}
+@media (max-width: 768px) {
+    .rule-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        width: 100% !important;
+        gap: 0.25rem !important;
+        overflow-x: visible !important;
+        padding-bottom: 0.5rem;
+    }
+    .rule-item .rule-info {
+        width: 100% !important;
+        margin-right: 0 !important;
+        margin-bottom: 0.25rem !important;
+        text-align: left;
+    }
+                .rule-item .switch {
+                    width: 48px !important;
+                    max-width: 48px !important;
+                    min-width: 36px !important;
+                    align-self: center !important;
+                    margin: 0.25rem auto 0  auto !important;
+                    display: flex !important;
+                    justify-content: center !important;
+                    border-top: 1px solid var(--border);
+                    padding-top: 0.5rem;
+                }
+    .slider {
+        border-radius: 34px;
+    }
+    .slider:before {
+        height: 13px !important;
+        width: 13px !important;
+        left: 2px !important;
+        bottom: 2.5px !important;
+    }
+    input:checked+.slider:before {
+        transform: translateX(14px) !important;
+    }
+    .global-rules {
+        overflow-x: visible !important;
+    }
+}
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
 
 :root {

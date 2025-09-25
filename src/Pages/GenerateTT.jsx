@@ -250,14 +250,22 @@ function GenerateTT() {
     const [selectedBatch, setSelectedBatch] = useState('A');
     const [classroomConstraints, setClassroomConstraints] = useState([]);
     const [teacherConstraints, setTeacherConstraints] = useState([]);
-    const [minimizeGaps, setMinimizeGaps] = useState(true);
-    const [balanceWorkload, setBalanceWorkload] = useState(true);
+    const [minimizeGaps, setMinimizeGaps] = useState(false);
+    const [balanceWorkload, setBalanceWorkload] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
     const [generatedTimetables, setGeneratedTimetables] = useState([]);
 
     const allRooms = [ "LT-101", "LT-102", "LT-103", "LT-104", "LT-105", "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3", "CS-LAB-1", "CS-LAB-2", "CS-LAB-3", "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1" ];
     const [newClassroom, setNewClassroom] = useState({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' });
     const [newTeacher, setNewTeacher] = useState({ teacher: '', day: 'Monday' });
+
+    // Responsive: detect mobile for native checkbox
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     const batchOptions = Array.from({ length: currentScopeData?.resources?.batches || 1 }, (_, i) => String.fromCharCode(65 + i));
     
     // --- MODIFIED Timetable Generator for Better Distribution ---
@@ -501,25 +509,44 @@ function GenerateTT() {
                                 </div>
                                 <div className="global-rules">
                                     <h4><Settings2 size={18} /> Global Rules</h4>
+                                    {/* Responsive toggle: native checkbox for mobile, custom switch for desktop */}
                                     <div className="rule-item">
                                         <div className="rule-info">
                                             <p className="rule-label">Minimize Gaps for Students</p>
                                             <p className="rule-description">Prioritize schedules with fewer free periods between classes.</p>
                                         </div>
-                                        <label className="switch">
-                                            <input type="checkbox" checked={minimizeGaps} onChange={e => setMinimizeGaps(e.target.checked)} />
-                                            <span className="slider round"></span>
-                                        </label>
+                                        {isMobile ? (
+                                            <input
+                                                className="mobile-checkbox"
+                                                type="checkbox"
+                                                checked={minimizeGaps}
+                                                onChange={e => setMinimizeGaps(e.target.checked)}
+                                            />
+                                        ) : (
+                                            <label className="switch">
+                                                <input type="checkbox" checked={minimizeGaps} onChange={e => setMinimizeGaps(e.target.checked)} />
+                                                <span className="slider round"></span>
+                                            </label>
+                                        )}
                                     </div>
                                     <div className="rule-item">
                                         <div className="rule-info">
                                             <p className="rule-label">Balance Faculty Workload</p>
                                             <p className="rule-description">Distribute classes evenly across faculty members.</p>
                                         </div>
-                                        <label className="switch">
-                                            <input type="checkbox" checked={balanceWorkload} onChange={e => setBalanceWorkload(e.target.checked)} />
-                                            <span className="slider round"></span>
-                                        </label>
+                                        {isMobile ? (
+                                            <input
+                                                className="mobile-checkbox"
+                                                type="checkbox"
+                                                checked={balanceWorkload}
+                                                onChange={e => setBalanceWorkload(e.target.checked)}
+                                            />
+                                        ) : (
+                                            <label className="switch">
+                                                <input type="checkbox" checked={balanceWorkload} onChange={e => setBalanceWorkload(e.target.checked)} />
+                                                <span className="slider round"></span>
+                                            </label>
+                                        )}
                                     </div>
                                 </div>
                             </div>
