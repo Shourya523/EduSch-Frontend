@@ -71,7 +71,7 @@ export default function SideBarStudent({ activePage }) {
                             <span className="label">Grades</span>
                         </a>
                     </li>
-                    <li className={activePage === 'notifications' ? 'active' : ''}>
+                    <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => handleNavigate("/notifications")}>
                         <a href="#">
                             <Bell size={20} />
                             <span className="label">Notifications</span>

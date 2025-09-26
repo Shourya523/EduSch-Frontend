@@ -16,6 +16,7 @@ import Courses from './Pages/StudentsDashboard/StudentCourses.jsx';
 import Notifications from './Pages/Notifications.jsx';
 import StudentAttendance from './Pages/StudentsDashboard/StudentAttendance.jsx';
 import StudentGrades from './Pages/StudentsDashboard/StudentGrades.jsx';
+import StudentNotifications from './Pages/StudentsDashboard/StudentNotification.jsx';
 function App() {
 
 
@@ -37,6 +38,7 @@ function App() {
         <Route path='student/courses' element={<Courses />} />
         <Route path='student/attendance' element={<StudentAttendance />} />
         <Route path='student/grades' element={<StudentGrades />} />
+        <Route path='student/notifications' element={<StudentNotifications />} />
       </Routes>
     </BrowserRouter>
   )
