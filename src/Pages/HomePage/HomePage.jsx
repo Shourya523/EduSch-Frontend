@@ -21,7 +21,7 @@ export default function HomePage() {
         <>
         <DisclaimerPopup />
             {/* Hero Section */}
-            <section className="hero">
+            <section className="hero fade-up">
                 {/* ... (previous hero section code remains unchanged) ... */}
                 <TopBar />
                 <div className="hero-badge">AI-Powered Academic Scheduling</div>
@@ -42,7 +42,7 @@ export default function HomePage() {
             </section>
 
             {/* Intelligent Academic Management Section */}
-            <section className="features-section">
+            <section className="features-section fade-up">
                 {/* ... (previous features section code remains unchanged) ... */}
                 <div className="features-container">
                     <div className="features-content">
@@ -102,7 +102,7 @@ export default function HomePage() {
             </section>
 
             {/* --- NEW: Powerful Features Grid Section --- */}
-            <section className="grid-features-section">
+            <section className="grid-features-section fade-up">
                 <div className="grid-features-header">
                     <h2>Powerful Features for Academic Excellence</h2>
                     <p>
@@ -167,7 +167,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 {/* --- NEW: Comparison Section --- */}
-                <section className="comparison-section">
+                <section className="comparison-section fade-up">
                     <h2>From Chaos to Clarity</h2>
                     <div className="comparison-container">
                         {/* Problems Card */}
@@ -218,7 +218,7 @@ export default function HomePage() {
                     </div>
                 </section>
             </section>
-            <section className="cta-section">
+            <section className="cta-section fade-up">
                 <h2>Ready to Transform Your Scheduling?</h2>
                 <p>
                     Join hundreds of universities already using EduSync to streamline
