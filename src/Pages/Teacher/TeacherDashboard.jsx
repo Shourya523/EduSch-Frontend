@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import StatCard from '../../components/StatCard';
@@ -22,6 +23,7 @@ const todaysSchedule = [
 ];
 
 export default function TeacherDashboard() {
+    const navigate=useNavigate();
     return (
         <div className="teacher-dashboard-layout">
             <SideBarTeacher activePage={'dashboard'} />
@@ -94,18 +96,18 @@ export default function TeacherDashboard() {
                             <div className="quick-access-card">
                                 <h3>Quick Actions</h3>
                                 <div className="quick-links-grid">
-                                    <a href="#" className="quick-link">
+                                    <div className="quick-link" onClick={()=>navigate('/teacher/timetable')}>
                                         <Calendar size={18} />
                                         <span>View Full Timetable</span>
-                                    </a>
-                                    <a href="#" className="quick-link">
+                                    </div>
+                                    <div className="quick-link" onClick={()=>navigate('/teacher/availability-leave')}>
                                         <CalendarCheck size={18} />
                                         <span>Update Availability / Leave</span>
-                                    </a>
-                                    <a href="#" className="quick-link">
+                                    </div>
+                                    <div className="quick-link"onClick={()=>navigate('/teacher/change-requests')}>
                                         <AlertTriangle size={18} />
                                         <span>Request Timetable Change</span>
-                                    </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
