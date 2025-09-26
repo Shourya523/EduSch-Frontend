@@ -1,7 +1,7 @@
 /* --- Floating Action Button for Chat --- */
  .s-fab-chat-btn {
     position: fixed;
-    bottom: 15vh; /* Sidebar height + gap + extra space */
+    bottom: 8vh; /* Sidebar height + gap + extra space */
     right: 32px;
     width: 64px;
     height: 64px;
@@ -38,7 +38,7 @@
 /* --- AI Chat Component Styles --- */
 .s-chat-overlay {
     position: fixed;
-    bottom: 20vh;
+    bottom: 6vh;
     right: 32px;
     width: auto;
     height: auto;
