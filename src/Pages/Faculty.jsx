@@ -124,7 +124,7 @@ const InfoItem = ({ label, value }) => (
 
 export default function Faculty() {
     // State to track the currently selected faculty for details view
-    const [selectedFaculty, setSelectedFaculty] = useState(facultyList[0]);
+    const [selectedFaculty, setSelectedFaculty] = useState(null);
 
     // Enhanced data for the info grid
     const lectureTheatres = classrooms.filter(c => c.startsWith('LT')).length;
