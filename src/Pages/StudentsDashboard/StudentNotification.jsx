@@ -69,9 +69,57 @@ const initialStudentNotifications = [
     },
 ];
 
+// Hindi translations for notification types/actions
+const hiText = {
+    inbox: "इनबॉक्स",
+    unread: "अपठित",
+    all: "सभी",
+    empty: "सभी सूचनाएँ पढ़ ली गई हैं!",
+    // Titles
+    classRescheduled: "कक्षा पुनर्निर्धारित",
+    classCancelled: "कक्षा रद्द",
+    upcomingReminder: "आगामी कक्षा अनुस्मारक",
+    campusAnnouncement: "परिसर घोषणा",
+    // Messages
+    rescheduledMsg: 'आपकी "डेटा संरचना" कक्षा जो सोमवार सुबह 10:00 बजे निर्धारित थी, अब मंगलवार दोपहर 02:00 बजे कमरा LT-101 में होगी।',
+    cancelledMsg: 'शिक्षक की अनुपलब्धता के कारण कल के लिए आपकी "इंजीनियरिंग गणित-I" कक्षा रद्द कर दी गई है।',
+    upcomingMsg1: 'आपकी "एल्गोरिदम" कक्षा आज सुबह 09:59 बजे कमरा LT-205 में है।',
+    upcomingMsg2: 'आपकी "ऑपरेटिंग सिस्टम लैब" 2 घंटे में CS-Lab-3 में शुरू होगी।',
+    announcementMsg: "वार्षिक टेक फेस्ट 'इनोवेट 2025' के लिए पंजीकरण अब खुल गए हैं। इसे न चूकें!",
+    upcomingMsg3: 'आपकी "डेटाबेस मैनेजमेंट" कक्षा कल सुबह 09:00 बजे है।',
+    // Actions
+    viewTimetable: "समय सारणी देखें",
+    acknowledge: "स्वीकार करें",
+    viewDetails: "विवरण देखें",
+    learnMore: "और जानें",
+    markRead: "पढ़ा हुआ चिह्नित करें"
+};
+
+
 // --- Reusable Notification Card Component ---
-const NotificationCard = ({ notification, onMarkRead }) => {
+const NotificationCard = ({ notification, onMarkRead, lang }) => {
     const { id, type, icon, title, message, timestamp, read, actions } = notification;
+
+    // Hindi mapping for title/message/actions
+    const hiMap = {
+        'Class Rescheduled': hiText.classRescheduled,
+        'Your "Data Structures" class scheduled for Monday 10:00 AM has been moved to Tuesday, 02:00 PM in Room LT-101.': hiText.rescheduledMsg,
+        'Class Cancelled': hiText.classCancelled,
+        'Your "Engineering Mathematics-I" class for tomorrow has been cancelled due to teacher unavailability.': hiText.cancelledMsg,
+        'Upcoming Class Reminder': hiText.upcomingReminder,
+        'Your "Algorithms" class is today at 09:59 AM in Room LT-205.': hiText.upcomingMsg1,
+        'Your "Operating Systems Lab" starts in 2 hours in CS-Lab-3.': hiText.upcomingMsg2,
+        'Campus Announcement': hiText.campusAnnouncement,
+        "The annual tech fest 'Innovate 2025' registrations are now open. Don't miss out!": hiText.announcementMsg,
+        'Your "Database Management" class is tomorrow at 09:00 AM.': hiText.upcomingMsg3,
+    };
+    const hiActions = {
+        'View Timetable': hiText.viewTimetable,
+        'Acknowledge': hiText.acknowledge,
+        'View Details': hiText.viewDetails,
+        'Learn More': hiText.learnMore,
+        'Mark as Read': hiText.markRead
+    };
 
     return (
         <div className={`s-ntf-card ${type} ${read ? 'read' : ''}`}>
@@ -80,15 +128,19 @@ const NotificationCard = ({ notification, onMarkRead }) => {
             </div>
             <div className="s-ntf-card-content">
                 <div className="s-ntf-content-header">
-                    <h3>{title}</h3>
+                    <h3>{lang === "hi" ? (hiMap[title] || title) : title}</h3>
                     <span className="s-ntf-timestamp">{timestamp}</span>
                 </div>
-                <p className="s-ntf-message">{message}</p>
+                <p className="s-ntf-message">{lang === "hi" ? (hiMap[message] || message) : message}</p>
                 <div className="s-ntf-card-actions">
                     {actions.map(action => (
-                        <button key={action} className={`s-ntf-action-btn ${action.toLowerCase().replace(' ', '-')}`}>{action}</button>
+                        <button key={action} className={`s-ntf-action-btn ${action.toLowerCase().replace(' ', '-')}`}>
+                            {lang === "hi" ? (hiActions[action] || action) : action}
+                        </button>
                     ))}
-                    {!read && <button className="s-ntf-action-btn mark-read" onClick={() => onMarkRead(id)}>Mark as Read</button>}
+                    {!read && <button className="s-ntf-action-btn mark-read" onClick={() => onMarkRead(id)}>
+                        {lang === "hi" ? hiText.markRead : "Mark as Read"}
+                    </button>}
                 </div>
             </div>
         </div>
@@ -99,7 +151,12 @@ const NotificationCard = ({ notification, onMarkRead }) => {
 export default function StudentNotifications() {
     const [notifications, setNotifications] = useState(initialStudentNotifications);
     const [filter, setFilter] = useState('unread');
+    const [showChat, setShowChat] = useState(false);
+    const [lang, setLang] = useState("en");
 
+    const altTitle = "छात्र सूचना केंद्र";
+    const altSubtitle = "आपकी कक्षाओं, आयोजनों और घोषणाओं पर अपडेट";
+    
     const handleMarkRead = (id) => {
         setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     };
@@ -108,7 +165,6 @@ export default function StudentNotifications() {
         if (filter === 'unread') return !n.read;
         return true;
     });
-    const [showChat, setShowChat] = useState(false);
 
     return (
         <div className="page-layout">
@@ -117,23 +173,27 @@ export default function StudentNotifications() {
                 <Header
                     title="Student Notification Center"
                     subtitle="Updates on your classes, events, and announcements"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="s-ntf-page">
                     <div className="s-ntf-container">
                         <div className="s-ntf-header">
-                            <h2><Bell size={22} /> Inbox</h2>
+                            <h2><Bell size={22} /> {lang === "hi" ? hiText.inbox : "Inbox"}</h2>
                             <div className="s-ntf-filter-tabs">
                                 <button
                                     className={`s-ntf-filter-btn ${filter === 'unread' ? 'active' : ''}`}
                                     onClick={() => setFilter('unread')}
                                 >
-                                    Unread ({notifications.filter(n => !n.read).length})
+                                    {lang === "hi" ? hiText.unread : "Unread"} ({notifications.filter(n => !n.read).length})
                                 </button>
                                 <button
                                     className={`s-ntf-filter-btn ${filter === 'all' ? 'active' : ''}`}
                                     onClick={() => setFilter('all')}
                                 >
-                                    All
+                                    {lang === "hi" ? hiText.all : "All"}
                                 </button>
                             </div>
                         </div>
@@ -145,12 +205,13 @@ export default function StudentNotifications() {
                                         key={notification.id}
                                         notification={notification}
                                         onMarkRead={handleMarkRead}
+                                        lang={lang}
                                     />
                                 ))
                             ) : (
                                 <div className="s-ntf-empty-state">
                                     <CheckCircle size={48} />
-                                    <p>All caught up! No unread notifications.</p>
+                                    <p>{lang === "hi" ? hiText.empty : "All caught up! No unread notifications."}</p>
                                 </div>
                             )}
                         </div>

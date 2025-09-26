@@ -47,32 +47,45 @@ export default function Rooms() {
         });
     }, [filters, rooms]);
     const [showChat, setShowChat] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "कक्षाएँ";
+    const altSubtitle = "स्वागत है, व्यवस्थापक उपयोगकर्ता";
+    const miniStatLabels = [
+        lang === "hi" ? "कुल कक्षाएँ" : "Total Rooms",
+        lang === "hi" ? "वर्तमान में व्यस्त" : "Currently Occupied",
+        lang === "hi" ? "औसत उपयोग" : "Average Utilization",
+        lang === "hi" ? "पीक घंटे" : "Peak Hours"
+    ];
     return (
         <div className="page-layout">
             <SideBar activePage={"rooms"} />
             <main className="main-content">
-                <Header title="Rooms" subtitle="Welcome back, Admin User" />
+                <Header
+                    title="Rooms"
+                    subtitle="Welcome back, Admin User"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
+                />
                 <div className="content-area">
                     <div className="stats-grid">
-                        <MiniStatCard icon={<DoorOpen size={20} />} value={rooms.length} label="Total Rooms" iconBgClass="icon-blue" />
-                        <MiniStatCard icon={<Building size={20} />} value={rooms.filter(r => r.status === 'Occupied').length} label="Currently Occupied" iconBgClass="icon-green" />
-                        <MiniStatCard icon={<Zap size={20} />} value={rooms.length > 0 ? `${Math.round(rooms.reduce((acc, r) => acc + (parseInt(r.utilization) || 0), 0) / rooms.length)}%` : '0%'} label="Average Utilization" iconBgClass="icon-yellow" />
-                        <MiniStatCard icon={<Clock size={20} />} value="10-11 AM" label="Peak Hours" iconBgClass="icon-purple" />
+                        <MiniStatCard icon={<DoorOpen size={20} />} value={rooms.length} label={miniStatLabels[0]} iconBgClass="icon-blue" />
+                        <MiniStatCard icon={<Building size={20} />} value={rooms.filter(r => r.status === 'Occupied').length} label={miniStatLabels[1]} iconBgClass="icon-green" />
+                        <MiniStatCard icon={<Zap size={20} />} value={rooms.length > 0 ? `${Math.round(rooms.reduce((acc, r) => acc + (parseInt(r.utilization) || 0), 0) / rooms.length)}%` : '0%'} label={miniStatLabels[2]} iconBgClass="icon-yellow" />
+                        <MiniStatCard icon={<Clock size={20} />} value="10-11 AM" label={miniStatLabels[3]} iconBgClass="icon-purple" />
                     </div>
-
-                    <RoomFilters onFilterChange={handleFilterChange} />
-
+                    <RoomFilters onFilterChange={handleFilterChange} lang={lang} />
                     <div className="room-grid">
                         {filteredRooms.map(room => (
                             <RoomCard
                                 key={room.id}
-                                {...room} // Use object spread for cleaner props
+                                {...room}
+                                lang={lang}
                             />
                         ))}
                     </div>
-
-                    <RoomHeatmap />
+                    <RoomHeatmap lang={lang} />
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>

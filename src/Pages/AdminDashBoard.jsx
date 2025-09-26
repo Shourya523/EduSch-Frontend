@@ -12,6 +12,38 @@ import UserRoles from './UserRoles';
 
 export default function DashBoard() {
     const [showChat, setShowChat] = useState(false);
+    const [lang, setLang] = useState("en");
+    const altTitle = "डैशबोर्ड";
+    const altSubtitle = "स्वागत है, व्यवस्थापक उपयोगकर्ता";
+    const statCards = [
+        {
+            title: lang === "hi" ? "कक्षा उपयोग" : "Classroom Utilization",
+            icon: <RectangleHorizontal />,
+            value: "78%",
+            description: lang === "hi" ? "पिछले सप्ताह से +2%" : "+2% from last week",
+            progressPercent: 78
+        },
+        {
+            title: lang === "hi" ? "फैकल्टी कार्यभार" : "Faculty Workload",
+            icon: <Users />,
+            value: lang === "hi" ? "16.8घं" : "16.8h",
+            description: lang === "hi" ? "प्रति सप्ताह औसत" : "Average per week",
+            progressPercent: 65
+        },
+        {
+            title: lang === "hi" ? "पीक घंटे" : "Peak Hours",
+            icon: <Clock />,
+            value: lang === "hi" ? "10-12 पूर्वाह्न" : "10-12 AM",
+            description: lang === "hi" ? "सर्वाधिक उपयोग" : "Highest utilization"
+        },
+        {
+            title: lang === "hi" ? "कुल फैकल्टी" : "Total Faculty",
+            icon: <UserSquare2 />,
+            value: "142",
+            description: lang === "hi" ? "5 अवकाश पर" : "5 on leave",
+            progressPercent: 95
+        }
+    ];
     return (
         <div className="dashboard-layout">
             <SideBar activePage={'dashboard'} />
@@ -19,43 +51,30 @@ export default function DashBoard() {
                 <Header 
                     title="Dashboard"
                     subtitle="Welcome back, Admin User"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="content-area">
                     <div className="stats-grid">
-                        <StatCard
-                            title="Classroom Utilization"
-                            icon={<RectangleHorizontal />}
-                            value="78%"
-                            description="+2% from last week"
-                            progressPercent={78}
-                        />
-                        <StatCard
-                            title="Faculty Workload"
-                            icon={<Users />}
-                            value="16.8h"
-                            description="Average per week"
-                            progressPercent={65}
-                        />
-                        <StatCard
-                            title="Peak Hours"
-                            icon={<Clock />}
-                            value="10-12 AM"
-                            description="Highest utilization"
-                        />
-                        <StatCard
-                            title="Total Faculty"
-                            icon={<UserSquare2 />}
-                            value="142"
-                            description="5 on leave"
-                            progressPercent={95}
-                        />
+                        {statCards.map((card, idx) => (
+                            <StatCard
+                                key={idx}
+                                title={card.title}
+                                icon={card.icon}
+                                value={card.value}
+                                description={card.description}
+                                progressPercent={card.progressPercent}
+                            />
+                        ))}
                     </div>
                     <div className="dashboard-main-section">
                         <div className="left-column">
-                            <QuickActions />
+                            <QuickActions lang={lang} />
                         </div>
                         <div className="right-column">
-                            <ApprovalQueue />
+                            <ApprovalQueue lang={lang} />
                         </div>
                     </div>
                 </div>

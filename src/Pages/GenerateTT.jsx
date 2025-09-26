@@ -397,6 +397,9 @@ function GenerateTT() {
     const handleAddTeacherConstraint = () => { if (newTeacher.teacher && newTeacher.day) { setTeacherConstraints([...teacherConstraints, { ...newTeacher }]); setNewTeacher({ teacher: '', day: 'Monday' }); } };
     const handleRemoveTeacherConstraint = idx => { setTeacherConstraints(teacherConstraints.filter((_, i) => i !== idx)); };
     const [showChat, setShowChat] = useState(false);
+    const [lang, setLang] = useState("en");
+    const altTitle = "समय सारणी बनाएं";
+    const altSubtitle = "अनुकूलित समय सारणी बनाने के लिए पैरामीटर और बाधाएँ सेट करें";
     return (
         <div className="page-layout">
             <SideBar activePage={'gentt'} />
@@ -404,6 +407,10 @@ function GenerateTT() {
                 <Header
                     title="Generate Timetable"
                     subtitle="Set parameters and constraints to generate an optimized timetable"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="content-area">
                     <div className="generation-container">

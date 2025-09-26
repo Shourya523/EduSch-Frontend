@@ -17,54 +17,81 @@ const todaysSchedule = [
 
 export default function StudentDashboard() {
     const [showChat, setShowChat] = useState(false);
+    const [lang, setLang] = useState("en");
+    const altTitle = "डैशबोर्ड";
+    const altSubtitle = "स्वागत है, छात्र नाम";
+    const statCards = [
+        {
+            title: lang === "hi" ? "कुल उपस्थिति" : "Overall Attendance",
+            icon: <ClipboardCheck />,
+            value: "85%",
+            description: lang === "hi" ? "पिछले सप्ताह से +1%" : "+1% from last week",
+            progressPercent: 85
+        },
+        {
+            title: lang === "hi" ? "नामांकित पाठ्यक्रम" : "Courses Enrolled",
+            icon: <BookOpen />,
+            value: "6",
+            description: lang === "hi" ? "वर्तमान सेमेस्टर" : "Current semester",
+            progressPercent: 100
+        },
+        {
+            title: lang === "hi" ? "साप्ताहिक भार" : "Weekly Load",
+            icon: <Clock />,
+            value: lang === "hi" ? "18 घंटे" : "18 Hours",
+            description: lang === "hi" ? "इस सप्ताह की कुल कक्षा घंटे" : "Total class hours this week",
+            progressPercent: 45
+        },
+        {
+            title: lang === "hi" ? "पूर्ण क्रेडिट" : "Credits Completed",
+            icon: <Award />,
+            value: "72/140",
+            description: lang === "hi" ? "स्नातक की ओर" : "Towards graduation",
+            progressPercent: 51
+        }
+    ];
+    const quickLinks = [
+        {
+            icon: <Library size={18} />,
+            label: lang === "hi" ? "डिजिटल लाइब्रेरी" : "Digital Library"
+        },
+        {
+            icon: <FileText size={18} />,
+            label: lang === "hi" ? "पाठ्यक्रम सामग्री" : "Course Materials"
+        },
+        {
+            icon: <Wallet size={18} />,
+            label: lang === "hi" ? "शुल्क भुगतान" : "Fee Payment"
+        }
+    ];
     return (
         <div className="student-dashboard-layout">
             <SideBar activePage={'dashboard'} />
             <main className="main-content">
                 <Header
                     title="Dashboard"
-                    subtitle="Welcome back, Student Name" // Personalized for the student
+                    subtitle="Welcome back, Student Name"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="content-area">
-                    {/* StatCards with student-relevant data */}
                     <div className="stats-grid">
-                        <StatCard
-                            title="Overall Attendance"
-                            icon={<ClipboardCheck />}
-                            value="85%"
-                            description="+1% from last week"
-                            progressPercent={85}
-                        />
-                        <StatCard
-                            title="Courses Enrolled"
-                            icon={<BookOpen />}
-                            value="6"
-                            description="Current semester"
-                            progressPercent={100}
-                        />
-                        {/* --- CARD UPDATED AS PER YOUR REQUEST --- */}
-                        {/* This card was changed to "Weekly Load" to provide a more student-centric metric, */}
-                        {/* reflecting the system's goal of ensuring a balanced workload. */}
-                        <StatCard
-                            title="Weekly Load"
-                            icon={<Clock />}
-                            value="18 Hours"
-                            description="Total class hours this week"
-                            progressPercent={45} // Represents 18 out of a 40-hour standard study week
-                        />
-                        <StatCard
-                            title="Credits Completed"
-                            icon={<Award />}
-                            value="72/140"
-                            description="Towards graduation"
-                            progressPercent={51}
-                        />
+                        {statCards.map((card, idx) => (
+                            <StatCard
+                                key={idx}
+                                title={card.title}
+                                icon={card.icon}
+                                value={card.value}
+                                description={card.description}
+                                progressPercent={card.progressPercent}
+                            />
+                        ))}
                     </div>
-
-                    {/* New sections for student-specific content */}
                     <div className="dashboard-columns">
                         <div className="upcoming-schedule">
-                            <h3>Today's Schedule</h3>
+                            <h3>{lang === "hi" ? "आज का कार्यक्रम" : "Today's Schedule"}</h3>
                             <div className="schedule-list">
                                 {todaysSchedule.length > 0 ? todaysSchedule.map((item, index) => (
                                     <div className="class-card" key={index}>
@@ -82,26 +109,19 @@ export default function StudentDashboard() {
                                             <span>{item.location}</span>
                                         </div>
                                     </div>
-                                )) : <p>No classes scheduled for today.</p>}
+                                )) : <p>{lang === "hi" ? "आज के लिए कोई कक्षा निर्धारित नहीं है।" : "No classes scheduled for today."}</p>}
                             </div>
                         </div>
-
                         <div className="quick-access">
                             <div className="quick-access-card">
-                                <h3>Quick Access</h3>
+                                <h3>{lang === "hi" ? "त्वरित पहुँच" : "Quick Access"}</h3>
                                 <div className="quick-links-grid">
-                                    <a href="#" className="quick-link">
-                                        <Library size={18} />
-                                        <span>Digital Library</span>
-                                    </a>
-                                    <a href="#" className="quick-link">
-                                        <FileText size={18} />
-                                        <span>Course Materials</span>
-                                    </a>
-                                    <a href="#" className="quick-link">
-                                        <Wallet size={18} />
-                                        <span>Fee Payment</span>
-                                    </a>
+                                    {quickLinks.map((link, idx) => (
+                                        <a href="#" className="quick-link" key={idx}>
+                                            {link.icon}
+                                            <span>{link.label}</span>
+                                        </a>
+                                    ))}
                                 </div>
                             </div>
                         </div>

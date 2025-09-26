@@ -17,7 +17,19 @@ import {
 export default function SideBar({ activePage }) {
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const labels = {
+        dashboard: lang === "hi" ? "डैशबोर्ड" : "Dashboard",
+        gentt: lang === "hi" ? "समय सारणी बनाएं" : "Generate Timetable",
+        timetable: lang === "hi" ? "समय सारणी" : "Timetable",
+        faculty: lang === "hi" ? "फैकल्टी" : "Faculty",
+        rooms: lang === "hi" ? "कक्षाएँ" : "Rooms",
+        notifications: lang === "hi" ? "सूचनाएँ" : "Notifications",
+        expand: lang === "hi" ? "विस्तार करें" : "Expand",
+        collapse: lang === "hi" ? "संकुचित करें" : "Collapse",
+        adminDashboard: lang === "hi" ? "व्यवस्थापक डैशबोर्ड" : "Admin Dashboard",
+        edusync: "EduSync"
+    };
     return (
         <aside className={`sidebar${collapsed ? ' collapsed' : ''}`}>
             <div className="sidebar-header">
@@ -25,8 +37,8 @@ export default function SideBar({ activePage }) {
                     <LayoutGrid size={24} />
                 </div>
                 <div className="header-text">
-                    <span className="header-title">EduSync</span>
-                    <span className="header-subtitle">Admin Dashboard</span>
+                    <span className="header-title">{labels.edusync}</span>
+                    <span className="header-subtitle">{labels.adminDashboard}</span>
                 </div>
             </div>
 
@@ -35,38 +47,37 @@ export default function SideBar({ activePage }) {
                     <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => navigate("/admin-dashboard")}>
                         <a href="#">
                             <LayoutDashboard size={20} />
-                            <span className="label">Dashboard</span>
+                            <span className="label">{labels.dashboard}</span>
                         </a>
                     </li>
                     <li className={activePage === 'gentt' ? 'active' : ''} onClick={() => navigate("/admin-gentt")}>
                         <a href="#">
                             <FilePlus2 size={20} />
-                            <span className="label">Generate Timetable</span>
+                            <span className="label">{labels.gentt}</span>
                         </a>
                     </li>
                     <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => navigate("/admin-timetable")}>
                         <a href="#">
                             <CalendarDays size={20} />
-                            <span className="label">Timetable</span>
+                            <span className="label">{labels.timetable}</span>
                         </a>
                     </li>
-                    
                     <li className={activePage === 'faculty' ? 'active' : ''} onClick={() => navigate("/admin-faculty")}>
                         <a href="#">
                             <Users size={20} />
-                            <span className="label">Faculty</span>
+                            <span className="label">{labels.faculty}</span>
                         </a>
                     </li>
                     <li className={activePage === 'rooms' ? 'active' : ''} onClick={() => navigate("/admin-rooms")}>
                         <a href="#">
                             <DoorOpen size={20} />
-                            <span className="label">Rooms</span>
+                            <span className="label">{labels.rooms}</span>
                         </a>
                     </li>
                     <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => navigate("/admin-notifications")}>
                         <a href="#">
                             <Bell size={20} />
-                            <span className="label">Notifications</span>
+                            <span className="label">{labels.notifications}</span>
                         </a>
                     </li>
                 </ul>
@@ -75,7 +86,13 @@ export default function SideBar({ activePage }) {
             <div className="sidebar-footer">
                 <button onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">
                     <Menu size={20} />
-                    <span className="label">{collapsed ? 'Expand' : 'Collapse'}</span>
+                    <span className="label">{collapsed ? labels.expand : labels.collapse}</span>
+                </button>
+                <button
+                    style={{ marginTop: 8, fontSize: 13, padding: "0.2em 0.7em", borderRadius: 6, border: "1px solid #444", background: "#232323", color: "#eee", cursor: "pointer" }}
+                    onClick={() => setLang(l => l === "en" ? "hi" : "en")}
+                >
+                    {lang === "hi" ? "English" : "हिन्दी"}
                 </button>
             </div>
         </aside>

@@ -45,6 +45,27 @@ const teacherTimetableData = [
 
 export default function TeacherTimetable() {
     const [openMenuId, setOpenMenuId] = useState(null);
+    const [lang, setLang] = useState("en");
+    const altTitle = "मेरी समय सारणी";
+    const altSubtitle = "आपका साप्ताहिक शिक्षण कार्यक्रम";
+    const hiDays = {
+        Monday: "सोमवार",
+        Tuesday: "मंगलवार",
+        Wednesday: "बुधवार",
+        Thursday: "गुरुवार",
+        Friday: "शुक्रवार"
+    };
+    const hiType = {
+        Lecture: "व्याख्यान",
+        Lab: "प्रयोगशाला"
+    };
+    const hiActions = {
+        "Sync to Calendar": "कैलेंडर से सिंक करें",
+        "Request Change": "परिवर्तन अनुरोध",
+        "Reschedule": "पुनर्निर्धारित करें",
+        "Send Alert": "अलर्ट भेजें",
+        "Cancel Class": "कक्षा रद्द करें"
+    };
     const menuRef = useRef(null);
 
     // Close menu when clicking outside
@@ -71,15 +92,19 @@ export default function TeacherTimetable() {
                 <Header
                     title="My Timetable"
                     subtitle="Your weekly teaching schedule"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 >
                     <div className="header-actions">
                         <button className="header-btn secondary">
                             <CalendarPlus size={16} />
-                            <span>Sync to Calendar</span>
+                            <span>{lang === "hi" ? hiActions["Sync to Calendar"] : "Sync to Calendar"}</span>
                         </button>
                         <button className="header-btn primary">
                             <AlertTriangle size={16} />
-                            <span>Request Change</span>
+                            <span>{lang === "hi" ? hiActions["Request Change"] : "Request Change"}</span>
                         </button>
                     </div>
                 </Header>
@@ -87,13 +112,13 @@ export default function TeacherTimetable() {
                     <div className="timetable-container">
                         {teacherTimetableData.map((dayData) => (
                             <div className="day-section" key={dayData.day}>
-                                <h3>{dayData.day}</h3>
+                                <h3>{lang === "hi" ? hiDays[dayData.day] : dayData.day}</h3>
                                 <div className="entries-container">
                                     {dayData.classes.length > 0 ? (
                                         dayData.classes.map((classInfo) => (
                                             <div className="timetable-entry" key={classInfo.id}>
                                                 <div className="entry-top">
-                                                    <span className={`entry-tag ${classInfo.type.toLowerCase()}`}>{classInfo.type}</span>
+                                                    <span className={`entry-tag ${classInfo.type.toLowerCase()}`}>{lang === "hi" ? hiType[classInfo.type] || classInfo.type : classInfo.type}</span>
                                                     <h4>{classInfo.subject}</h4>
                                                 </div>
                                                 <div className="entry-details">
@@ -118,15 +143,15 @@ export default function TeacherTimetable() {
                                                         <div className="entry-dropdown-menu">
                                                             <button className="dropdown-item">
                                                                 <CalendarClock size={14} />
-                                                                <span>Reschedule</span>
+                                                                <span>{lang === "hi" ? hiActions["Reschedule"] : "Reschedule"}</span>
                                                             </button>
                                                             <button className="dropdown-item">
                                                                 <Megaphone size={14} />
-                                                                <span>Send Alert</span>
+                                                                <span>{lang === "hi" ? hiActions["Send Alert"] : "Send Alert"}</span>
                                                             </button>
                                                             <button className="dropdown-item danger">
                                                                 <XCircle size={14} />
-                                                                <span>Cancel Class</span>
+                                                                <span>{lang === "hi" ? hiActions["Cancel Class"] : "Cancel Class"}</span>
                                                             </button>
                                                         </div>
                                                     )}
@@ -134,7 +159,7 @@ export default function TeacherTimetable() {
                                             </div>
                                         ))
                                     ) : (
-                                        <p className="no-class-message">No classes scheduled for this day.</p>
+                                        <p className="no-class-message">{lang === "hi" ? "आज के लिए कोई कक्षा निर्धारित नहीं है।" : "No classes scheduled for this day."}</p>
                                     )}
                                 </div>
                             </div>

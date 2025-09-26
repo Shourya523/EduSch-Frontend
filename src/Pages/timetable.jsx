@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
@@ -109,7 +107,9 @@ export default function Timetable() {
         return () => window.removeEventListener('storage', handleStorage);
     }, [selectedGroup]);
     const [showChat, setShowChat] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "समय सारणी";
+    const altSubtitle = "स्वागत है, व्यवस्थापक उपयोगकर्ता";
     return (
         <div className="timetable-layout">
             <SideBar activePage={'timetable'} />
@@ -117,6 +117,10 @@ export default function Timetable() {
                 <Header
                     title="Timetable"
                     subtitle="Welcome back, Admin User"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="content-area">
                     {/* Dept/Sem Groups */}

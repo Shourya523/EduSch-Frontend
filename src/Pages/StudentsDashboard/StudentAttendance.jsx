@@ -159,12 +159,21 @@ export default function StudentAttendance() {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const todaysClasses = dayToDayData[selectedDate] || [];
     const [showChat, setShowChat] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "मेरी उपस्थिति";
+    const altSubtitle = "वर्तमान सेमेस्टर के लिए अपनी उपस्थिति ट्रैक करें";
     return (
         <div className="page-layout">
             <SideBarStudent activePage={"attendance"} />
             <main className="main-content">
-                <Header title="My Attendance" subtitle="Track your attendance for the current semester" />
+                <Header
+                    title="My Attendance"
+                    subtitle="Track your attendance for the current semester"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
+                />
                 <div className="attendance-page">
                     <div className="attendance-content-container">
                         {!selectedCourse && (

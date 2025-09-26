@@ -58,8 +58,59 @@ const initialTeacherNotifications = [
     },
 ];
 
-const NotificationCard = ({ notification, onMarkRead }) => {
+// Hindi translations for notification types/actions
+const hiText = {
+    inbox: "इनबॉक्स",
+    unread: "अपठित",
+    all: "सभी",
+    empty: "सभी सूचनाएँ पढ़ ली गई हैं!",
+    leaveApproved: "अवकाश अनुरोध स्वीकृत",
+    leaveApprovedMsg: "29 सितम्बर 2025 - 1 अक्टूबर 2025 के लिए आपका अवकाश विभागाध्यक्ष द्वारा स्वीकृत किया गया है।",
+    changeRequest: "नई समय सारणी परिवर्तन अनुरोध",
+    changeRequestMsg: "'Data Structures' कक्षा को प्रो. शर्मा की 'Algorithms' कक्षा से बदलने का अनुरोध किया गया है।",
+    systemSuggestion: "सिस्टम शेड्यूलिंग सुझाव",
+    systemSuggestionMsg: "'Advanced Algorithms' कक्षा के लिए शुक्रवार 2 बजे कक्ष C-103 में उपयुक्त स्लॉट उपलब्ध है।",
+    info: "फैकल्टी मीटिंग सूचना",
+    infoMsg: "NEP 2020 अनुपालन पर चर्चा हेतु सोमवार शाम 5:00 बजे मुख्य सम्मेलन कक्ष में अनिवार्य फैकल्टी मीटिंग है।",
+    leaveRejected: "अवकाश अनुरोध अस्वीकृत",
+    leaveRejectedMsg: "22 सितम्बर 2025 के लिए आपका अवकाश अनुरोध मिड-टर्म परीक्षा के दौरान टकराव के कारण अस्वीकृत किया गया।",
+    viewCalendar: "कैलेंडर देखें",
+    acknowledge: "स्वीकार करें",
+    reviewRequest: "अनुरोध की समीक्षा करें",
+    decline: "अस्वीकार करें",
+    acceptSlot: "स्लॉट स्वीकारें",
+    viewOptions: "विकल्प देखें",
+    addToCalendar: "कैलेंडर में जोड़ें",
+    viewDetails: "विवरण देखें",
+    markRead: "पढ़ा हुआ चिह्नित करें"
+};
+
+const NotificationCard = ({ notification, onMarkRead, lang }) => {
     const { id, type, icon, title, message, timestamp, read, actions } = notification;
+    // Hindi mapping for title/message/actions
+    const hiMap = {
+        'Leave Request Approved': hiText.leaveApproved,
+        'Your leave request for Sep 29, 2025 - Oct 01, 2025 has been approved by the department head.': hiText.leaveApprovedMsg,
+        'New Timetable Change Request': hiText.changeRequest,
+        "A request has been submitted to swap your 'Data Structures' class with Prof. Sharma's 'Algorithms' class.": hiText.changeRequestMsg,
+        'System Scheduling Suggestion': hiText.systemSuggestion,
+        "An optimal slot for your pending 'Advanced Algorithms' class is available on Friday at 2 PM in Room C-103.": hiText.systemSuggestionMsg,
+        'Faculty Meeting Announcement': hiText.info,
+        'A mandatory faculty meeting is scheduled for Monday at 5:00 PM in the main conference hall to discuss NEP 2020 compliance.': hiText.infoMsg,
+        'Leave Request Rejected': hiText.leaveRejected,
+        'Your leave request for Sep 22, 2025 was rejected due to scheduling conflicts during the mid-term exam period.': hiText.leaveRejectedMsg,
+    };
+    const hiActions = {
+        'View Calendar': hiText.viewCalendar,
+        'Acknowledge': hiText.acknowledge,
+        'Review Request': hiText.reviewRequest,
+        'Decline': hiText.decline,
+        'Accept Slot': hiText.acceptSlot,
+        'View Options': hiText.viewOptions,
+        'Add to Calendar': hiText.addToCalendar,
+        'View Details': hiText.viewDetails,
+        'Mark as Read': hiText.markRead
+    };
 
     return (
         <div className={`t-ntf-card ${type} ${read ? 'read' : ''}`}>
@@ -68,15 +119,19 @@ const NotificationCard = ({ notification, onMarkRead }) => {
             </div>
             <div className="t-ntf-card-content">
                 <div className="t-ntf-content-header">
-                    <h3>{title}</h3>
+                    <h3>{lang === "hi" ? (hiMap[title] || title) : title}</h3>
                     <span className="t-ntf-timestamp">{timestamp}</span>
                 </div>
-                <p className="t-ntf-message">{message}</p>
+                <p className="t-ntf-message">{lang === "hi" ? (hiMap[message] || message) : message}</p>
                 <div className="t-ntf-card-actions">
                     {actions.map(action => (
-                        <button key={action} className={`t-ntf-action-btn ${action.toLowerCase().replace(' ', '-')}`}>{action}</button>
+                        <button key={action} className={`t-ntf-action-btn ${action.toLowerCase().replace(' ', '-')}`}>
+                            {lang === "hi" ? (hiActions[action] || action) : action}
+                        </button>
                     ))}
-                    {!read && <button className="t-ntf-action-btn mark-read" onClick={() => onMarkRead(id)}>Mark as Read</button>}
+                    {!read && <button className="t-ntf-action-btn mark-read" onClick={() => onMarkRead(id)}>
+                        {lang === "hi" ? hiText.markRead : "Mark as Read"}
+                    </button>}
                 </div>
             </div>
         </div>
@@ -86,6 +141,10 @@ const NotificationCard = ({ notification, onMarkRead }) => {
 export default function TeacherNotifications() {
     const [notifications, setNotifications] = useState(initialTeacherNotifications);
     const [filter, setFilter] = useState('unread');
+    const [lang, setLang] = useState("en");
+
+    const altTitle = "सूचना केंद्र";
+    const altSubtitle = "आपकी अनुसूची, अनुरोधों और घोषणाओं पर अपडेट";
 
     const handleMarkRead = (id) => {
         setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
@@ -103,27 +162,30 @@ export default function TeacherNotifications() {
                 <Header
                     title="Notification Center"
                     subtitle="Updates on your schedule, requests, and announcements"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="t-ntf-page">
                     <div className="t-ntf-container">
                         <div className="t-ntf-header">
-                            <h2><Bell size={22} /> Inbox</h2>
+                            <h2><Bell size={22} /> {lang === "hi" ? hiText.inbox : "Inbox"}</h2>
                             <div className="t-ntf-filter-tabs">
                                 <button
                                     className={`t-ntf-filter-btn ${filter === 'unread' ? 'active' : ''}`}
                                     onClick={() => setFilter('unread')}
                                 >
-                                    Unread ({notifications.filter(n => !n.read).length})
+                                    {lang === "hi" ? hiText.unread : "Unread"} ({notifications.filter(n => !n.read).length})
                                 </button>
                                 <button
                                     className={`t-ntf-filter-btn ${filter === 'all' ? 'active' : ''}`}
                                     onClick={() => setFilter('all')}
                                 >
-                                    All
+                                    {lang === "hi" ? hiText.all : "All"}
                                 </button>
                             </div>
                         </div>
-
                         <div className="t-ntf-list">
                             {filteredNotifications.length > 0 ? (
                                 filteredNotifications.map(notification => (
@@ -131,12 +193,13 @@ export default function TeacherNotifications() {
                                         key={notification.id}
                                         notification={notification}
                                         onMarkRead={handleMarkRead}
+                                        lang={lang}
                                     />
                                 ))
                             ) : (
                                 <div className="t-ntf-empty-state">
                                     <CheckCircle size={48} />
-                                    <p>All caught up! No unread notifications.</p>
+                                    <p>{lang === "hi" ? hiText.empty : "All caught up! No unread notifications."}</p>
                                 </div>
                             )}
                         </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import Header from '../../components/Header';
 import './TeacherCourses.css';
@@ -35,7 +35,14 @@ const assignedCourses = [
     }
 ];
 
-const CourseCard = ({ course }) => (
+const hiText = {
+    students: "छात्र",
+    batches: "बैच",
+    classesPerWeek: "कक्षाएँ/सप्ताह",
+    semester: "सेमेस्टर"
+};
+
+const CourseCard = ({ course, lang }) => (
     <div className="course-card">
         <div className="card-top">
             <div className="course-icon">
@@ -50,19 +57,19 @@ const CourseCard = ({ course }) => (
         <div className="course-stats">
             <div className="stat-item">
                 <Users size={16} />
-                <span>{course.totalStudents} Students</span>
+                <span>{course.totalStudents} {lang === "hi" ? hiText.students : "Students"}</span>
             </div>
             <div className="stat-item">
                 <BarChart3 size={16} />
-                <span>{course.batches} Batch(es)</span>
+                <span>{course.batches} {lang === "hi" ? hiText.batches : "Batch(es)"}</span>
             </div>
             <div className="stat-item">
                 <Calendar size={16} />
-                <span>{course.weeklyClasses} Classes/Week</span>
+                <span>{course.weeklyClasses} {lang === "hi" ? hiText.classesPerWeek : "Classes/Week"}</span>
             </div>
-             <div className="stat-item">
+            <div className="stat-item">
                 <Tag size={16} />
-                <span>{course.semester}</span>
+                <span>{lang === "hi" ? hiText.semester : course.semester}</span>
             </div>
         </div>
     </div>
@@ -70,6 +77,9 @@ const CourseCard = ({ course }) => (
 
 
 export default function TeacherCourses() {
+    const [lang, setLang] = useState("en");
+    const altTitle = "मेरे पाठ्यक्रम";
+    const altSubtitle = "वर्तमान शैक्षणिक सत्र के लिए आपके सौंपे गए विषयों का अवलोकन";
     return (
         <div className="page-layout">
             <SideBarTeacher activePage={'my-courses'} />
@@ -77,11 +87,15 @@ export default function TeacherCourses() {
                 <Header
                     title="My Courses"
                     subtitle="An overview of your assigned subjects for the current academic session"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="courses-page">
                     <div className="courses-grid">
                         {assignedCourses.map(course => (
-                            <CourseCard key={course.id} course={course} />
+                            <CourseCard key={course.id} course={course} lang={lang} />
                         ))}
                     </div>
                 </div>

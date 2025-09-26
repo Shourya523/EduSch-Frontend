@@ -131,50 +131,51 @@ export default function Faculty() {
     const labs = classrooms.length - lectureTheatres;
     const totalSubjectsTaught = facultyList.reduce((sum, f) => sum + f.subjects.length, 0);
 
-    const infoData = [
-        { label: "Total Faculties", value: facultyList.length },
-        { label: "Total Subjects in Semester", value: semesterSubjects.length },
-        { label: "Total Subject Load", value: `${totalSubjectsTaught} classes taught` },
-        { label: "Classroom Breakdown", value: `${lectureTheatres} Lecture Theatres, ${labs} Labs` },
-        { label: "Student Batches", value: `${batches.length} (${batches.join(', ')})` },
-        { label: "Fixed Special Classes", value: facultyList.reduce((acc, f) => acc + f.specialClasses.length, 0) },
-        { label: "Avg. Leaves/Faculty/Month", value: (facultyList.reduce((sum, f) => sum + f.leavesPerMonth, 0) / facultyList.length).toFixed(1) },
-        { label: "Faculty with Perfect Attendance", value: facultyList.filter(f => f.leavesPerMonth === 0).length },
-    ];
     const [showChat, setShowChat] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "फैकल्टी प्रबंधन";
+    const altSubtitle = "";
+    const infoData = [
+        { label: lang === "hi" ? "कुल फैकल्टी" : "Total Faculties", value: facultyList.length },
+        { label: lang === "hi" ? "सेमेस्टर में कुल विषय" : "Total Subjects in Semester", value: semesterSubjects.length },
+        { label: lang === "hi" ? "कुल विषय भार" : "Total Subject Load", value: `${totalSubjectsTaught} ${lang === "hi" ? "कक्षाएँ पढ़ाई गई" : "classes taught"}` },
+        { label: lang === "hi" ? "कक्षा विभाजन" : "Classroom Breakdown", value: `${lectureTheatres} ${lang === "hi" ? "व्याख्यान कक्ष" : "Lecture Theatres"}, ${labs} ${lang === "hi" ? "प्रयोगशालाएँ" : "Labs"}` },
+        { label: lang === "hi" ? "छात्र बैच" : "Student Batches", value: `${batches.length} (${batches.join(', ')})` },
+        { label: lang === "hi" ? "नियत विशेष कक्षाएँ" : "Fixed Special Classes", value: facultyList.reduce((acc, f) => acc + f.specialClasses.length, 0) },
+        { label: lang === "hi" ? "औसत अवकाश/फैकल्टी/माह" : "Avg. Leaves/Faculty/Month", value: (facultyList.reduce((sum, f) => sum + f.leavesPerMonth, 0) / facultyList.length).toFixed(1) },
+        { label: lang === "hi" ? "पूर्ण उपस्थिति वाले फैकल्टी" : "Faculty with Perfect Attendance", value: facultyList.filter(f => f.leavesPerMonth === 0).length },
+    ];
     return (
         <div className="page-layout">
             <SideBar activePage={"faculty"} />
             <main className="main-content">
                 <div className="faculty-page">
                     <div className="page-header">
-                        <h1>Faculty Management</h1>
+                        <h1>
+                            {lang === "hi" ? altTitle : "Faculty Management"}
+                        </h1>
                         <button className="add-faculty-btn">
                             <Plus size={16} />
-                            Add New Faculty
+                            {lang === "hi" ? "नया फैकल्टी जोड़ें" : "Add New Faculty"}
                         </button>
                     </div>
-
-                    {/* --- Semester & Resource Info now on top --- */}
                     <div className="info-section top">
-                        <h2><FileText size={20} /> Semester & Resource Info</h2>
+                        <h2><FileText size={20} /> {lang === "hi" ? "सेमेस्टर और संसाधन जानकारी" : "Semester & Resource Info"}</h2>
                         <div className="info-grid">
                             {infoData.map((item, index) => (
                                 <InfoItem key={index} label={item.label} value={item.value} />
                             ))}
                         </div>
                     </div>
-
                     <div className="faculty-content-container">
                         <div className="faculty-section">
-                            <h2><Users size={20} /> Faculty Members</h2>
+                            <h2><Users size={20} /> {lang === "hi" ? "फैकल्टी सदस्य" : "Faculty Members"}</h2>
                             <table className="faculty-table">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Subjects Taught</th>
-                                        <th><CalendarDays size={14} /> Leaves/Month</th>
+                                        <th>{lang === "hi" ? "नाम" : "Name"}</th>
+                                        <th>{lang === "hi" ? "पढ़ाए गए विषय" : "Subjects Taught"}</th>
+                                        <th><CalendarDays size={14} /> {lang === "hi" ? "अवकाश/माह" : "Leaves/Month"}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

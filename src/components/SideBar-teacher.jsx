@@ -15,12 +15,22 @@ import {
 export default function SideBarTeacher({ activePage }) {
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
-
-    // Assuming teacher routes are prefixed with /teacher
+    const [lang, setLang] = useState("en");
+    const labels = {
+        dashboard: lang === "hi" ? "डैशबोर्ड" : "Dashboard",
+        timetable: lang === "hi" ? "समय सारणी" : "Timetable",
+        availability: lang === "hi" ? "उपलब्धता" : "Availability",
+        changeRequests: lang === "hi" ? "परिवर्तन अनुरोध" : "Change Requests",
+        courses: lang === "hi" ? "पाठ्यक्रम" : "Courses",
+        notifications: lang === "hi" ? "सूचनाएँ" : "Notifications",
+        expand: lang === "hi" ? "विस्तार करें" : "Expand",
+        collapse: lang === "hi" ? "संकुचित करें" : "Collapse",
+        teacherDashboard: lang === "hi" ? "शिक्षक डैशबोर्ड" : "Teacher Dashboard",
+        edusync: "EduSync"
+    };
     const handleNavigate = (path) => {
         navigate(`/teacher${path}`);
     };
-
     return (
         <aside className={`sidebar-teacher${collapsed ? ' collapsed' : ''}`}>
             <div className="sidebar-teacher-header">
@@ -28,48 +38,47 @@ export default function SideBarTeacher({ activePage }) {
                     <LayoutGrid size={24} />
                 </div>
                 <div className="header-text">
-                    <span className="header-title">EduSync</span>
-                    <span className="header-subtitle">Teacher Dashboard</span>
+                    <span className="header-title">{labels.edusync}</span>
+                    <span className="header-subtitle">{labels.teacherDashboard}</span>
                 </div>
             </div>
 
             <nav className="sidebar-teacher-nav">
                 <ul>
-                    {/* --- Teacher Specific Navigation Links --- */}
                     <li className={activePage === 'dashboard' ? 'active' : ''} onClick={() => handleNavigate("")}>
                         <a href="#">
                             <LayoutDashboard size={20} />
-                            <span className="label">Dashboard</span>
+                            <span className="label">{labels.dashboard}</span>
                         </a>
                     </li>
                     <li className={activePage === 'timetable' ? 'active' : ''} onClick={() => handleNavigate("/timetable")}>
                         <a href="#">
                             <CalendarDays size={20} />
-                            <span className="label">Timetable</span>
+                            <span className="label">{labels.timetable}</span>
                         </a>
                     </li>
                     <li className={activePage === 'availability-leave' ? 'active' : ''} onClick={() => handleNavigate("/availability-leave")}>
                         <a href="#">
                             <CalendarCheck size={20} />
-                            <span className="label">Availability</span>
+                            <span className="label">{labels.availability}</span>
                         </a>
                     </li>
                     <li className={activePage === 'change-requests' ? 'active' : ''} onClick={() => handleNavigate("/change-requests")}>
                         <a href="#">
                             <GitPullRequest size={20} />
-                            <span className="label">Change Requests</span>
+                            <span className="label">{labels.changeRequests}</span>
                         </a>
                     </li>
                     <li className={activePage === 'my-courses' ? 'active' : ''} onClick={() => handleNavigate("/courses")}>
                         <a href="#">
                             <BookOpen size={20} />
-                            <span className="label">Courses</span>
+                            <span className="label">{labels.courses}</span>
                         </a>
                     </li>
                     <li className={activePage === 'notifications' ? 'active' : ''} onClick={() => handleNavigate("/notifications")}>
                         <a href="#">
                             <Bell size={20} />
-                            <span className="label">Notifications</span>
+                            <span className="label">{labels.notifications}</span>
                         </a>
                     </li>
                 </ul>
@@ -78,7 +87,13 @@ export default function SideBarTeacher({ activePage }) {
             <div className="sidebar-teacher-footer">
                 <button onClick={() => setCollapsed(!collapsed)} aria-label="Toggle sidebar">
                     <Menu size={20} />
-                    <span className="label">{collapsed ? 'Expand' : 'Collapse'}</span>
+                    <span className="label">{collapsed ? labels.expand : labels.collapse}</span>
+                </button>
+                <button
+                    style={{ marginTop: 8, fontSize: 13, padding: "0.2em 0.7em", borderRadius: 6, border: "1px solid #444", background: "#232323", color: "#eee", cursor: "pointer" }}
+                    onClick={() => setLang(l => l === "en" ? "hi" : "en")}
+                >
+                    {lang === "hi" ? "English" : "हिन्दी"}
                 </button>
             </div>
         </aside>

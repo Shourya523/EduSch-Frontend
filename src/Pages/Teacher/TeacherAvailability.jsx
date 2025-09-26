@@ -63,17 +63,45 @@ const LeaveCalendar = () => {
     return <div className="calendar-container">{renderHeader()}{renderDays()}{renderCells()}</div>;
 };
 
+const hiText = {
+    requestLeave: "अवकाश का अनुरोध करें",
+    annualLeaveTaken: "वार्षिक अवकाश लिया",
+    sickLeaveTaken: "बीमारी अवकाश लिया",
+    leaveHistory: "अवकाश इतिहास",
+    approved: "स्वीकृत",
+    pending: "लंबित",
+    rejected: "अस्वीकृत",
+    legendApproved: "स्वीकृत",
+    legendPending: "लंबित",
+    legendRejected: "अस्वीकृत",
+    leaveType: "अवकाश प्रकार",
+    startDate: "प्रारंभ तिथि",
+    endDate: "समाप्ति तिथि",
+    reason: "कारण (वैकल्पिक)",
+    cancel: "रद्द करें",
+    submit: "अनुरोध भेजें"
+};
+
 export default function TeacherAvailability() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "उपलब्धता और अवकाश";
+    const altSubtitle = "अपना शेड्यूल प्रबंधित करें और अवकाश का अनुरोध करें";
     return (
         <div className="page-layout">
             <SideBarTeacher activePage={'availability-leave'} />
             <main className="main-content">
-                <Header title="Availability & Leave" subtitle="Manage your schedule and request time off">
+                <Header
+                    title="Availability & Leave"
+                    subtitle="Manage your schedule and request time off"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
+                >
                     <button className="header-btn primary" onClick={() => setIsModalOpen(true)}>
                         <Plus size={16} />
-                        <span>Request Leave</span>
+                        <span>{lang === "hi" ? hiText.requestLeave : "Request Leave"}</span>
                     </button>
                 </Header>
                 <div className="availability-page">
@@ -81,11 +109,11 @@ export default function TeacherAvailability() {
                         {/* Left Column: Stats and History */}
                         <div className="info-section">
                             <div className="leave-stats-grid">
-                                <div className="info-item"><p className="info-item-label">Annual Leave Taken</p><p className="info-item-value">9 / 12</p></div>
-                                <div className="info-item"><p className="info-item-label">Sick Leave Taken</p><p className="info-item-value">1 / 8</p></div>
+                                <div className="info-item"><p className="info-item-label">{lang === "hi" ? hiText.annualLeaveTaken : "Annual Leave Taken"}</p><p className="info-item-value">9 / 12</p></div>
+                                <div className="info-item"><p className="info-item-label">{lang === "hi" ? hiText.sickLeaveTaken : "Sick Leave Taken"}</p><p className="info-item-value">1 / 8</p></div>
                             </div>
                             <div className="leave-history">
-                                <h4>Leave History</h4>
+                                <h4>{lang === "hi" ? hiText.leaveHistory : "Leave History"}</h4>
                                 <div className="leave-history-list">
                                     {leaveHistory.map(item => (
                                         <div className="leave-history-item" key={item.id}>
@@ -93,7 +121,7 @@ export default function TeacherAvailability() {
                                                 <span className="item-type">{item.type}</span>
                                                 <span className="item-dates">{item.dates}</span>
                                             </div>
-                                            <span className={`item-status status-${item.status.toLowerCase()}`}>{item.status}</span>
+                                            <span className={`item-status status-${item.status.toLowerCase()}`}>{lang === "hi" ? hiText[item.status.toLowerCase()] : item.status}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -103,9 +131,9 @@ export default function TeacherAvailability() {
                         <div className="calendar-section">
                             <LeaveCalendar />
                             <div className="legend-container">
-                                <div className="legend-item"><span className="legend-dot approved"></span> Approved</div>
-                                <div className="legend-item"><span className="legend-dot pending"></span> Pending</div>
-                                <div className="legend-item"><span className="legend-dot rejected"></span> Rejected</div>
+                                <div className="legend-item"><span className="legend-dot approved"></span> {lang === "hi" ? hiText.legendApproved : "Approved"}</div>
+                                <div className="legend-item"><span className="legend-dot pending"></span> {lang === "hi" ? hiText.legendPending : "Pending"}</div>
+                                <div className="legend-item"><span className="legend-dot rejected"></span> {lang === "hi" ? hiText.legendRejected : "Rejected"}</div>
                             </div>
                         </div>
                     </div>
@@ -116,36 +144,36 @@ export default function TeacherAvailability() {
                     <div className="modal-backdrop">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h3>Request Time Off</h3>
+                                <h3>{lang === "hi" ? hiText.requestLeave : "Request Time Off"}</h3>
                                 <button className="modal-close-btn" onClick={() => setIsModalOpen(false)}><X size={20} /></button>
                             </div>
                             <form className="modal-form">
                                 <div className="form-group">
-                                    <label htmlFor="leave-type">Leave Type</label>
+                                    <label htmlFor="leave-type">{lang === "hi" ? hiText.leaveType : "Leave Type"}</label>
                                     <select id="leave-type">
-                                        <option>Annual Leave</option>
-                                        <option>Sick Leave</option>
-                                        <option>Conference</option>
-                                        <option>Unpaid Leave</option>
+                                        <option>{lang === "hi" ? "वार्षिक अवकाश" : "Annual Leave"}</option>
+                                        <option>{lang === "hi" ? "बीमारी अवकाश" : "Sick Leave"}</option>
+                                        <option>{lang === "hi" ? "सम्मेलन" : "Conference"}</option>
+                                        <option>{lang === "hi" ? "अवैतनिक अवकाश" : "Unpaid Leave"}</option>
                                     </select>
                                 </div>
                                 <div className="form-group-row">
                                     <div className="form-group">
-                                        <label htmlFor="start-date">Start Date</label>
+                                        <label htmlFor="start-date">{lang === "hi" ? hiText.startDate : "Start Date"}</label>
                                         <input type="date" id="start-date" defaultValue="2025-09-26" />
                                     </div>
                                     <div className="form-group">
-                                        <label htmlFor="end-date">End Date</label>
+                                        <label htmlFor="end-date">{lang === "hi" ? hiText.endDate : "End Date"}</label>
                                         <input type="date" id="end-date" defaultValue="2025-09-26" />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label htmlFor="reason">Reason (Optional)</label>
-                                    <textarea id="reason" rows="3" placeholder="e.g., Attending conference..."></textarea>
+                                    <label htmlFor="reason">{lang === "hi" ? hiText.reason : "Reason (Optional)"}</label>
+                                    <textarea id="reason" rows="3" placeholder={lang === "hi" ? "जैसे: सम्मेलन में भाग लेना..." : "e.g., Attending conference..."}></textarea>
                                 </div>
                                 <div className="form-actions">
-                                    <button type="button" className="form-btn secondary" onClick={() => setIsModalOpen(false)}>Cancel</button>
-                                    <button type="submit" className="form-btn primary">Submit Request</button>
+                                    <button type="button" className="form-btn secondary" onClick={() => setIsModalOpen(false)}>{lang === "hi" ? hiText.cancel : "Cancel"}</button>
+                                    <button type="submit" className="form-btn primary">{lang === "hi" ? hiText.submit : "Submit Request"}</button>
                                 </div>
                             </form>
                         </div>

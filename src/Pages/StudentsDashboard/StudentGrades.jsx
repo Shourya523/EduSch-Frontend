@@ -50,14 +50,23 @@ const InfoItem = ({ icon, label, value }) => (
 
 export default function StudentGrades() {
     const [showChat, setShowChat] = useState(false);
-
+    const [lang, setLang] = useState("en");
+    const altTitle = "मेरे अंक";
+    const altSubtitle = "वर्तमान सेमेस्टर के लिए अपनी शैक्षणिक प्रदर्शन की समीक्षा करें";
     const infoData = [
-        { label: "Current SGPA", value: calculateSGPA(gradesData), icon: <Award size={20} /> },
-        { label: "Overall CGPA", value: "8.45", icon: <TrendingUp size={20} /> }, // Mock CGPA
-        { label: "Overall Percentage", value: calculatePercentage(gradesData), icon: <Percent size={20} /> },
-        { label: "Subjects Passed", value: `${countSubjectsPassed(gradesData)} / ${gradesData.length}`, icon: <CheckCircle size={20} /> },
+        { label: lang === "hi" ? "वर्तमान SGPA" : "Current SGPA", value: calculateSGPA(gradesData), icon: <Award size={20} /> },
+        { label: lang === "hi" ? "कुल CGPA" : "Overall CGPA", value: "8.45", icon: <TrendingUp size={20} /> },
+        { label: lang === "hi" ? "कुल प्रतिशत" : "Overall Percentage", value: calculatePercentage(gradesData), icon: <Percent size={20} /> },
+        { label: lang === "hi" ? "उत्तीर्ण विषय" : "Subjects Passed", value: `${countSubjectsPassed(gradesData)} / ${gradesData.length}`, icon: <CheckCircle size={20} /> },
     ];
-
+    const tableHeaders = [
+        lang === "hi" ? "कोड" : "Code",
+        lang === "hi" ? "विषय का नाम" : "Subject Name",
+        lang === "hi" ? "प्रकार" : "Type",
+        lang === "hi" ? "क्रेडिट्स" : "Credits",
+        lang === "hi" ? "ग्रेड" : "Grade",
+        lang === "hi" ? "अंक" : "Points"
+    ];
     return (
         <div className="page-layout">
             <SideBarStudent activePage={"grades"} />
@@ -65,30 +74,27 @@ export default function StudentGrades() {
                 <Header
                     title="My Grades"
                     subtitle="Review your academic performance for the current semester"
+                    altTitle={altTitle}
+                    altSubtitle={altSubtitle}
+                    lang={lang}
+                    onToggleLang={() => setLang(l => l === "en" ? "hi" : "en")}
                 />
                 <div className="grades-page">
                     <div className="grades-content-container">
-
                         <div className="info-section">
-                            <h2><BarChart3 size={20} /> Performance Overview</h2>
+                            <h2><BarChart3 size={20} /> {lang === "hi" ? "प्रदर्शन अवलोकन" : "Performance Overview"}</h2>
                             <div className="info-grid">
                                 {infoData.map((item, index) => (
                                     <InfoItem key={index} label={item.label} value={item.value} icon={item.icon} />
                                 ))}
                             </div>
                         </div>
-
                         <div className="grades-section">
-                            <h2><Award size={20} /> Semester Grade Sheet</h2>
+                            <h2><Award size={20} /> {lang === "hi" ? "सेमेस्टर ग्रेड शीट" : "Semester Grade Sheet"}</h2>
                             <table className="grades-table">
                                 <thead>
                                     <tr>
-                                        <th>Code</th>
-                                        <th>Subject Name</th>
-                                        <th>Type</th>
-                                        <th>Credits</th>
-                                        <th>Grade</th>
-                                        <th>Points</th>
+                                        {tableHeaders.map((th, idx) => <th key={idx}>{th}</th>)}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -96,7 +102,7 @@ export default function StudentGrades() {
                                         <tr key={idx}>
                                             <td>{course.code}</td>
                                             <td>{course.name}</td>
-                                            <td>{course.type}</td>
+                                            <td>{lang === "hi" ? (course.type === "Core" ? "मुख्य" : course.type === "Elective" ? "ऐच्छिक" : course.type === "Lab" ? "प्रयोगशाला" : course.type) : course.type}</td>
                                             <td>{course.credits}</td>
                                             <td>
                                                 <span className={`grade-badge grade-${course.grade.replace('+', 'plus')}`}>
@@ -109,7 +115,6 @@ export default function StudentGrades() {
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
