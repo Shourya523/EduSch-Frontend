@@ -21,6 +21,9 @@
         border-radius: 0.4rem !important;
         gap: 0.3rem !important;
     }
+    .info-section.top{
+        width: 91.5vw;
+    }
     .info-section.top,
     .faculty-section,
     .faculty-details-panel {

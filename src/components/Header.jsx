@@ -13,9 +13,9 @@ export default function Header({ title, subtitle }) {
                 <p className="header-subtitle-mobile-hide">{subtitle || 'Welcome back, Admin User'}</p>
             </div>
             <div className="header-controls">
-                <button className="theme-toggle">
+                {/* <button className="theme-toggle">
                     <Moon size={20} />
-                </button>
+                </button> */}
                 <button className="control-btn">
                     <Languages size={18} />
                     <span>हिन्दी</span>
