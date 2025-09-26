@@ -1,8 +1,10 @@
 import React from 'react';
 import './StudentCourses.css';
+import { useState } from 'react';
 import SideBarStudent from '../../components/SideBar-student';
 import Header from '../../components/Header';
 import { BookOpen, BarChart2, Layers, Star, Clock } from 'lucide-react';
+import AIChat from '../../components/AiChat';
 
 // --- Mock Data for a single 5th Semester CS Student ---
 const courseList = [
@@ -36,6 +38,7 @@ const InfoItem = ({ icon, label, value, progress, description }) => (
 );
 
 export default function StudentCourses() {
+    const [showChat, setShowChat] = useState(false);
     // UPDATED: Added a "description" property to each object
     const infoData = [
         { label: "Courses Enrolled", value: courseList.length, icon: <BookOpen size={20} />, progress: (courseList.length / 7) * 100, description: "Max 7 per semester" },
@@ -48,7 +51,7 @@ export default function StudentCourses() {
         <div className="page-layout">
             <SideBarStudent activePage={"courses"} />
             <main className="main-content">
-                <Header 
+                <Header
                     title="My Courses"
                     subtitle="An overview of your subjects for the current semester"
                 />
@@ -94,6 +97,10 @@ export default function StudentCourses() {
                         </div>
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Faculty.css';
 import SideBar from '../components/SideBar';
 import { Plus, Users, School, Book, UserCheck, CalendarDays, Clock, FileText, UserMinus, Award, X, BookOpen, Ban } from 'lucide-react';
+import AIChat from '../components/AiChat';
 
 // Expanded faculty data for a more robust demo
 const facultyList = [
@@ -50,7 +51,7 @@ const facultyList = [
         leavesPerMonth: 0,
         maxClassesPerDay: 4,
         specialClasses: [
-             { subject: 'Machine Learning', day: 'Friday', time: '14:00-15:00', room: 'CS-Lab-1' }
+            { subject: 'Machine Learning', day: 'Friday', time: '14:00-15:00', room: 'CS-Lab-1' }
         ]
     },
     {
@@ -140,6 +141,7 @@ export default function Faculty() {
         { label: "Avg. Leaves/Faculty/Month", value: (facultyList.reduce((sum, f) => sum + f.leavesPerMonth, 0) / facultyList.length).toFixed(1) },
         { label: "Faculty with Perfect Attendance", value: facultyList.filter(f => f.leavesPerMonth === 0).length },
     ];
+    const [showChat, setShowChat] = useState(false);
 
     return (
         <div className="page-layout">
@@ -177,8 +179,8 @@ export default function Faculty() {
                                 </thead>
                                 <tbody>
                                     {facultyList.map((f, idx) => (
-                                        <tr 
-                                            key={idx} 
+                                        <tr
+                                            key={idx}
                                             onClick={() => setSelectedFaculty(f)}
                                             className={selectedFaculty && selectedFaculty.name === f.name ? 'selected' : ''}
                                         >
@@ -267,6 +269,10 @@ export default function Faculty() {
                         )}
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)} >
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

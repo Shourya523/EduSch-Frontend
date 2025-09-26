@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AiChat from '../components/AiChat';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import StatCard from '../components/StatCard';
@@ -8,8 +9,9 @@ import './AdminDashBoard.css';
 import { RectangleHorizontal, Users, Clock, UserSquare2 } from "lucide-react";
 import UserRoles from './UserRoles';
 
-export default function DashBoard() {
 
+export default function DashBoard() {
+    const [showChat, setShowChat] = useState(false);
     return (
         <div className="dashboard-layout">
             <SideBar activePage={'dashboard'} />
@@ -57,6 +59,11 @@ export default function DashBoard() {
                         </div>
                     </div>
                 </div>
+                {/* Floating Chat Button */}
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)} >
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+                </button>
+                {showChat && <AiChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useState } from 'react';
 import './StudentGrades.css';
 import SideBarStudent from '../../components/SideBar-student';
 import Header from '../../components/Header';
 import { BarChart3, TrendingUp, Percent, CheckCircle, Award } from 'lucide-react';
+import AIChat from '../../components/AiChat';
 
 // --- Mock Data for a student's grades for the current semester ---
 const gradesData = [
@@ -47,6 +49,7 @@ const InfoItem = ({ icon, label, value }) => (
 
 
 export default function StudentGrades() {
+    const [showChat, setShowChat] = useState(false);
 
     const infoData = [
         { label: "Current SGPA", value: calculateSGPA(gradesData), icon: <Award size={20} /> },
@@ -59,7 +62,7 @@ export default function StudentGrades() {
         <div className="page-layout">
             <SideBarStudent activePage={"grades"} />
             <main className="main-content">
-                <Header 
+                <Header
                     title="My Grades"
                     subtitle="Review your academic performance for the current semester"
                 />
@@ -109,6 +112,10 @@ export default function StudentGrades() {
 
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

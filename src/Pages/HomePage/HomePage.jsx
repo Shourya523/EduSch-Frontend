@@ -68,7 +68,7 @@ export default function HomePage() {
                             </li>
                         </ul>
                     </div>
-                    <div className="features-dashboard">
+                    <div className="features-dashboard-home">
                         <div className="dashboard-header">
                             <BarChart size={18} />
                             <span>Live Analytics Dashboard</span>

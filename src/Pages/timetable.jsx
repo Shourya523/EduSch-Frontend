@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import './timetable.css';
 import { Clock, MapPin, User } from 'lucide-react';
+import AIChat from '../components/AiChat';
 
 
 // Helper: get all batch keys and info from localStorage, grouped by dept+sem
@@ -12,7 +13,7 @@ function getAllBatchInfos() {
     let batchKeys = [];
     try {
         batchKeys = JSON.parse(localStorage.getItem('timetable_batchKeys') || '[]');
-    } catch (e) {}
+    } catch (e) { }
     // Group by dept+sem
     const batchMap = {};
     batchKeys.forEach(key => {
@@ -28,7 +29,7 @@ function getAllBatchInfos() {
                     sem: parsed.semester || 'Unknown',
                     batch: parsed.batch || 'A',
                 });
-            } catch (e) {}
+            } catch (e) { }
         }
     });
     // Flatten to array of {groupKey, branch, sem, batches: [batchInfo, ...]}
@@ -52,7 +53,7 @@ function getTimetableForBatch(batchKey) {
             const parsed = JSON.parse(stored);
             if (parsed && parsed.timetable) return parsed.timetable;
         }
-    } catch (e) {}
+    } catch (e) { }
     return null;
 }
 
@@ -107,14 +108,15 @@ export default function Timetable() {
         window.addEventListener('storage', handleStorage);
         return () => window.removeEventListener('storage', handleStorage);
     }, [selectedGroup]);
+    const [showChat, setShowChat] = useState(false);
 
     return (
         <div className="timetable-layout">
             <SideBar activePage={'timetable'} />
             <main className="main-content">
-                <Header 
-                    title="Timetable" 
-                    subtitle="Welcome back, Admin User" 
+                <Header
+                    title="Timetable"
+                    subtitle="Welcome back, Admin User"
                 />
                 <div className="content-area">
                     {/* Dept/Sem Groups */}
@@ -228,6 +230,10 @@ export default function Timetable() {
                         )}
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

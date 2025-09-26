@@ -4,6 +4,7 @@ import SideBar from '../components/SideBar'; // Make sure this path is correct
 import './GenerateTT.css';
 import { Plus, Settings2, RotateCw, Book, School, Users, UserCheck, Target } from 'lucide-react';
 import TimetablePopup from '../components/TimetablePopup.jsx';
+import AIChat from '../components/AiChat.jsx';
 
 // --- Helper function to shuffle an array (Fisher-Yates shuffle) ---
 const shuffleArray = (array) => {
@@ -236,8 +237,8 @@ for (const dept of departments) {
 }
 
 // --- Reusable Sub-Components ---
-const StatBox = ({ icon, value, label }) => ( <div className="stat-box"> {icon} <div className="stat-box-info"> <p className="stat-box-value">{value}</p> <p className="stat-box-label">{label}</p> </div> </div> );
-const SubjectAllocationRow = ({ subject, onAllocationChange }) => ( <div className="subject-allocation-row"> <p className="subject-name">{subject.name}</p> <div className="form-group subject-allocation-controls"> <button type="button" className="allocation-btn minus" onClick={() => onAllocationChange(subject.name, Math.max(0, subject.classesPerWeek - 1))} > - </button> <span className="allocation-value">{subject.classesPerWeek}</span> <button type="button" className="allocation-btn plus" onClick={() => onAllocationChange(subject.name, subject.classesPerWeek + 1)} > + </button> </div> </div> );
+const StatBox = ({ icon, value, label }) => (<div className="stat-box"> {icon} <div className="stat-box-info"> <p className="stat-box-value">{value}</p> <p className="stat-box-label">{label}</p> </div> </div>);
+const SubjectAllocationRow = ({ subject, onAllocationChange }) => (<div className="subject-allocation-row"> <p className="subject-name">{subject.name}</p> <div className="form-group subject-allocation-controls"> <button type="button" className="allocation-btn minus" onClick={() => onAllocationChange(subject.name, Math.max(0, subject.classesPerWeek - 1))} > - </button> <span className="allocation-value">{subject.classesPerWeek}</span> <button type="button" className="allocation-btn plus" onClick={() => onAllocationChange(subject.name, subject.classesPerWeek + 1)} > + </button> </div> </div>);
 
 function getInitialDept() { return localStorage.getItem('lastSelectedDept') || 'Computer Science'; }
 function getInitialSem() { return localStorage.getItem('lastSelectedSemester') || '5th Semester'; }
@@ -255,7 +256,7 @@ function GenerateTT() {
     const [showPopup, setShowPopup] = useState(false);
     const [generatedTimetables, setGeneratedTimetables] = useState([]);
 
-    const allRooms = [ "LT-101", "LT-102", "LT-103", "LT-104", "LT-105", "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3", "CS-LAB-1", "CS-LAB-2", "CS-LAB-3", "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1" ];
+    const allRooms = ["LT-101", "LT-102", "LT-103", "LT-104", "LT-105", "MECH-LAB-1", "MECH-LAB-2", "MECH-LAB-3", "CS-LAB-1", "CS-LAB-2", "CS-LAB-3", "PHY-LAB-1", "CHEM-LAB-1", "EEE-LAB-1"];
     const [newClassroom, setNewClassroom] = useState({ room: allRooms[0], day: 'Monday', time: '9:00-10:00' });
     const [newTeacher, setNewTeacher] = useState({ teacher: '', day: 'Monday' });
 
@@ -267,7 +268,7 @@ function GenerateTT() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
     const batchOptions = Array.from({ length: currentScopeData?.resources?.batches || 1 }, (_, i) => String.fromCharCode(65 + i));
-    
+
     // --- MODIFIED Timetable Generator for Better Distribution ---
     function generateTimetable(subjectAllocations, constraints, globalRules) {
         const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
@@ -395,14 +396,14 @@ function GenerateTT() {
     const handleRemoveClassroomConstraint = idx => { setClassroomConstraints(classroomConstraints.filter((_, i) => i !== idx)); };
     const handleAddTeacherConstraint = () => { if (newTeacher.teacher && newTeacher.day) { setTeacherConstraints([...teacherConstraints, { ...newTeacher }]); setNewTeacher({ teacher: '', day: 'Monday' }); } };
     const handleRemoveTeacherConstraint = idx => { setTeacherConstraints(teacherConstraints.filter((_, i) => i !== idx)); };
-
+    const [showChat, setShowChat] = useState(false);
     return (
         <div className="page-layout">
             <SideBar activePage={'gentt'} />
             <main className="main-content">
-                <Header 
-                    title="Generate Timetable" 
-                    subtitle="Set parameters and constraints to generate an optimized timetable" 
+                <Header
+                    title="Generate Timetable"
+                    subtitle="Set parameters and constraints to generate an optimized timetable"
                 />
                 <div className="content-area">
                     <div className="generation-container">
@@ -425,13 +426,13 @@ function GenerateTT() {
                                 <div className="form-group">
                                     <label htmlFor="semester">Semester</label>
                                     <select id="semester" name="semester" value={selectedSemester} onChange={e => setSelectedSemester(e.target.value)}>
-                                        {semesters.map(sem => ( <option key={sem} value={sem}>{sem}</option> ))}
+                                        {semesters.map(sem => (<option key={sem} value={sem}>{sem}</option>))}
                                     </select>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="batch">Batch</label>
                                     <select id="batch" name="batch" value={selectedBatch} onChange={e => setSelectedBatch(e.target.value)}>
-                                        {batchOptions.map(batch => ( <option key={batch} value={batch}>{batch}</option> ))}
+                                        {batchOptions.map(batch => (<option key={batch} value={batch}>{batch}</option>))}
                                     </select>
                                 </div>
                             </div>
@@ -439,9 +440,9 @@ function GenerateTT() {
 
                         {/* --- Section 2: Resource Overview --- */}
                         <div className="generation-section">
-                             <div className="section-header">
-                                 <div className="section-number">2</div>
-                                 <h3>Resource Overview</h3>
+                            <div className="section-header">
+                                <div className="section-number">2</div>
+                                <h3>Resource Overview</h3>
                             </div>
                             <p className="section-description"> A summary of the available resources for the selected scope. </p>
                             <div className="resource-overview">
@@ -464,7 +465,7 @@ function GenerateTT() {
                                     <h4><Book size={18} /> Subject Name</h4>
                                     <h4><Target size={18} /> Classes Per Week</h4>
                                 </div>
-                                {subjectAllocations.map(subject => ( <SubjectAllocationRow key={subject.name} subject={subject} onAllocationChange={handleAllocationChange} /> ))}
+                                {subjectAllocations.map(subject => (<SubjectAllocationRow key={subject.name} subject={subject} onAllocationChange={handleAllocationChange} />))}
                             </div>
                         </div>
 
@@ -479,17 +480,17 @@ function GenerateTT() {
                                 <div className="fixed-slots">
                                     <h4>Classroom Unavailable</h4>
                                     <ul className="fixed-slot-list">
-                                        {classroomConstraints.map((c, idx) => ( <li key={idx}> {c.room} unavailable on {c.day} at {c.time} <button onClick={() => handleRemoveClassroomConstraint(idx)} className="btn-remove-constraint">Remove</button> </li> ))}
+                                        {classroomConstraints.map((c, idx) => (<li key={idx}> {c.room} unavailable on {c.day} at {c.time} <button onClick={() => handleRemoveClassroomConstraint(idx)} className="btn-remove-constraint">Remove</button> </li>))}
                                     </ul>
                                     <div className="constraint-form">
-                                        <select value={newClassroom.room} onChange={e => setNewClassroom({...newClassroom, room: e.target.value})}>
+                                        <select value={newClassroom.room} onChange={e => setNewClassroom({ ...newClassroom, room: e.target.value })}>
                                             {allRooms.map(room => <option key={room} value={room}>{room}</option>)}
                                         </select>
-                                        <select value={newClassroom.day} onChange={e => setNewClassroom({...newClassroom, day: e.target.value})}>
-                                            {['Monday','Tuesday','Wednesday','Thursday','Friday'].map(day => <option key={day} value={day}>{day}</option>)}
+                                        <select value={newClassroom.day} onChange={e => setNewClassroom({ ...newClassroom, day: e.target.value })}>
+                                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(day => <option key={day} value={day}>{day}</option>)}
                                         </select>
-                                        <select value={newClassroom.time} onChange={e => setNewClassroom({...newClassroom, time: e.target.value})}>
-                                            {["9:00-10:00","10:00-11:00","11:00-12:00","12:00-13:00","14:00-15:00","15:00-16:00"].map(time => <option key={time} value={time}>{time}</option>)}
+                                        <select value={newClassroom.time} onChange={e => setNewClassroom({ ...newClassroom, time: e.target.value })}>
+                                            {["9:00-10:00", "10:00-11:00", "11:00-12:00", "12:00-13:00", "14:00-15:00", "15:00-16:00"].map(time => <option key={time} value={time}>{time}</option>)}
                                         </select>
                                         <button className="btn btn-secondary" onClick={handleAddClassroomConstraint}> <Plus size={16} /> Add </button>
                                     </div>
@@ -497,12 +498,12 @@ function GenerateTT() {
                                 <div className="fixed-slots">
                                     <h4>Teacher Absent</h4>
                                     <ul className="fixed-slot-list">
-                                        {teacherConstraints.map((c, idx) => ( <li key={idx}> {c.teacher} unavailable on {c.day} <button onClick={() => handleRemoveTeacherConstraint(idx)} className="btn-remove-constraint">Remove</button> </li> ))}
+                                        {teacherConstraints.map((c, idx) => (<li key={idx}> {c.teacher} unavailable on {c.day} <button onClick={() => handleRemoveTeacherConstraint(idx)} className="btn-remove-constraint">Remove</button> </li>))}
                                     </ul>
                                     <div className="constraint-form">
-                                        <input type="text" placeholder="Teacher (e.g. Prof. Kumar)" value={newTeacher.teacher} onChange={e => setNewTeacher({...newTeacher, teacher: e.target.value})} />
-                                        <select value={newTeacher.day} onChange={e => setNewTeacher({...newTeacher, day: e.target.value})}>
-                                            {['Monday','Tuesday','Wednesday','Thursday','Friday'].map(day => <option key={day} value={day}>{day}</option>)}
+                                        <input type="text" placeholder="Teacher (e.g. Prof. Kumar)" value={newTeacher.teacher} onChange={e => setNewTeacher({ ...newTeacher, teacher: e.target.value })} />
+                                        <select value={newTeacher.day} onChange={e => setNewTeacher({ ...newTeacher, day: e.target.value })}>
+                                            {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'].map(day => <option key={day} value={day}>{day}</option>)}
                                         </select>
                                         <button className="btn btn-secondary" onClick={handleAddTeacherConstraint}> <Plus size={16} /> Add </button>
                                     </div>
@@ -563,13 +564,17 @@ function GenerateTT() {
 
             {/* --- Conditionally render the popup --- */}
             {showPopup && (
-                <TimetablePopup 
+                <TimetablePopup
                     timetables={generatedTimetables}
                     onSelect={handleTimetableSelect}
                     onClose={() => setShowPopup(false)}
                     scope={{ dept: selectedDept, semester: selectedSemester, batch: selectedBatch }}
                 />
             )}
+            <button className="s-fab-chat-btn" onClick={() => setShowChat(true)} >
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+            </button>
+            {showChat && <AIChat onClose={() => setShowChat(false)} />}
         </div>
     );
 }

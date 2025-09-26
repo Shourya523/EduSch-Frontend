@@ -3,6 +3,7 @@ import './Notifications.css'; // This now links to the refactored CSS
 import SideBar from '../components/SideBar';
 import Header from '../components/Header';
 import { CalendarPlus, UserMinus, Wrench, Megaphone, CheckCircle, Bell } from 'lucide-react';
+import AIChat from '../components/AiChat';
 
 // Mock Notification Data (remains the same)
 const initialNotifications = [
@@ -97,12 +98,13 @@ export default function Notifications() {
         if (filter === 'unread') return !n.read;
         return true;
     });
+    const [showChat, setShowChat] = useState(false);
 
     return (
         <div className="page-layout">
             <SideBar activePage={"notifications"} />
             <main className="main-content">
-                <Header 
+                <Header
                     title="Notifications"
                     subtitle="Review requests, updates, and system alerts"
                 />
@@ -111,13 +113,13 @@ export default function Notifications() {
                         <div className="ntf-header">
                             <h2><Bell size={22} /> Inbox</h2>
                             <div className="ntf-filter-tabs">
-                                <button 
+                                <button
                                     className={`ntf-filter-btn ${filter === 'unread' ? 'active' : ''}`}
                                     onClick={() => setFilter('unread')}
                                 >
                                     Unread ({notifications.filter(n => !n.read).length})
                                 </button>
-                                <button 
+                                <button
                                     className={`ntf-filter-btn ${filter === 'all' ? 'active' : ''}`}
                                     onClick={() => setFilter('all')}
                                 >
@@ -129,7 +131,7 @@ export default function Notifications() {
                         <div className="ntf-list">
                             {filteredNotifications.length > 0 ? (
                                 filteredNotifications.map(notification => (
-                                    <NotificationCard 
+                                    <NotificationCard
                                         key={notification.id}
                                         notification={notification}
                                         onMarkRead={handleMarkRead}
@@ -144,6 +146,10 @@ export default function Notifications() {
                         </div>
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
 // --- ADD CHART.JS IMPORTS ---
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler } from 'chart.js';
+import AIChat from '../../components/AiChat.jsx';
 
 // --- REGISTER CHART.JS MODULES ---
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler);
@@ -157,6 +158,7 @@ export default function StudentAttendance() {
     const [selectedDate, setSelectedDate] = useState('2025-09-25');
     const [selectedCourse, setSelectedCourse] = useState(null);
     const todaysClasses = dayToDayData[selectedDate] || [];
+    const [showChat, setShowChat] = useState(false);
 
     return (
         <div className="page-layout">
@@ -217,6 +219,10 @@ export default function StudentAttendance() {
                         </div>
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );
