@@ -1,6 +1,7 @@
 import TopBar from '../../components/TopBar.jsx'
 import { useNavigate } from "react-router-dom";
 import "./HomePage.css";
+import { useEffect, useState } from "react";
 import {
     ArrowRight,
     CheckCircle,
@@ -15,14 +16,19 @@ import {
 } from "lucide-react";
 import DisclaimerPopup from '../../components/Disclaimer.jsx';
 
+
 export default function HomePage() {
-    const navigate =useNavigate();
+    const navigate = useNavigate();
+    const [fade, setFade] = useState(false);
+    useEffect(() => {
+        const timeout = setTimeout(() => setFade(true), 50);
+        return () => clearTimeout(timeout);
+    }, []);
     return (
         <>
         <DisclaimerPopup />
             {/* Hero Section */}
-            <section className="hero fade-up">
-                {/* ... (previous hero section code remains unchanged) ... */}
+            <section className={`hero fade-up${fade ? ' visible' : ''}`}>
                 <TopBar />
                 <div className="hero-badge">AI-Powered Academic Scheduling</div>
                 <div className="hero-title">
@@ -34,7 +40,7 @@ export default function HomePage() {
                     eliminate scheduling conflicts automatically.
                 </p>
                 <div className="hero-actions">
-                    <button className="btn btn-primary-home" onClick={()=>navigate("/register")}>
+                    <button className="btn btn-primary-home" onClick={()=>navigate("/register")}> 
                         Start Free Trial <ArrowRight size={16} />
                     </button>
                     <button className="btn btn-secondary-demo-dashboard" onClick={()=>navigate("/roles")}>View Demo Dashboard</button>
@@ -42,8 +48,7 @@ export default function HomePage() {
             </section>
 
             {/* Intelligent Academic Management Section */}
-            <section className="features-section fade-up">
-                {/* ... (previous features section code remains unchanged) ... */}
+            <section className={`features-section fade-up${fade ? ' visible' : ''}`}>
                 <div className="features-container">
                     <div className="features-content">
                         <h2>Intelligent Academic Management</h2>
@@ -102,7 +107,7 @@ export default function HomePage() {
             </section>
 
             {/* --- NEW: Powerful Features Grid Section --- */}
-            <section className="grid-features-section fade-up">
+            <section className={`grid-features-section fade-up${fade ? ' visible' : ''}`}>
                 <div className="grid-features-header">
                     <h2>Powerful Features for Academic Excellence</h2>
                     <p>
@@ -167,7 +172,7 @@ export default function HomePage() {
                     </div>
                 </div>
                 {/* --- NEW: Comparison Section --- */}
-                <section className="comparison-section fade-up">
+                <section className={`comparison-section fade-up${fade ? ' visible' : ''}`}>
                     <h2>From Chaos to Clarity</h2>
                     <div className="comparison-container">
                         {/* Problems Card */}
@@ -218,7 +223,7 @@ export default function HomePage() {
                     </div>
                 </section>
             </section>
-            <section className="cta-section fade-up">
+            <section className={`cta-section fade-up${fade ? ' visible' : ''}`}>
                 <h2>Ready to Transform Your Scheduling?</h2>
                 <p>
                     Join hundreds of universities already using EduSync to streamline

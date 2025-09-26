@@ -41,18 +41,17 @@ body {
   50% { opacity: 0.45; }
 }
 /* Fade up animation for all main sections */
+
 .fade-up {
   opacity: 0;
-  transform: translateY(32px);
-  animation: fadeUpAnim 1.2s cubic-bezier(0.4,0,0.2,1) forwards;
-  will-change: opacity, transform;
+  /* Removed transform to prevent layout shift and scroll jump */
+  transition: opacity 1.2s cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity;
 }
 
-@keyframes fadeUpAnim {
-  to {
-    opacity: 1;
-    transform: none;
-  }
+.fade-up.visible {
+  opacity: 1;
+  transform: none;
 }
 
 .hero-title {
