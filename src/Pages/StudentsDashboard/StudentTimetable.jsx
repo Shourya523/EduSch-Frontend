@@ -51,17 +51,39 @@ export default function StudentTimetable() {
     const [lang, setLang] = React.useState("en");
     const altTitle = "मेरी समय सारणी";
     const altSubtitle = "आपका साप्ताहिक कक्षा कार्यक्रम";
-    const hiDays = {
-        Monday: "सोमवार",
-        Tuesday: "मंगलवार",
-        Wednesday: "बुधवार",
-        Thursday: "गुरुवार",
-        Friday: "शुक्रवार"
+    
+    // Comprehensive Hindi translations
+    const hiText = {
+        days: {
+            Monday: "सोमवार",
+            Tuesday: "मंगलवार",
+            Wednesday: "बुधवार",
+            Thursday: "गुरुवार",
+            Friday: "शुक्रवार"
+        },
+        types: {
+            Lecture: "व्याख्यान",
+            Lab: "प्रयोगशाला"
+        },
+        subjects: {
+            "Data Structures": "डेटा संरचनाएं",
+            "IT Infrastructure Lab": "आईटी इंफ्रास्ट्रक्चर लैब",
+            "Digital Systems": "डिजिटल सिस्टम",
+            "Database Management": "डेटाबेस प्रबंधन",
+            "Data Structures Lab": "डेटा संरचनाएं लैब",
+            "Operating Systems": "ऑपरेटिंग सिस्टम",
+            "Digital Systems Lab": "डिजिटल सिस्टम लैब"
+        },
+        instructors: {
+            "Mrs. Ruchika Bala": "श्रीमती रुचिका बाला",
+            "Dr. Himika Verma": "डॉ. हिमिका वर्मा",
+            "Prof. Divya Kaushik": "प्रो. दिव्या कौशिक",
+            "Prof. Anil Kumar": "प्रो. अनिल कुमार",
+            "Dr. Sandeep Singh": "डॉ. संदीप सिंह"
+        },
+        noClass: "आज के लिए कोई कक्षा निर्धारित नहीं है।"
     };
-    const hiType = {
-        Lecture: "व्याख्यान",
-        Lab: "प्रयोगशाला"
-    };
+
     return (
         <div className="student-timetable-layout">
             <SideBarStudent activePage={'timetable'} />
@@ -78,14 +100,14 @@ export default function StudentTimetable() {
                     <div className="timetable-container">
                         {studentTimetableData.map((dayData, index) => (
                             <div className="day-section" key={index}>
-                                <h3>{lang === "hi" ? hiDays[dayData.day] : dayData.day}</h3>
+                                <h3>{lang === "hi" ? hiText.days[dayData.day] : dayData.day}</h3>
                                 <div className="entries-container">
                                     {dayData.classes.length > 0 ? (
                                         dayData.classes.map((classInfo, classIndex) => (
                                             <div className="timetable-entry" key={classIndex}>
                                                 <div className="entry-top">
-                                                    <span className={`entry-tag ${classInfo.type.toLowerCase()}`}>{lang === "hi" ? hiType[classInfo.type] || classInfo.type : classInfo.type}</span>
-                                                    <h4>{classInfo.subject}</h4>
+                                                    <span className={`entry-tag ${classInfo.type.toLowerCase()}`}>{lang === "hi" ? hiText.types[classInfo.type] || classInfo.type : classInfo.type}</span>
+                                                    <h4>{lang === "hi" ? hiText.subjects[classInfo.subject] || classInfo.subject : classInfo.subject}</h4>
                                                 </div>
                                                 <div className="entry-details">
                                                     <div className="detail-item">
@@ -98,13 +120,13 @@ export default function StudentTimetable() {
                                                     </div>
                                                     <div className="detail-item">
                                                         <User size={14} />
-                                                        <span>{classInfo.instructor}</span>
+                                                        <span>{lang === "hi" ? hiText.instructors[classInfo.instructor] || classInfo.instructor : classInfo.instructor}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         ))
                                     ) : (
-                                        <p className="no-class-message">{lang === "hi" ? "आज के लिए कोई कक्षा निर्धारित नहीं है।" : "No classes scheduled for today."}</p>
+                                        <p className="no-class-message">{lang === "hi" ? hiText.noClass : "No classes scheduled for today."}</p>
                                     )}
                                 </div>
                             </div>
