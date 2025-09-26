@@ -60,7 +60,7 @@ export default function SideBarTeacher({ activePage }) {
                             <span className="label">Change Requests</span>
                         </a>
                     </li>
-                    <li className={activePage === 'my-courses' ? 'active' : ''} onClick={() => handleNavigate("/my-courses")}>
+                    <li className={activePage === 'my-courses' ? 'active' : ''} onClick={() => handleNavigate("/courses")}>
                         <a href="#">
                             <BookOpen size={20} />
                             <span className="label">Courses</span>

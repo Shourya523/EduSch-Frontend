@@ -22,6 +22,7 @@ import TeacherTimetable from './Pages/Teacher/TeacherTimetable.jsx';
 import TeacherAvailability from './Pages/Teacher/TeacherAvailability.jsx';
 import TeacherNotifications from './Pages/Teacher/TeacherNotification.jsx';
 import TeacherChangeRequests from './Pages/Teacher/TeacherChangeRequests.jsx';
+import TeacherCourses from './Pages/Teacher/TeacherCourses.jsx';
 function App() {
 
 
@@ -49,6 +50,7 @@ function App() {
         <Route path='/teacher/availability-leave' element={<TeacherAvailability/>} />
         <Route path='/teacher/notifications' element={<TeacherNotifications/>} />
         <Route path='/teacher/change-requests' element={<TeacherChangeRequests/>} />
+        <Route path='/teacher/courses' element={<TeacherCourses/>} />
       </Routes>
     </BrowserRouter>
   )
