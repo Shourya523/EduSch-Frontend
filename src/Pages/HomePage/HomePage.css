@@ -68,13 +68,13 @@ body {
   transition: all 0.2s ease;
 }
 
-.btn-primary {
+.btn-primary-home {
   background-color: var(--btn-light);
   color: #000;
   border: none;
 }
 
-.btn-primary:hover {
+.btn-primary-home:hover {
   background-color: #f3f3f3;
 }
 

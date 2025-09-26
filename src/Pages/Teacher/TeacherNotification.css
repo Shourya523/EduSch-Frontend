@@ -1,0 +1,237 @@
+/* --- Teacher Notifications Page Specific Styles --- */
+.t-ntf-page {
+    padding: 32px;
+    color: var(--text-light);
+    background: #0f0f0f;
+    min-height: 100vh;
+}
+
+.t-ntf-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #0f0f0f;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 16px 0 #000a;
+}
+
+.t-ntf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: #0f0f0f;
+}
+
+.t-ntf-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.t-ntf-filter-tabs {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.t-ntf-filter-btn {
+    background: none;
+    border: none;
+    border-left: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.t-ntf-filter-btn:focus {
+    box-shadow: 0 0 0 2px #4fd1c5;
+    z-index: 1;
+}
+
+.t-ntf-filter-tabs .t-ntf-filter-btn:first-child {
+    border-left: none;
+}
+
+.t-ntf-filter-btn:hover {
+    color: var(--text-light);
+    background-color: var(--btn-dark);
+}
+
+.t-ntf-filter-btn.active {
+    background-color: #23232b;
+    color: var(--text-light);
+    font-weight: 600;
+    box-shadow: 0 2px 8px 0 #0004;
+}
+
+.t-ntf-list {
+    padding: 1.5rem 2rem 2.5rem 2rem;
+}
+
+/* --- Notification Card Styles --- */
+.t-ntf-card {
+    display: flex;
+    gap: 1.5rem;
+    background-color: #0f0f0f;
+    border: 1px solid var(--border);
+    border-left-width: 4px;
+    border-radius: 0.5rem;
+    padding: 1.15rem 1.25rem;
+    margin-bottom: 1.25rem;
+    transition: opacity 0.3s, background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 8px 0 #0006;
+}
+.t-ntf-card:hover {
+    background-color: #23232b;
+    box-shadow: 0 2px 16px 0 #000a;
+}
+
+/* Card type color-coding */
+.t-ntf-card.info { border-left-color: #a855f7; } /* Purple */
+.t-ntf-card.leave-approved { border-left-color: #22c55e; } /* Green */
+.t-ntf-card.leave-rejected { border-left-color: #ef4444; } /* Red */
+.t-ntf-card.change-request { border-left-color: #6366f1; } /* Indigo */
+.t-ntf-card.system-suggestion { border-left-color: #f59e0b; } /* Amber */
+
+
+.t-ntf-card.read {
+    opacity: 0.5;
+    filter: grayscale(0.2);
+}
+.t-ntf-card.read:hover {
+    opacity: 0.8;
+}
+
+.t-ntf-card-icon {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+}
+
+/* Icon type color-coding */
+.t-ntf-icon-info { color: #a855f7; }
+.t-ntf-icon-leave-approved { color: #22c55e; }
+.t-ntf-icon-leave-rejected { color: #ef4444; }
+.t-ntf-icon-change-request { color: #6366f1; }
+.t-ntf-icon-system-suggestion { color: #f59e0b; }
+
+
+.t-ntf-card-content {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.t-ntf-content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.25rem;
+}
+
+.t-ntf-content-header h3 {
+    margin: 0;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--text-light);
+    letter-spacing: 0.01em;
+}
+
+.t-ntf-timestamp {
+    font-size: 0.8rem;
+    color: #8e9ab3;
+    flex-shrink: 0;
+    margin-left: 1rem;
+}
+
+.t-ntf-message {
+    font-size: 0.97rem;
+    color: #bdbdbd;
+    margin: 0 0 1.1rem 0;
+    line-height: 1.65;
+}
+
+.t-ntf-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.t-ntf-action-btn {
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    font-size: 0.87rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.1s;
+    outline: none;
+}
+.t-ntf-action-btn:focus {
+    box-shadow: 0 0 0 2px #4fd1c5;
+    z-index: 1;
+}
+.t-ntf-action-btn:active {
+    transform: scale(0.97);
+}
+
+.t-ntf-action-btn,
+.t-ntf-action-btn.acknowledge, 
+.t-ntf-action-btn.mark-read, 
+.t-ntf-action-btn.view-calendar,
+.t-ntf-action-btn.review-request,
+.t-ntf-action-btn.accept-slot,
+.t-ntf-action-btn.add-to-calendar,
+.t-ntf-action-btn.view-details,
+.t-ntf-action-btn.decline,
+.t-ntf-action-btn.view-options {
+    background-color: #18181c;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px 0 #0002;
+}
+.t-ntf-action-btn:hover,
+.t-ntf-action-btn.acknowledge:hover, 
+.t-ntf-action-btn.mark-read:hover, 
+.t-ntf-action-btn.view-calendar:hover,
+.t-ntf-action-btn.review-request:hover,
+.t-ntf-action-btn.accept-slot:hover,
+.t-ntf-action-btn.add-to-calendar:hover,
+.t-ntf-action-btn.view-details:hover,
+.t-ntf-action-btn.decline:hover,
+.t-ntf-action-btn.view-options:hover {
+    background-color: #23232b;
+    color: var(--text-light);
+}
+
+/* Empty State Styles */
+.t-ntf-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #8e9ab3;
+}
+.t-ntf-empty-state svg {
+    color: #22c55e;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+.t-ntf-empty-state p {
+    font-size: 1.13rem;
+    margin: 0;
+    color: #bdbdbd;
+}
+
+/* Responsive Notifications */
+@media (max-width: 768px) {
+  .t-ntf-page { padding: 12px; }
+  .t-ntf-header { flex-direction: column; gap: 1rem; }
+  .t-ntf-list { padding: 1rem; }
+  .t-ntf-card { flex-direction: column; gap: 1rem; }
+}

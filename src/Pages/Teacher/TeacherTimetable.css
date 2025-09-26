@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+/* --- Root Variables --- */
+:root {
+    --bg-dark: #080808;
+    --text-light: #eeeeee;
+    --border: rgba(255, 255, 255, 0.1);
+    --btn-dark: #1c1c1c;
+    --btn-light: #ffffff;
+    --text-dark: #0f0f0f;
+    --accent-primary: #3b82f6;
+    --danger-red: #E5484D;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-dark);
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Main Layout --- */
+.teacher-timetable-layout {
+    display: flex;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-area {
+    padding: 24px 32px;
+    overflow-y: auto;
+}
+
+/* --- Header Action Buttons --- */
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.header-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Geist', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.header-btn.secondary {
+    background-color: var(--btn-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+}
+.header-btn.secondary:hover {
+    background-color: #2c2c2c;
+}
+.header-btn.primary {
+    background-color: var(--accent-primary);
+    color: var(--btn-light);
+}
+.header-btn.primary:hover {
+    background-color: #2563eb;
+}
+
+
+/* --- Timetable Container --- */
+.timetable-container {
+    background-color: transparent;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+/* --- Day Section Styling --- */
+.day-section {
+    margin-bottom: 24px;
+}
+.day-section:last-child {
+    margin-bottom: 0;
+}
+
+.day-section h3 {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0 0 16px 0;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.entries-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* --- Timetable Entry Card Styling --- */
+.timetable-entry {
+    position: relative;
+    background-color: var(--btn-dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.entry-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.entry-tag {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.entry-tag.lecture {
+    background-color: var(--btn-light);
+    color: var(--text-dark);
+}
+
+.entry-tag.lab {
+    background-color: #57090c;
+    color: var(--btn-light);
+}
+
+.entry-top h4 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.entry-details {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    color: #a0a0a0;
+    font-size: 0.85rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* --- NEW: Entry Actions & Dropdown --- */
+.entry-actions-container {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+}
+
+.entry-actions-btn {
+    background-color: transparent;
+    border: none;
+    color: #a0a0a0;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+.entry-actions-btn:hover {
+    background-color: #2c2c2c;
+    color: var(--text-light);
+}
+
+.entry-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background-color: #252525;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px;
+    z-index: 10;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-family: 'Geist', sans-serif;
+    font-size: 0.9rem;
+    padding: 8px 10px;
+    border-radius: 6px;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.dropdown-item:hover {
+    background-color: #3f3f3f;
+}
+
+.dropdown-item.danger {
+    color: var(--danger-red);
+}
+.dropdown-item.danger:hover {
+    background-color: rgba(229, 72, 77, 0.1);
+}
+
+.no-class-message {
+    color: #a0a0a0;
+    font-style: italic;
+    padding: 16px 0;
+}
+
+@media (max-width: 768px) {
+    .header-actions {
+        display: none;
+    }
+}

@@ -34,7 +34,7 @@ export default function HomePage() {
                     eliminate scheduling conflicts automatically.
                 </p>
                 <div className="hero-actions">
-                    <button className="btn btn-primary" onClick={()=>navigate("/register")}>
+                    <button className="btn btn-primary-home" onClick={()=>navigate("/register")}>
                         Start Free Trial <ArrowRight size={16} />
                     </button>
                     <button className="btn btn-secondary-demo-dashboard" onClick={()=>navigate("/roles")}>View Demo Dashboard</button>
