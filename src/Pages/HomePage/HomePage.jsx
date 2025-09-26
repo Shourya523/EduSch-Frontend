@@ -28,18 +28,18 @@ export default function HomePage() {
         <>
         <DisclaimerPopup />
             {/* Hero Section */}
-            <section className={`hero fade-up${fade ? ' visible' : ''}`}>
+            <section className="hero">
                 <TopBar />
-                <div className="hero-badge">AI-Powered Academic Scheduling</div>
-                <div className="hero-title">
+                <div className={`hero-badge fade-up${fade ? ' visible' : ''}`}>AI-Powered Academic Scheduling</div>
+                <div className={`hero-title fade-up${fade ? ' visible' : ''}`}>
                     Smart Timetables <br /> for Modern Universities
                 </div>
-                <p className="hero-subtext">
+                <p className={`hero-subtext fade-up${fade ? ' visible' : ''}`}>
                     Transform your academic scheduling with EduSync's intelligent AI
                     system. Optimize faculty workloads, maximize classroom utilization, and
                     eliminate scheduling conflicts automatically.
                 </p>
-                <div className="hero-actions">
+                <div className={`hero-actions fade-up${fade ? ' visible' : ''}`}>
                     <button className="btn btn-primary-home" onClick={()=>navigate("/register")}> 
                         Start Free Trial <ArrowRight size={16} />
                     </button>
@@ -48,9 +48,9 @@ export default function HomePage() {
             </section>
 
             {/* Intelligent Academic Management Section */}
-            <section className={`features-section fade-up${fade ? ' visible' : ''}`}>
+            <section className="features-section">
                 <div className="features-container">
-                    <div className="features-content">
+                    <div className={`features-content fade-up${fade ? ' visible' : ''}`}>
                         <h2>Intelligent Academic Management</h2>
                         <p>
                             EduSync revolutionizes university scheduling with advanced AI
@@ -73,7 +73,7 @@ export default function HomePage() {
                             </li>
                         </ul>
                     </div>
-                    <div className="features-dashboard-home">
+                    <div className={`features-dashboard-home fade-up${fade ? ' visible' : ''}`}>
                         <div className="dashboard-header">
                             <BarChart size={18} />
                             <span>Live Analytics Dashboard</span>
@@ -107,8 +107,8 @@ export default function HomePage() {
             </section>
 
             {/* --- NEW: Powerful Features Grid Section --- */}
-            <section className={`grid-features-section fade-up${fade ? ' visible' : ''}`}>
-                <div className="grid-features-header">
+            <section className="grid-features-section">
+                <div className="grid-features-header fade-up visible">
                     <h2>Powerful Features for Academic Excellence</h2>
                     <p>
                         Comprehensive tools designed specifically for the unique challenges
@@ -117,7 +117,7 @@ export default function HomePage() {
                 </div>
                 <div className="features-grid">
                     {/* Card 1 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <BrainCircuit size={28} className="card-icon" />
                         <h3>AI-Powered Optimization</h3>
                         <p>
@@ -126,7 +126,7 @@ export default function HomePage() {
                         </p>
                     </div>
                     {/* Card 2 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <CalendarDays size={28} className="card-icon" />
                         <h3>Smart Timetable Generation</h3>
                         <p>
@@ -135,7 +135,7 @@ export default function HomePage() {
                         </p>
                     </div>
                     {/* Card 3 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <Users size={28} className="card-icon" />
                         <h3>Faculty Management</h3>
                         <p>
@@ -144,7 +144,7 @@ export default function HomePage() {
                         </p>
                     </div>
                     {/* Card 4 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <Clock size={28} className="card-icon" />
                         <h3>Real-Time Updates</h3>
                         <p>
@@ -153,7 +153,7 @@ export default function HomePage() {
                         </p>
                     </div>
                     {/* Card 5 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <Shield size={28} className="card-icon" />
                         <h3>Secure & Compliant</h3>
                         <p>
@@ -162,7 +162,7 @@ export default function HomePage() {
                         </p>
                     </div>
                     {/* Card 6 */}
-                    <div className="feature-card">
+                    <div className={`feature-card fade-up${fade ? ' visible' : ''}`}>
                         <Zap size={28} className="card-icon" />
                         <h3>Lightning Fast</h3>
                         <p>
@@ -172,11 +172,11 @@ export default function HomePage() {
                     </div>
                 </div>
                 {/* --- NEW: Comparison Section --- */}
-                <section className={`comparison-section fade-up${fade ? ' visible' : ''}`}>
-                    <h2>From Chaos to Clarity</h2>
+                <section className="comparison-section">
+                    <h2 className="fade-up visible">From Chaos to Clarity</h2>
                     <div className="comparison-container">
                         {/* Problems Card */}
-                        <div className="comparison-card problems-card">
+                        <div className={`comparison-card problems-card fade-up${fade ? ' visible' : ''}`}>
                             <h3>Traditional Scheduling Problems</h3>
                             <ul>
                                 <li>
@@ -199,7 +199,7 @@ export default function HomePage() {
                         </div>
 
                         {/* Solutions Card */}
-                        <div className="comparison-card solutions-card">
+                        <div className={`comparison-card solutions-card fade-up${fade ? ' visible' : ''}`}>
                             <h3>EduSync Solutions</h3>
                             <ul>
                                 <li>
@@ -223,13 +223,13 @@ export default function HomePage() {
                     </div>
                 </section>
             </section>
-            <section className={`cta-section fade-up${fade ? ' visible' : ''}`}>
-                <h2>Ready to Transform Your Scheduling?</h2>
-                <p>
+            <section className="cta-section">
+                <h2 className="fade-up visible">Ready to Transform Your Scheduling?</h2>
+                <p className="fade-up visible">
                     Join hundreds of universities already using EduSync to streamline
                     their academic operations
                 </p>
-                <div className="cta-actions">
+                <div className={`cta-actions fade-up${fade ? ' visible' : ''}`}>
                     <button className="btn btn-cta-primary">
                         Start Your Free Trial <ArrowRight size={16} />
                     </button>
