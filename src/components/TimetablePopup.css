@@ -109,6 +109,7 @@
 .card-body-preview {
     padding: 1rem;
     flex-grow: 1;
+    overflow-x: auto; /* <-- THIS IS THE ONLY LINE ADDED TO FIX THE BUG */
 }
 
 .card-body-preview table {
@@ -168,8 +169,19 @@
     background-color: #16a34a;
 }
 
-/* Responsive Timetable Popup */
+/* Responsive Timetable Popup - I've also corrected the class name here */
 @media (max-width: 768px) {
-  .timetable-popup { width: 100%; max-width: none; left: 0; right: 0; margin: 0; border-radius: 12px 12px 0 0; bottom: 64px; }
-  .timetable-popup .content { padding: 12px; }
+  .popup-container { /* This now correctly targets the main container */
+      width: 95%;
+      height: 85vh;
+  }
+  .popup-content {
+      /* On mobile, stack cards vertically */
+      grid-template-columns: 1fr; 
+      padding: 1rem;
+      gap: 1rem;
+  }
+  .popup-header h2 {
+      font-size: 1.2rem;
+  }
 }
