@@ -47,14 +47,18 @@ export default function RoomCard({ name, description, typeTag, status, occupancy
                         <span>{lang === 'hi' ? 'वर्तमान अधिभोग' : 'Current Occupancy'}</span>
                         <span>{occupancy || '0/0'}</span>
                     </div>
-                    {/* ... progress bar ... */}
+                    <div className="progress-bar-container">
+                        <div className="progress-bar-fill" style={{ width: `${occupancyPercent}%` }}></div>
+                    </div>
                 </div>
                 <div className="progress-item">
                     <div className="progress-labels">
                         <span>{lang === 'hi' ? 'साप्ताहिक उपयोग' : 'Weekly Utilization'}</span>
                         <span>{utilization || 0}%</span>
                     </div>
-                    {/* ... progress bar ... */}
+                    <div className="progress-bar-container">
+                        <div className="progress-bar-fill" style={{ width: `${utilization || 0}%` }}></div>
+                    </div>
                 </div>
             </div>
 

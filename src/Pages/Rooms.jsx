@@ -9,8 +9,14 @@ import './Rooms.css';
 import { DoorOpen, Building, Zap, Clock } from 'lucide-react';
 import AIChat from '../components/AiChat';
 
+// --- ADD THIS MOCK DATA ---
 const allRoomsData = [
-    // ... (allRoomsData remains the same)
+    { id: 'LT-1', name: 'LT-1', description: 'Lecture Theatre 1', type: 'Lecture Theatre', typeTag: 'LT', status: 'Occupied', occupancy: '95/120', utilization: '85', scheduleInfo: 'Free at 11:00 AM' },
+    { id: 'LT-2', name: 'LT-2', description: 'Lecture Theatre 2', type: 'Lecture Theatre', typeTag: 'LT', status: 'Available', occupancy: '0/100', utilization: '72', scheduleInfo: 'Math-III at 2:00 PM' },
+    { id: 'LT-3', name: 'LT-3', description: 'Lecture Theatre 3', type: 'Lecture Theatre', typeTag: 'LT', status: 'Occupied', occupancy: '65/80', utilization: '90', scheduleInfo: 'Free at 12:00 PM' },
+    { id: 'C-101', name: 'C-101', description: 'Classroom 101', type: 'Classroom', typeTag: 'CR', status: 'Available', occupancy: '0/45', utilization: '65', scheduleInfo: 'Next: Physics at 1:00 PM' },
+    { id: 'CSL-A', name: 'CS Lab-A', description: 'Computer Science Lab A', type: 'Laboratory', typeTag: 'LAB', status: 'Maintenance', occupancy: 'N/A', utilization: '55', scheduleInfo: 'Unavailable Today' },
+    { id: 'C-204', name: 'C-204', description: 'Classroom 204', type: 'Classroom', typeTag: 'CR', status: 'Occupied', occupancy: '40/45', utilization: '88', scheduleInfo: 'Free at 3:00 PM' },
 ];
 
 const hiText = {
@@ -20,7 +26,7 @@ const hiText = {
         total: "कुल कक्षाएँ",
         occupied: "वर्तमान में व्यस्त",
         utilization: "औसत उपयोग",
-        peak: "पीक घंटे",
+        peak: "व्यस्ततम घंटे",
         peakValue: "10-11 सुबह"
     }
 };
@@ -76,7 +82,9 @@ export default function Rooms() {
                         <MiniStatCard icon={<Zap size={20} />} value={miniStatData.utilization} label={lang === 'hi' ? hiText.stats.utilization : "Average Utilization"} iconBgClass="icon-yellow" />
                         <MiniStatCard icon={<Clock size={20} />} value={miniStatData.peak} label={lang === 'hi' ? hiText.stats.peak : "Peak Hours"} iconBgClass="icon-purple" />
                     </div>
+                    
                     <RoomFilters onFilterChange={handleFilterChange} lang={lang} />
+                    
                     <div className="room-grid">
                         {filteredRooms.map(room => (
                             <RoomCard
@@ -86,8 +94,10 @@ export default function Rooms() {
                             />
                         ))}
                     </div>
+                    
                     <RoomHeatmap lang={lang} />
                 </div>
+                
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
                 </button>
