@@ -124,8 +124,9 @@
 /* --- Info Grid Styles (StatCard) --- */
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(4, 17vw); /* This creates exactly 4 equal columns */
     gap: 1.5rem;
+    max-width: max-content;
 }
 
 .info-item {
