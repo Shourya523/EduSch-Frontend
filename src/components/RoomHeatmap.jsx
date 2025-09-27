@@ -22,19 +22,22 @@ const mockHeatmapData = [
   { time: '3-4 PM', values: [65, 55, 70] },
 ];
 
-export default function RoomHeatmap({ heatmapData = mockHeatmapData }) {
-    const headers = ['Lecture Theatres', 'Classrooms', 'Laboratories'];
+export default function RoomHeatmap({ heatmapData = mockHeatmapData, lang = 'en' }) {
+    const headers = {
+        en: ['Lecture Theatres', 'Classrooms', 'Laboratories'],
+        hi: ['व्याख्यान थिएटर', 'कक्षाएं', 'प्रयोगशालाएं']
+    };
 
     return (
         <div className="heatmap-container">
             <div className="heatmap-header">
                 <LineChart size={20} />
-                <h4>Room Utilization Heatmap</h4>
+                <h4>{lang === 'hi' ? 'कमरा उपयोग हीटमैप' : 'Room Utilization Heatmap'}</h4>
             </div>
-            <p className="heatmap-description">Hourly utilization rates across different room types</p>
+            <p className="heatmap-description">{lang === 'hi' ? 'विभिन्न प्रकार के कमरों में प्रति घंटा उपयोग दर' : 'Hourly utilization rates across different room types'}</p>
 
             <div className="heatmap-legend">
-                <span>Utilization:</span>
+                <span>{lang === 'hi' ? 'उपयोग:' : 'Utilization:'}</span>
                 <div className="legend-item">
                     <div className="legend-color-box heat-0-25"></div>
                     <span>0-25%</span>
@@ -61,8 +64,8 @@ export default function RoomHeatmap({ heatmapData = mockHeatmapData }) {
                 <table className="heatmap-table">
                     <thead>
                         <tr>
-                            <th>Time</th>
-                            {headers.map(header => <th key={header}>{header}</th>)}
+                            <th>{lang === 'hi' ? 'समय' : 'Time'}</th>
+                            {headers[lang].map(header => <th key={header}>{header}</th>)}
                         </tr>
                     </thead>
                     <tbody>

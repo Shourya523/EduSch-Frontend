@@ -89,12 +89,7 @@ export default function SideBarStudent({ activePage }) {
                     <Menu size={20} />
                     <span className="label">{collapsed ? labels.expand : labels.collapse}</span>
                 </button>
-                <button
-                    style={{ marginTop: 8, fontSize: 13, padding: "0.2em 0.7em", borderRadius: 6, border: "1px solid #444", background: "#232323", color: "#eee", cursor: "pointer" }}
-                    onClick={() => setLang(l => l === "en" ? "hi" : "en")}
-                >
-                    {lang === "hi" ? "English" : "हिन्दी"}
-                </button>
+
             </div>
         </aside>
     );
