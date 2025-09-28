@@ -6,7 +6,7 @@ import StatCard from '../components/StatCard';
 import QuickActions from '../components/QuickActions';
 import ApprovalQueue from '../components/ApprovalQueue';
 import './AdminDashBoard.css';
-import { RectangleHorizontal, Users, Clock, UserSquare2 } from "lucide-react";
+import { RectangleHorizontal, Users, Clock, UserSquare2, Sparkles } from "lucide-react";
 
 // Static data for the dashboard cards (in English)
 const statCardsData = [
@@ -77,7 +77,7 @@ export default function DashBoard() {
         <div className="dashboard-layout">
             <SideBar activePage={'dashboard'} />
             <main className="main-content">
-                <Header 
+                <Header
                     title="Dashboard"
                     subtitle="Welcome back, Admin User"
                     altTitle={hiText.title}
@@ -112,7 +112,11 @@ export default function DashBoard() {
                 </div>
                 {/* Floating Chat Button */}
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)} >
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 15s1.5-2 4-2 4 2 4 2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AiChat onClose={() => setShowChat(false)} />}
             </main>

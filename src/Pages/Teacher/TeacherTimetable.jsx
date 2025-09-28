@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import Header from '../../components/Header';
 import './TeacherTimetable.css';
-import { 
-    Clock, MapPin, Users, MoreVertical, CalendarPlus, 
-    AlertTriangle, CalendarClock, XCircle, Megaphone 
+import {
+    Clock, MapPin, Users, MoreVertical, CalendarPlus,
+    AlertTriangle, CalendarClock, XCircle, Megaphone,Sparkles
 } from 'lucide-react';
+import AIChat from '../../components/AiChat';
 
 // Mock data for a teacher's timetable.
 const teacherTimetableData = [
@@ -32,7 +33,7 @@ const teacherTimetableData = [
     {
         day: "Thursday",
         classes: [
-             { id: "thu-1", type: "Lab", subject: "Digital Systems Lab", time: "11:00 AM - 1:00 PM", location: "Lab-D2", batch: "B.Tech ECE - 2nd Year" }
+            { id: "thu-1", type: "Lab", subject: "Digital Systems Lab", time: "11:00 AM - 1:00 PM", location: "Lab-D2", batch: "B.Tech ECE - 2nd Year" }
         ]
     },
     {
@@ -44,6 +45,7 @@ const teacherTimetableData = [
 ];
 
 export default function TeacherTimetable() {
+    const [showChat, setShowChat] = useState(false);
     const [openMenuId, setOpenMenuId] = useState(null);
     const [lang, setLang] = useState("en");
     const altTitle = "मेरी समय सारणी";
@@ -166,6 +168,14 @@ export default function TeacherTimetable() {
                         ))}
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

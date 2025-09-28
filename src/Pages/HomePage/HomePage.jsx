@@ -20,13 +20,14 @@ import DisclaimerPopup from '../../components/Disclaimer.jsx';
 export default function HomePage() {
     const navigate = useNavigate();
     const [fade, setFade] = useState(false);
+    const [showDisclaimer, setShowDisclaimer] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => setFade(true), 50);
         return () => clearTimeout(timeout);
     }, []);
     return (
         <>
-        <DisclaimerPopup />
+        {showDisclaimer && <DisclaimerPopup onClose={() => setShowDisclaimer(false)} />}
             {/* Hero Section */}
             <section className="hero">
                 <TopBar />
@@ -40,7 +41,7 @@ export default function HomePage() {
                     eliminate scheduling conflicts automatically.
                 </p>
                 <div className={`hero-actions fade-up${fade ? ' visible' : ''}`}>
-                    <button className="btn btn-primary-home" onClick={()=>navigate("/register")}> 
+                    <button className="btn btn-primary-home" onClick={() => setShowDisclaimer(true)}>
                         Start Free Trial <ArrowRight size={16} />
                     </button>
                     <button className="btn btn-secondary-demo-dashboard" onClick={()=>navigate("/roles")}>View Demo Dashboard</button>

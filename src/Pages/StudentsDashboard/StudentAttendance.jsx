@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './StudentAttendance.css';
 import SideBarStudent from '../../components/SideBar-student.jsx';
 import Header from '../../components/Header.jsx';
-import { ChevronLeft, ChevronRight, ArrowLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowLeft, Sparkles } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Filler } from 'chart.js';
 import AIChat from '../../components/AiChat.jsx';
@@ -135,12 +135,12 @@ export default function StudentAttendance() {
 
     const altTitle = "मेरी उपस्थिति";
     const altSubtitle = "वर्तमान सेमेस्टर के लिए अपनी उपस्थिति ट्रैक करें";
-    
+
     const statusTranslations = {
         en: { Present: "Present", Absent: "Absent" },
         hi: { Present: "उपस्थित", Absent: "अनुपस्थित" }
     };
-    
+
     return (
         <div className="page-layout">
             <SideBarStudent activePage={"attendance"} />
@@ -177,7 +177,7 @@ export default function StudentAttendance() {
                                                         <div className="stats-text">
                                                             <span>{`${course.attendedClasses} / ${course.totalClasses}`}</span>
                                                             <span className={percentage < 75 ? 'status-low' : 'status-ok'}>
-                                                                {percentage < 75 
+                                                                {percentage < 75
                                                                     ? (lang === 'hi' ? `${neededClasses} और कक्षाओं में उपस्थित हों` : `Attend ${neededClasses} more`)
                                                                     : (lang === 'hi' ? 'सही रास्ते पर' : 'On Track')}
                                                             </span>
@@ -210,7 +210,11 @@ export default function StudentAttendance() {
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

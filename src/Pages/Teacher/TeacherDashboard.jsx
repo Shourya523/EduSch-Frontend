@@ -13,8 +13,10 @@ import {
     MapPin,
     Calendar,
     CalendarCheck,
-    AlertTriangle
+    AlertTriangle,
+    Sparkles
 } from "lucide-react";
+import AIChat from '../../components/AiChat';
 
 // Mock data for a teacher's schedule for today
 const todaysSchedule = [
@@ -24,6 +26,7 @@ const todaysSchedule = [
 ];
 
 export default function TeacherDashboard() {
+    const [showChat, setShowChat] = useState(false);
     const navigate = useNavigate();
     const [lang, setLang] = useState("en");
     // Hindi alternatives for stat cards and quick actions
@@ -142,6 +145,14 @@ export default function TeacherDashboard() {
                         </div>
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

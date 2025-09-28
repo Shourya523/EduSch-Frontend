@@ -6,7 +6,7 @@ import RoomFilters from '../components/RoomFilters';
 import RoomCard from '../components/RoomCard';
 import RoomHeatmap from '../components/RoomHeatmap';
 import './Rooms.css';
-import { DoorOpen, Building, Zap, Clock } from 'lucide-react';
+import { DoorOpen, Building, Zap, Clock, Sparkles } from 'lucide-react';
 import AIChat from '../components/AiChat';
 
 // --- ADD THIS MOCK DATA ---
@@ -82,9 +82,9 @@ export default function Rooms() {
                         <MiniStatCard icon={<Zap size={20} />} value={miniStatData.utilization} label={lang === 'hi' ? hiText.stats.utilization : "Average Utilization"} iconBgClass="icon-yellow" />
                         <MiniStatCard icon={<Clock size={20} />} value={miniStatData.peak} label={lang === 'hi' ? hiText.stats.peak : "Peak Hours"} iconBgClass="icon-purple" />
                     </div>
-                    
+
                     <RoomFilters onFilterChange={handleFilterChange} lang={lang} />
-                    
+
                     <div className="room-grid">
                         {filteredRooms.map(room => (
                             <RoomCard
@@ -94,12 +94,16 @@ export default function Rooms() {
                             />
                         ))}
                     </div>
-                    
+
                     <RoomHeatmap lang={lang} />
                 </div>
-                
+
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

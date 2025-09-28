@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import './timetable.css';
-import { Clock, MapPin, User } from 'lucide-react';
+import { Clock, MapPin, User, Sparkles } from 'lucide-react';
 import AIChat from '../components/AiChat';
 
 // Helper: get all batch keys and info from localStorage, grouped by dept+sem
@@ -13,10 +13,10 @@ function getAllBatchInfos() {
         const storedKeys = localStorage.getItem('timetable_batchKeys');
         batchKeys = storedKeys ? JSON.parse(storedKeys) : [];
         if (!Array.isArray(batchKeys)) batchKeys = []; // Safety check
-    } catch (e) { 
+    } catch (e) {
         batchKeys = []; // If parsing fails, default to an empty array
     }
-    
+
     const batchMap = {};
     batchKeys.forEach(key => {
         const stored = localStorage.getItem(`timetable_${key}`);
@@ -105,7 +105,7 @@ export default function Timetable() {
         window.addEventListener('storage', handleStorage);
         return () => window.removeEventListener('storage', handleStorage);
     }, [selectedGroup]);
-    
+
     // --- Language State and Translations ---
     const [showChat, setShowChat] = useState(false);
     const [lang, setLang] = useState("en");
@@ -234,7 +234,11 @@ export default function Timetable() {
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import Header from '../../components/Header';
 import './TeacherCourses.css';
-import { BookOpen, Users, BarChart3, Calendar, Tag } from 'lucide-react';
+import { BookOpen, Users, BarChart3, Calendar, Tag,Sparkles } from 'lucide-react';
+import AIChat from '../../components/AiChat';
 
 // --- MOCK DATA with Hindi Translations ---
 const assignedCourses = [
@@ -101,6 +102,7 @@ const CourseCard = ({ course, lang }) => (
 
 
 export default function TeacherCourses() {
+    const [showChat, setShowChat] = useState(false);
     const [lang, setLang] = useState("en");
     const altTitle = "मेरे पाठ्यक्रम";
     const altSubtitle = "वर्तमान शैक्षणिक सत्र के लिए आपके सौंपे गए विषयों का अवलोकन";
@@ -123,6 +125,14 @@ export default function TeacherCourses() {
                         ))}
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

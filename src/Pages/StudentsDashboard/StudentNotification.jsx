@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './StudentNotification.css'; // This now links to the refactored CSS
-import { Megaphone, CheckCircle, Bell, CalendarClock, CalendarX2, Timer } from 'lucide-react';
+import { Megaphone, CheckCircle, Bell, CalendarClock, CalendarX2, Timer, Sparkles } from 'lucide-react';
 import SideBarStudent from '../../components/SideBar-student';
 import Header from '../../components/Header';
 import AIChat from '../../components/AiChat';
@@ -156,7 +156,7 @@ export default function StudentNotifications() {
 
     const altTitle = "छात्र सूचना केंद्र";
     const altSubtitle = "आपकी कक्षाओं, आयोजनों और घोषणाओं पर अपडेट";
-    
+
     const handleMarkRead = (id) => {
         setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     };
@@ -218,7 +218,11 @@ export default function StudentNotifications() {
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

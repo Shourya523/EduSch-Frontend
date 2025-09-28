@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import Header from '../../components/Header';
 import './TeacherAvailability.css';
-import { Calendar, ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
+import { Calendar, ChevronLeft, ChevronRight, Plus, X, Sparkles } from 'lucide-react';
+import AIChat from '../../components/AiChat';
 
 // --- MOCK DATA (EXPANDED with REJECTED status) ---
 const leaveData = {
@@ -83,6 +84,7 @@ const hiText = {
 };
 
 export default function TeacherAvailability() {
+    const [showChat, setShowChat] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [lang, setLang] = useState("en");
     const altTitle = "उपलब्धता और अवकाश";
@@ -179,6 +181,14 @@ export default function TeacherAvailability() {
                         </div>
                     </div>
                 )}
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

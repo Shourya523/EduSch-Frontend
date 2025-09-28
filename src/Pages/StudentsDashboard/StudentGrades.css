@@ -64,10 +64,32 @@
 
 /* --- Info Grid Styles (Copied from StudentCourses.css) --- */
 .info-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 17vw); 
-    gap: 1.5rem;
-    max-width: max-content;
+        display: grid;
+        grid-template-columns: repeat(4, 17vw);
+        gap: 1.5rem;
+        max-width: max-content;
+}
+
+@media (max-width: 900px) {
+    .info-grid {
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+        gap: 0.7rem;
+    }
+    .info-item {
+        padding: 1rem 0.7rem;
+        min-width: 0;
+        word-break: break-word;
+        font-size: 1rem;
+    }
 }
 
 .info-item {
@@ -79,6 +101,8 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .info-item-header {

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import SideBarTeacher from '../../components/SideBar-teacher.jsx'
 import './TeacherChangeRequests.css'
 import Header from '../../components/Header';
-import { GitPullRequest, ArrowRight, Clock, MapPin, Check, X, Filter, LayoutGrid, Menu, Bell } from 'lucide-react';
+import { GitPullRequest, ArrowRight, Clock, MapPin, Check, X, Filter, LayoutGrid, Menu, Bell,Sparkles } from 'lucide-react';
+import AIChat from '../../components/AiChat.jsx';
 
 // --- STYLES (Embedded CSS) ---
 
@@ -29,7 +30,7 @@ const allRequests = [
         original: { subject: 'Digital Systems', time: 'Fri, 2 PM', location: 'B-101' },
         proposed: { subject: 'Digital Systems', time: 'Fri, 4 PM', location: 'B-102' }
     },
-     {
+    {
         id: 'CR-003',
         requester: 'Dr. Verma',
         status: 'Pending',
@@ -102,6 +103,7 @@ const RequestCard = ({ request, lang }) => (
 
 
 export default function TeacherChangeRequests() {
+    const [showChat, setShowChat] = useState(false);
     const [filter, setFilter] = useState('pending');
     const [lang, setLang] = useState("en");
     const altTitle = "परिवर्तन अनुरोध";
@@ -158,6 +160,14 @@ export default function TeacherChangeRequests() {
                             </div>
                         </div>
                     </div>
+                    <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                        <Sparkles
+                            size={24} // Adjust size as needed, using the default 24x24 viewBox
+                            strokeWidth={2}
+                            aria-label="AI Sparkles Icon" // Good practice for accessibility
+                        />
+                    </button>
+                    {showChat && <AIChat onClose={() => setShowChat(false)} />}
                 </main>
             </div>
         </>

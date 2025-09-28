@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './TeacherNotification.css';
-import { Megaphone, CheckCircle, Bell, GitPullRequest, Lightbulb, XCircle } from 'lucide-react';
+import { Megaphone, CheckCircle, Bell, GitPullRequest, Lightbulb, XCircle,Sparkles } from 'lucide-react';
 import SideBarTeacher from '../../components/SideBar-teacher';
 import Header from '../../components/Header';
+import AIChat from '../../components/AiChat';
 
 // --- Mock Data for a Teacher ---
 const initialTeacherNotifications = [
@@ -139,6 +140,7 @@ const NotificationCard = ({ notification, onMarkRead, lang }) => {
 };
 
 export default function TeacherNotifications() {
+    const [showChat, setShowChat] = useState(false);
     const [notifications, setNotifications] = useState(initialTeacherNotifications);
     const [filter, setFilter] = useState('unread');
     const [lang, setLang] = useState("en");
@@ -205,6 +207,14 @@ export default function TeacherNotifications() {
                         </div>
                     </div>
                 </div>
+                <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
+                </button>
+                {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>
         </div>
     );

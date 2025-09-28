@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Notifications.css'; // This now links to the refactored CSS
 import SideBar from '../components/SideBar';
 import Header from '../components/Header';
-import { CalendarPlus, UserMinus, Wrench, Megaphone, CheckCircle, Bell } from 'lucide-react';
+import { CalendarPlus, UserMinus, Wrench, Megaphone, CheckCircle, Bell, Sparkles } from 'lucide-react';
 import AIChat from '../components/AiChat';
 
 // Mock Notification Data (remains the same)
@@ -129,7 +129,7 @@ const NotificationCard = ({ notification, onMarkRead, lang }) => {
                 <div className="ntf-card-actions">
                     {actions.map(action => (
                         <button key={action} className={`ntf-action-btn ${action.toLowerCase().replace(' ', '-')}`}>
-                             {lang === "hi" ? (hiActions[action] || action) : action}
+                            {lang === "hi" ? (hiActions[action] || action) : action}
                         </button>
                     ))}
                     {!read && <button className="ntf-action-btn mark-read" onClick={() => onMarkRead(id)}>
@@ -150,7 +150,7 @@ export default function Notifications() {
 
     const altTitle = "सूचनाएँ";
     const altSubtitle = "अनुरोधों, अपडेट्स और सिस्टम अलर्ट की समीक्षा करें";
-    
+
     const handleMarkRead = (id) => {
         setNotifications(notifications.map(n => n.id === id ? { ...n, read: true } : n));
     };
@@ -211,7 +211,11 @@ export default function Notifications() {
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SideBarStudent from '../../components/SideBar-student'; // Corrected path
 import Header from '../../components/Header'; // Assuming Header is in components
 import './StudentTimetable.css'; // The new CSS file for this page
-import { Clock, MapPin, User } from 'lucide-react';
+import { Clock, MapPin, User, Sparkles } from 'lucide-react';
 import AIChat from '../../components/AiChat';
 
 // Mock data for a student's timetable. In a real app, this would be fetched.
@@ -51,7 +51,7 @@ export default function StudentTimetable() {
     const [lang, setLang] = React.useState("en");
     const altTitle = "मेरी समय सारणी";
     const altSubtitle = "आपका साप्ताहिक कक्षा कार्यक्रम";
-    
+
     // Comprehensive Hindi translations
     const hiText = {
         days: {
@@ -134,7 +134,11 @@ export default function StudentTimetable() {
                     </div>
                 </div>
                 <button className="s-fab-chat-btn" onClick={() => setShowChat(true)}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                    <Sparkles
+                        size={24} // Adjust size as needed, using the default 24x24 viewBox
+                        strokeWidth={2}
+                        aria-label="AI Sparkles Icon" // Good practice for accessibility
+                    />
                 </button>
                 {showChat && <AIChat onClose={() => setShowChat(false)} />}
             </main>

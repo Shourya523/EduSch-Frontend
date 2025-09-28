@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import './GenerateTT.css';
-import { Plus, Settings2, RotateCw, Book, School, Users, UserCheck, Target } from 'lucide-react';
+import { Plus, Settings2, RotateCw, Book, School, Users, UserCheck, Target, Sparkles } from 'lucide-react';
 import AIChat from '../components/AiChat.jsx';
 import TimetablePopup from '../components/TimetablePopup.jsx';
 
@@ -45,29 +45,29 @@ const btechSubjects = {
         ]
     },
     'Computer Science': {
-        3: [ { name: 'Discrete Mathematics', classesPerWeek: 4 }, { name: 'Data Structures', classesPerWeek: 5 }, { name: 'Digital Logic Design', classesPerWeek: 4 }, { name: 'Object Oriented Programming', classesPerWeek: 4 }, { name: 'Computer Organization', classesPerWeek: 3 }, ],
-        4: [ { name: 'Design and Analysis of Algorithms', classesPerWeek: 5 }, { name: 'Database Management Systems', classesPerWeek: 4 }, { name: 'Operating Systems', classesPerWeek: 4 }, { name: 'Microprocessors', classesPerWeek: 3 }, { name: 'Software Engineering', classesPerWeek: 3 }, ],
-        5: [ { name: 'Computer Networks', classesPerWeek: 5 }, { name: 'Theory of Computation', classesPerWeek: 4 }, { name: 'Compiler Design', classesPerWeek: 4 }, { name: 'Web Technologies', classesPerWeek: 3 }, { name: 'Artificial Intelligence', classesPerWeek: 3 }, ]
+        3: [{ name: 'Discrete Mathematics', classesPerWeek: 4 }, { name: 'Data Structures', classesPerWeek: 5 }, { name: 'Digital Logic Design', classesPerWeek: 4 }, { name: 'Object Oriented Programming', classesPerWeek: 4 }, { name: 'Computer Organization', classesPerWeek: 3 },],
+        4: [{ name: 'Design and Analysis of Algorithms', classesPerWeek: 5 }, { name: 'Database Management Systems', classesPerWeek: 4 }, { name: 'Operating Systems', classesPerWeek: 4 }, { name: 'Microprocessors', classesPerWeek: 3 }, { name: 'Software Engineering', classesPerWeek: 3 },],
+        5: [{ name: 'Computer Networks', classesPerWeek: 5 }, { name: 'Theory of Computation', classesPerWeek: 4 }, { name: 'Compiler Design', classesPerWeek: 4 }, { name: 'Web Technologies', classesPerWeek: 3 }, { name: 'Artificial Intelligence', classesPerWeek: 3 },]
     },
     'Information Technology': {
-        3: [ { name: 'Discrete Mathematics', classesPerWeek: 4 }, { name: 'Data Structures', classesPerWeek: 5 }, { name: 'Digital Electronics', classesPerWeek: 4 }, { name: 'Object Oriented Programming', classesPerWeek: 4 }, { name: 'Computer Organization', classesPerWeek: 3 }, ],
-        4: [ { name: 'Design and Analysis of Algorithms', classesPerWeek: 5 }, { name: 'Database Management Systems', classesPerWeek: 4 }, { name: 'Operating Systems', classesPerWeek: 4 }, { name: 'Microprocessors', classesPerWeek: 3 }, { name: 'Software Engineering', classesPerWeek: 3 }, ],
-        5: [ { name: 'Computer Networks', classesPerWeek: 5 }, { name: 'Information Security', classesPerWeek: 4 }, { name: 'Web Technologies', classesPerWeek: 4 }, { name: 'Cloud Computing', classesPerWeek: 3 }, { name: 'Data Mining', classesPerWeek: 3 }, ]
+        3: [{ name: 'Discrete Mathematics', classesPerWeek: 4 }, { name: 'Data Structures', classesPerWeek: 5 }, { name: 'Digital Electronics', classesPerWeek: 4 }, { name: 'Object Oriented Programming', classesPerWeek: 4 }, { name: 'Computer Organization', classesPerWeek: 3 },],
+        4: [{ name: 'Design and Analysis of Algorithms', classesPerWeek: 5 }, { name: 'Database Management Systems', classesPerWeek: 4 }, { name: 'Operating Systems', classesPerWeek: 4 }, { name: 'Microprocessors', classesPerWeek: 3 }, { name: 'Software Engineering', classesPerWeek: 3 },],
+        5: [{ name: 'Computer Networks', classesPerWeek: 5 }, { name: 'Information Security', classesPerWeek: 4 }, { name: 'Web Technologies', classesPerWeek: 4 }, { name: 'Cloud Computing', classesPerWeek: 3 }, { name: 'Data Mining', classesPerWeek: 3 },]
     },
     'Mechanical Engineering': {
-        3: [ { name: 'Engineering Thermodynamics', classesPerWeek: 5 }, { name: 'Fluid Mechanics', classesPerWeek: 4 }, { name: 'Strength of Materials', classesPerWeek: 4 }, { name: 'Manufacturing Processes', classesPerWeek: 3 }, { name: 'Machine Drawing', classesPerWeek: 3 }, ],
-        4: [ { name: 'Applied Thermodynamics', classesPerWeek: 5 }, { name: 'Kinematics of Machines', classesPerWeek: 4 }, { name: 'Material Science', classesPerWeek: 4 }, { name: 'Dynamics of Machines', classesPerWeek: 3 }, { name: 'Industrial Engineering', classesPerWeek: 3 }, ],
-        5: [ { name: 'Heat Transfer', classesPerWeek: 5 }, { name: 'Design of Machine Elements', classesPerWeek: 4 }, { name: 'Refrigeration and Air Conditioning', classesPerWeek: 4 }, { name: 'Automobile Engineering', classesPerWeek: 3 }, { name: 'Vibration Engineering', classesPerWeek: 3 }, ]
+        3: [{ name: 'Engineering Thermodynamics', classesPerWeek: 5 }, { name: 'Fluid Mechanics', classesPerWeek: 4 }, { name: 'Strength of Materials', classesPerWeek: 4 }, { name: 'Manufacturing Processes', classesPerWeek: 3 }, { name: 'Machine Drawing', classesPerWeek: 3 },],
+        4: [{ name: 'Applied Thermodynamics', classesPerWeek: 5 }, { name: 'Kinematics of Machines', classesPerWeek: 4 }, { name: 'Material Science', classesPerWeek: 4 }, { name: 'Dynamics of Machines', classesPerWeek: 3 }, { name: 'Industrial Engineering', classesPerWeek: 3 },],
+        5: [{ name: 'Heat Transfer', classesPerWeek: 5 }, { name: 'Design of Machine Elements', classesPerWeek: 4 }, { name: 'Refrigeration and Air Conditioning', classesPerWeek: 4 }, { name: 'Automobile Engineering', classesPerWeek: 3 }, { name: 'Vibration Engineering', classesPerWeek: 3 },]
     },
     'Biotechnology': {
-        3: [ { name: 'Cell Biology', classesPerWeek: 4 }, { name: 'Biochemistry', classesPerWeek: 5 }, { name: 'Microbiology', classesPerWeek: 4 }, { name: 'Genetics', classesPerWeek: 4 }, { name: 'Bioprocess Engineering', classesPerWeek: 3 }, ],
-        4: [ { name: 'Molecular Biology', classesPerWeek: 5 }, { name: 'Immunology', classesPerWeek: 4 }, { name: 'Enzyme Technology', classesPerWeek: 4 }, { name: 'Plant Biotechnology', classesPerWeek: 3 }, { name: 'Bioinformatics', classesPerWeek: 3 }, ],
-        5: [ { name: 'Animal Biotechnology', classesPerWeek: 5 }, { name: 'Environmental Biotechnology', classesPerWeek: 4 }, { name: 'Genetic Engineering', classesPerWeek: 4 }, { name: 'Biostatistics', classesPerWeek: 3 }, { name: 'Downstream Processing', classesPerWeek: 3 }, ]
+        3: [{ name: 'Cell Biology', classesPerWeek: 4 }, { name: 'Biochemistry', classesPerWeek: 5 }, { name: 'Microbiology', classesPerWeek: 4 }, { name: 'Genetics', classesPerWeek: 4 }, { name: 'Bioprocess Engineering', classesPerWeek: 3 },],
+        4: [{ name: 'Molecular Biology', classesPerWeek: 5 }, { name: 'Immunology', classesPerWeek: 4 }, { name: 'Enzyme Technology', classesPerWeek: 4 }, { name: 'Plant Biotechnology', classesPerWeek: 3 }, { name: 'Bioinformatics', classesPerWeek: 3 },],
+        5: [{ name: 'Animal Biotechnology', classesPerWeek: 5 }, { name: 'Environmental Biotechnology', classesPerWeek: 4 }, { name: 'Genetic Engineering', classesPerWeek: 4 }, { name: 'Biostatistics', classesPerWeek: 3 }, { name: 'Downstream Processing', classesPerWeek: 3 },]
     },
     'Electronics and Communication': {
-        3: [ { name: 'Analog Circuits', classesPerWeek: 5 }, { name: 'Digital Electronics', classesPerWeek: 4 }, { name: 'Signals and Systems', classesPerWeek: 4 }, { name: 'Network Analysis', classesPerWeek: 3 }, { name: 'Electromagnetic Field Theory', classesPerWeek: 3 }, ],
-        4: [ { name: 'Microprocessors and Microcontrollers', classesPerWeek: 5 }, { name: 'Communication Systems', classesPerWeek: 4 }, { name: 'Control Systems', classesPerWeek: 4 }, { name: 'Analog Communication', classesPerWeek: 3 }, { name: 'Electronic Measurement', classesPerWeek: 3 }, ],
-        5: [ { name: 'Digital Communication', classesPerWeek: 5 }, { name: 'VLSI Design', classesPerWeek: 4 }, { name: 'Embedded Systems', classesPerWeek: 4 }, { name: 'Microwave Engineering', classesPerWeek: 3 }, { name: 'Antenna and Wave Propagation', classesPerWeek: 3 }, ]
+        3: [{ name: 'Analog Circuits', classesPerWeek: 5 }, { name: 'Digital Electronics', classesPerWeek: 4 }, { name: 'Signals and Systems', classesPerWeek: 4 }, { name: 'Network Analysis', classesPerWeek: 3 }, { name: 'Electromagnetic Field Theory', classesPerWeek: 3 },],
+        4: [{ name: 'Microprocessors and Microcontrollers', classesPerWeek: 5 }, { name: 'Communication Systems', classesPerWeek: 4 }, { name: 'Control Systems', classesPerWeek: 4 }, { name: 'Analog Communication', classesPerWeek: 3 }, { name: 'Electronic Measurement', classesPerWeek: 3 },],
+        5: [{ name: 'Digital Communication', classesPerWeek: 5 }, { name: 'VLSI Design', classesPerWeek: 4 }, { name: 'Embedded Systems', classesPerWeek: 4 }, { name: 'Microwave Engineering', classesPerWeek: 3 }, { name: 'Antenna and Wave Propagation', classesPerWeek: 3 },]
     }
 };
 
@@ -215,7 +215,7 @@ function GenerateTT() {
             if (constraints.teachers.some(c => c.day === day && c.teacher === faculty)) return false;
             return true;
         }
-        
+
         let classSessions = [];
         subjectAllocations.forEach((subject, subjIdx) => {
             for (let i = 0; i < subject.classesPerWeek; i++) {
@@ -312,7 +312,7 @@ function GenerateTT() {
     const handleRemoveClassroomConstraint = idx => { setClassroomConstraints(classroomConstraints.filter((_, i) => i !== idx)); };
     const handleAddTeacherConstraint = () => { if (newTeacher.teacher && newTeacher.day) { setTeacherConstraints([...teacherConstraints, { ...newTeacher }]); setNewTeacher({ teacher: '', day: 'Monday' }); } };
     const handleRemoveTeacherConstraint = idx => { setTeacherConstraints(teacherConstraints.filter((_, i) => i !== idx)); };
-    
+
     const [showChat, setShowChat] = useState(false);
     const [lang, setLang] = useState("en");
     const altTitle = "समय सारणी बनाएं";
@@ -445,7 +445,11 @@ function GenerateTT() {
 
             {showPopup && <TimetablePopup timetables={generatedTimetables} onSelect={handleTimetableSelect} onClose={() => setShowPopup(false)} scope={{ dept: selectedDept, semester: selectedSemester, batch: selectedBatch }} lang={lang} />}
             <button className="s-fab-chat-btn" onClick={() => setShowChat(true)} >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10" /><path d="M8 15s1.5-2 4-2 4 2 4 2" /><path d="M9 9h.01" /><path d="M15 9h.01" /></svg>
+                <Sparkles
+                    size={24} // Adjust size as needed, using the default 24x24 viewBox
+                    strokeWidth={2}
+                    aria-label="AI Sparkles Icon" // Good practice for accessibility
+                />
             </button>
             {showChat && <AIChat onClose={() => setShowChat(false)} />}
         </div>
